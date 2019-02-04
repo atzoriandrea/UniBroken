@@ -8,4 +8,7 @@
     tools:context=".ListaSegn"
     tools:showIn="@layout/activity_lista_segn">
 
+
+
+
 </android.support.constraint.ConstraintLayout>

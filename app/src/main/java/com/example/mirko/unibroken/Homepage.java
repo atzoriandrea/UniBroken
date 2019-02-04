@@ -14,13 +14,15 @@ public class Homepage extends AppCompatActivity {
     Persona p1;
     Persona p2;
     TextView r;
+    Button segnalazioni;
     Button indietro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        PersonaFactory pf = PersonaFactory.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-
+        segnalazioni = (Button)findViewById(R.id.mostra);
         r = (TextView) findViewById(R.id.result);
         //indietro = (Button) findViewById(R.id.indietro);
 
@@ -30,19 +32,22 @@ public class Homepage extends AppCompatActivity {
 
         p1 = (Persona)obj;
         r = (TextView)findViewById(R.id.result);
-        p2 = PersonaFactory.login(p1.getUsername(),p1.getPassword());
-        if(p2 != null)
-            if (!p2.getIsRaga()) {
-                r.setText("Benvenuto in UniBroken");
-            }else{
-                Intent showResults = new Intent(Homepage.this, Homepage.class);
+        //if (!p1.getIsRaga()) {
+            r.setText("Benvenuto in UniBroken, " + p1.getNome());
+        //} else {
+         //   Intent showResults = new Intent(Homepage.this, HomeRaga.class);
+          //  startActivity(showResults);
+       //}
 
+
+
+        segnalazioni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent segnalazioni = new Intent(Homepage.this, ListaSegn.class);
+                startActivity(segnalazioni);
             }
-        else{
-            startActivity(new Intent(Homepage.this,MainActivity.class));
-        }
-
-
+        });
 
 
 

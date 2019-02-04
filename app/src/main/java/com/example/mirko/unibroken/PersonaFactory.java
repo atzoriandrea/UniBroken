@@ -15,22 +15,22 @@ public class PersonaFactory {
         p1.setPassword("mirko");
 
         Persona p4 = new Persona();
-        p1.setNome("Andrea");
-        p1.setCognome("Atzori");
+        p4.setNome("Andrea");
+        p4.setCognome("Atzori");
         p4.setId(4);
-        p4.setUsername("a.atzori28 ");
+        p4.setUsername("a.atzori28");
         p4.setPassword("andrea");
 
         Persona p2 = new Persona();
-        p1.setNome("Riccardo");
-        p1.setCognome("Scateni");
+        p2.setNome("Riccardo");
+        p2.setCognome("Scateni");
         p2.setId(2);
         p2.setUsername("r.scateni23");
         p2.setPassword("ricscat");
 
         Persona p3 = new Persona();
-        p1.setNome("Francesco");
-        p1.setCognome("Raga");
+        p3.setNome("Francesco");
+        p3.setCognome("Raga");
         p3.setUsername("ragafrancesco");
         p3.setPassword("unica");
         p3.setRaga(true);
@@ -51,9 +51,11 @@ public class PersonaFactory {
 
     public static Persona login(String username, String password){
         PersonaFactory factory = PersonaFactory.getInstance();
-        for(Persona p : listaPersone)
+
+        for(Persona p : listaPersone) {
             if (p.getUsername().equals(username) && p.getPassword().equals(password))
                 return p;
+        }
         return null;
     }
 }

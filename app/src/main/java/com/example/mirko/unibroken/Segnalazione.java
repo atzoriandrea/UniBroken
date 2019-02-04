@@ -1,6 +1,8 @@
 package com.example.mirko.unibroken;
 
-public class Segnalazione {
+import java.io.Serializable;
+
+public class Segnalazione implements Serializable {
     private int autore;
     private String image;
     private String testo;

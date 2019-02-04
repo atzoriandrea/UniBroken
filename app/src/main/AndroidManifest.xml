@@ -22,10 +22,8 @@
             android:name=".HomeRaga"
             android:label="@string/title_activity_home_raga"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ListaSegn"
-            android:label="@string/title_activity_lista_segn"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ListaSegn"/>
+
     </application>
 
 </manifest>

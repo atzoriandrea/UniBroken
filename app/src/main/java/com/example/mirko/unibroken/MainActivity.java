@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     persona.setPassword(""+password.getText().toString());
                     p2 = PersonaFactory.login(persona.getUsername(),persona.getPassword());
                     if(p2 != null){
-                        showResults.putExtra(PERSONA_EXTRA, persona);
+                        showResults.putExtra(PERSONA_EXTRA, p2);
                         //passo i dati del mio utente ed attivo la seconda activity
                         startActivity(showResults);}
                     else{
