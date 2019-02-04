@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name"><c>UniBroken</c></string>
+    <string name="title_activity_home_raga">HomeRaga</string>
+    <string name="title_activity_lista_segn">ListaSegn</string>
 </resources>

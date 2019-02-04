@@ -16,8 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Homepage"></activity>
-        <activity android:name=".Pop"></activity>
+        <activity android:name=".Homepage" />
+        <activity android:name=".Pop" />
+        <activity
+            android:name=".HomeRaga"
+            android:label="@string/title_activity_home_raga"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListaSegn"
+            android:label="@string/title_activity_lista_segn"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
