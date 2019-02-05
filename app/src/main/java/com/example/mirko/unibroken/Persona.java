@@ -60,4 +60,6 @@ public class Persona implements Serializable{
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
+
+
 }

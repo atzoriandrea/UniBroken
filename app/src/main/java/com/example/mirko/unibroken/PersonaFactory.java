@@ -8,7 +8,7 @@ public class PersonaFactory {
     private static ArrayList<Persona> listaPersone = new ArrayList<>();
     private PersonaFactory(){
         Persona p1 = new Persona();
-        p1.setId(0);
+        p1.setId(1);
         p1.setNome("Mirko");
         p1.setCognome("Muscas");
         p1.setUsername("m.mirko21");
@@ -57,5 +57,15 @@ public class PersonaFactory {
                 return p;
         }
         return null;
+    }
+
+    public static Persona getPersonaById(int id){
+        PersonaFactory factory = PersonaFactory.getInstance();
+        for(Persona p : listaPersone){
+            if (p.getId() == id)
+                return p;
+
+        }
+        return  null;
     }
 }

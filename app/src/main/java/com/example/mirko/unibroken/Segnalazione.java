@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Segnalazione implements Serializable {
     private int autore;
-    private String image;
+    public int image;
     private String testo;
     public Segnalazione(){
 
@@ -18,11 +18,11 @@ public class Segnalazione implements Serializable {
         this.autore = autore;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 
@@ -33,4 +33,6 @@ public class Segnalazione implements Serializable {
     public void setTesto(String testo) {
         this.testo = testo;
     }
+
+
 }
