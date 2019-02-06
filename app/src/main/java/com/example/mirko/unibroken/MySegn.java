@@ -48,5 +48,12 @@ public class MySegn extends AppCompatActivity {
 
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
+        Intent indietro = new Intent(MySegn.this, Homepage.class);
+        indietro.putExtra(PERSONA_EXTRA,p1);
+        startActivity(indietro);
     }
 }

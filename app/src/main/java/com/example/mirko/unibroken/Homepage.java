@@ -40,6 +40,7 @@ public class Homepage extends AppCompatActivity {
             r.setText("Benvenuto in UniBroken, " + p1.getNome());
         } else {
             Intent showResults = new Intent(Homepage.this, HomeRaga.class);
+            showResults.putExtra(PERSONA_EXTRA,p1);
             startActivity(showResults);
        }
 
@@ -71,5 +72,10 @@ public class Homepage extends AppCompatActivity {
                 startActivity(undo);    //bottone per tornare alla prima activity
             }
         });*/
+    }
+    @Override
+    public void onBackPressed() {
+        Intent indietro = new Intent(Homepage.this, MainActivity.class);
+        startActivity(indietro);
     }
 }
