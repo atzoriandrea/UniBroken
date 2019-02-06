@@ -22,8 +22,10 @@
             android:name=".HomeRaga"
             android:label="@string/title_activity_home_raga"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ListaSegn"/>
-
+        <activity android:name=".ListaSegn" />
+        <activity android:name=".Showsegn" />
+        <activity android:name=".MySegn" />
+        <activity android:name=".MySegnDetail"></activity>
     </application>
 
 </manifest>

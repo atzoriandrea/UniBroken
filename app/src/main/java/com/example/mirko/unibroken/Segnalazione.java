@@ -3,12 +3,17 @@ package com.example.mirko.unibroken;
 import java.io.Serializable;
 
 public class Segnalazione implements Serializable {
+    private int id;
     private int autore;
     public int image;
     private String testo;
+    private String luogo;
     public Segnalazione(){
 
     }
+    public int getId() {return id;}
+
+    public void setId(int id){this.id = id;}
 
     public int getAutore() {
         return autore;
@@ -32,6 +37,14 @@ public class Segnalazione implements Serializable {
 
     public void setTesto(String testo) {
         this.testo = testo;
+    }
+
+    public String getLuogo() {
+        return luogo;
+    }
+
+    public void setLuogo(String luogo) {
+        this.luogo = luogo;
     }
 
 

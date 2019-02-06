@@ -10,11 +10,13 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 public class Homepage extends AppCompatActivity {
-
+    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
     Persona p1;
     Persona p2;
     TextView r;
     Button segnalazioni;
+    Button mio;
+
     Button indietro;
 
     @Override
@@ -23,6 +25,8 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
         segnalazioni = (Button)findViewById(R.id.mostra);
+        mio = (Button)findViewById(R.id.visualizzaMieSegnalazioni);
+
         r = (TextView) findViewById(R.id.result);
         //indietro = (Button) findViewById(R.id.indietro);
 
@@ -32,12 +36,12 @@ public class Homepage extends AppCompatActivity {
 
         p1 = (Persona)obj;
         r = (TextView)findViewById(R.id.result);
-        //if (!p1.getIsRaga()) {
+        if (!p1.getIsRaga()) {
             r.setText("Benvenuto in UniBroken, " + p1.getNome());
-        //} else {
-         //   Intent showResults = new Intent(Homepage.this, HomeRaga.class);
-          //  startActivity(showResults);
-       //}
+        } else {
+            Intent showResults = new Intent(Homepage.this, HomeRaga.class);
+            startActivity(showResults);
+       }
 
 
 
@@ -45,6 +49,15 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent segnalazioni = new Intent(Homepage.this, ListaSegn.class);
+                startActivity(segnalazioni);
+            }
+        });
+
+        mio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent segnalazioni = new Intent(Homepage.this, MySegn.class);
+                segnalazioni.putExtra(PERSONA_EXTRA, p1);
                 startActivity(segnalazioni);
             }
         });
