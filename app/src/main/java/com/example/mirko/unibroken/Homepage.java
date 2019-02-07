@@ -14,6 +14,7 @@ public class Homepage extends AppCompatActivity {
     Persona p1;
     Persona p2;
     TextView r;
+    Button invia;
     Button segnalazioni;
     Button mio;
 
@@ -26,7 +27,7 @@ public class Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
         segnalazioni = (Button)findViewById(R.id.mostra);
         mio = (Button)findViewById(R.id.visualizzaMieSegnalazioni);
-
+        invia = (Button)findViewById(R.id.invia);
         r = (TextView) findViewById(R.id.result);
         //indietro = (Button) findViewById(R.id.indietro);
 
@@ -44,7 +45,14 @@ public class Homepage extends AppCompatActivity {
             startActivity(showResults);
        }
 
-
+        invia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent send = new Intent(Homepage.this, SendSegn.class);
+                send.putExtra(PERSONA_EXTRA, p1);
+                startActivity(send);
+            }
+        });
 
         segnalazioni.setOnClickListener(new View.OnClickListener() {
             @Override

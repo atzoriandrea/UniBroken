@@ -12,6 +12,7 @@ import android.widget.Button;
 import java.io.Serializable;
 
 public class HomeRaga extends AppCompatActivity {
+    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
     Persona p;
     Button invia, gestisci, budget;
     @Override
@@ -25,6 +26,30 @@ public class HomeRaga extends AppCompatActivity {
         invia = (Button)findViewById(R.id.invia);
         gestisci = (Button)findViewById(R.id.gestisci);
         budget = (Button)findViewById(R.id.budget);
+        invia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent send = new Intent(HomeRaga.this, SendSegn.class);
+                send.putExtra(PERSONA_EXTRA, p);
+                startActivity(send);
+            }
+        });
+        gestisci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent segnalazioni = new Intent(HomeRaga.this, SendSegn.class);
+                segnalazioni.putExtra(PERSONA_EXTRA, p);
+                startActivity(segnalazioni);
+            }
+        });
+        budget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent segnalazioni = new Intent(HomeRaga.this, SendSegn.class);
+                segnalazioni.putExtra(PERSONA_EXTRA, p);
+                startActivity(segnalazioni);
+            }
+        });
 
     }
 

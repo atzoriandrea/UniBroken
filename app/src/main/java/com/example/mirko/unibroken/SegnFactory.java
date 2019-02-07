@@ -57,7 +57,22 @@ public class SegnFactory {
         }
         return null;
     }
+    public static int getLastSegn(){
+        SegnFactory factory = SegnFactory.getInstance();
+        int m = 0;
+        for(Segnalazione s:listaSegnalazioni){
+            if (m<s.getId())
+                m = s.getId();
+        }
+        return m;
+    }
+    public static void addSegnalazione(Segnalazione s){
+        SegnFactory factory = SegnFactory.getInstance();
+        int max = getLastSegn();
+        s.setId(max+1);
+        listaSegnalazioni.add(s);
 
+    }
     public static void remSegnalazioneById(int id){
         SegnFactory factory = SegnFactory.getInstance();
         ArrayList<Segnalazione> tmp = new ArrayList<>();

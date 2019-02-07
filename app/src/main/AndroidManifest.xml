@@ -25,7 +25,8 @@
         <activity android:name=".ListaSegn" />
         <activity android:name=".Showsegn" />
         <activity android:name=".MySegn" />
-        <activity android:name=".MySegnDetail"></activity>
+        <activity android:name=".MySegnDetail" />
+        <activity android:name=".SendSegn"></activity>
     </application>
 
 </manifest>
