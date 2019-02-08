@@ -1,5 +1,6 @@
 package com.example.mirko.unibroken;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
@@ -21,10 +22,12 @@ public class SendSegn extends AppCompatActivity {
     Button capturedImageButton;
     EditText t;
     Button save;
+    Bitmap bitmap;
     public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
     Persona p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Context c = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
         save = (Button)findViewById(R.id.save);
@@ -70,12 +73,15 @@ public class SendSegn extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegnFactory factory = SegnFactory.getInstance();
+                SegnFactory factory = SegnFactory.getInstance(c);
                 Segnalazione s = new Segnalazione();
                 s.setAutore(p.getId());
-                s.setImage(imageHolder.getId());
+                s.setImage(bitmap);
                 s.setTesto(t.getText().toString());
-                SegnFactory.addSegnalazione(s);
+                SegnFactory.addSegnalazione(s,c);
+                Intent menu = new Intent(SendSegn.this, Homepage.class);
+                menu.putExtra(PERSONA_EXTRA,p);
+                startActivity(menu);
             }
         });
     }
@@ -83,7 +89,7 @@ public class SendSegn extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(this.requestCode == requestCode && resultCode == RESULT_OK){
-            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+            bitmap = (Bitmap)data.getExtras().get("data");
             imageHolder.setImageBitmap(bitmap);
 
         }

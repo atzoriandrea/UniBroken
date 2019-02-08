@@ -18,19 +18,19 @@ public class MySegn extends AppCompatActivity {
     ListView lista;
     Persona p1;
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
-    SegnFactory sf = SegnFactory.getInstance();
+    SegnFactory sf = SegnFactory.getInstance(this);
     Segnalazione s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_segn);
-        SegnFactory sf = SegnFactory.getInstance();
+        SegnFactory sf = SegnFactory.getInstance(this);
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         p1 = (Persona)obj;
-        segn = SegnFactory.getListaSegnalazioniByAuthor(p1.getId());
+        segn = SegnFactory.getListaSegnalazioniByAuthor(p1.getId(),this);
 
         OptionActivity.Adattatore a = new OptionActivity.Adattatore(this,segn);
         lista = (ListView)findViewById(R.id.SegList);

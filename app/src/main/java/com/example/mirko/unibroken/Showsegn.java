@@ -27,7 +27,7 @@ public class Showsegn extends AppCompatActivity {
         descrizione = (TextView)findViewById(R.id.des);
         luogo = (TextView)findViewById(R.id.loc);
         descrizione.setText(s.getTesto());
-        img.setImageResource(s.getImage());
+        img.setImageBitmap(s.getImage());
 
 
     }

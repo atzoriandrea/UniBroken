@@ -25,14 +25,14 @@ public class ListaSegn extends AppCompatActivity {
 
     ListView lista;
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
-    SegnFactory sf = SegnFactory.getInstance();
+    SegnFactory sf = SegnFactory.getInstance(this);
     Segnalazione s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_segn);
-        segn = SegnFactory.getListaSegnalazioni();
+        segn = SegnFactory.getListaSegnalazioni(this);
 
 
         OptionActivity.Adattatore a = new OptionActivity.Adattatore(this,segn);

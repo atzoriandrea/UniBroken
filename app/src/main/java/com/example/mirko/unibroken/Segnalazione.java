@@ -1,11 +1,13 @@
 package com.example.mirko.unibroken;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class Segnalazione implements Serializable {
     private int id;
     private int autore;
-    public int image;
+    public Bitmap image;
     private String testo;
     private String luogo;
     public Segnalazione(){
@@ -23,11 +25,11 @@ public class Segnalazione implements Serializable {
         this.autore = autore;
     }
 
-    public int getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 

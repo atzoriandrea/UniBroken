@@ -1,6 +1,7 @@
 package com.example.mirko.unibroken;
 
 import android.app.Person;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,8 @@ public class MySegnDetail extends AppCompatActivity {
     Persona p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SegnFactory factory = SegnFactory.getInstance();
+        SegnFactory factory = SegnFactory.getInstance(this);
+        final Context c = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_segn_detail);
         Intent intent = getIntent();
@@ -39,12 +41,12 @@ public class MySegnDetail extends AppCompatActivity {
         luogo = (TextView)findViewById(R.id.loc);
         elimina = (Button)findViewById(R.id.elimina);
         descrizione.setText(s.getTesto());
-        img.setImageResource(s.getImage());
+        img.setImageBitmap(s.getImage());
 
         elimina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegnFactory.remSegnalazioneById(s.getId());
+                SegnFactory.remSegnalazioneById(s.getId(), c);
                 Intent segnalazioni = new Intent(MySegnDetail.this, MySegn.class);
                 segnalazioni.putExtra(PERSONA_EXTRA, p);
                 startActivity(segnalazioni);
