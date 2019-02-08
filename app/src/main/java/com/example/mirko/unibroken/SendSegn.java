@@ -2,7 +2,11 @@ package com.example.mirko.unibroken;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.Serializable;
 
@@ -22,9 +27,18 @@ public class SendSegn extends AppCompatActivity {
     Button capturedImageButton;
     EditText t;
     Button save;
+    Button galleria;
     Bitmap bitmap;
+    BitmapDrawable bd;
+    String titolo;
+    String imgDecodableString = null;
+    Bitmap [] array = new Bitmap[3];
+    private static final int PICK_IMAGE_REQUEST = 100;
+    private static int RESULT_LOAD_IMG = 1;
+
     public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
     Persona p;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final Context c = this;
@@ -34,11 +48,14 @@ public class SendSegn extends AppCompatActivity {
         capturedImageButton= (Button)findViewById(R.id.addphoto);
         Spinner luogo = (Spinner) findViewById(R.id.luogo);
         imageHolder = (ImageView)findViewById(R.id.addedphoto);
+        galleria = (Button)findViewById(R.id.addImage);
         t = (EditText)findViewById(R.id.mydescription);
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(MainActivity.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
-
+        array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
+        array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
+        array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         p = (Persona)obj;
         // Create an ArrayAdapter using the string array and a default spinner layout
         Spinner dropdown = findViewById(R.id.tipologia);
@@ -73,26 +90,71 @@ public class SendSegn extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegnFactory factory = SegnFactory.getInstance(c);
+                SegnFactory factory = SegnFactory.getInstance();
                 Segnalazione s = new Segnalazione();
                 s.setAutore(p.getId());
+                //getResourseId(SendSegn.this, "myIcon", "drawable", getPackageName());
+                //bd = new BitmapDrawable(getResources(), bitmap);
+                //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
+                if (imgDecodableString != null){
+                    bitmap = BitmapFactory.decodeFile(imgDecodableString, new BitmapFactory.Options());
+                }
                 s.setImage(bitmap);
                 s.setTesto(t.getText().toString());
-                SegnFactory.addSegnalazione(s,c);
+                SegnFactory.addSegnalazione(s);
                 Intent menu = new Intent(SendSegn.this, Homepage.class);
                 menu.putExtra(PERSONA_EXTRA,p);
                 startActivity(menu);
             }
         });
     }
+    public void loadImagefromGallery(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(this.requestCode == requestCode && resultCode == RESULT_OK){
-            bitmap = (Bitmap)data.getExtras().get("data");
-            imageHolder.setImageBitmap(bitmap);
+        try {
+            // When an Image is picked
+            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
 
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                // Move to first row
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+                imageHolder.setImageBitmap(BitmapFactory
+                        .decodeFile(imgDecodableString));
+
+
+            } else {
+                Toast.makeText(this, "You haven't picked Image",
+                        Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+                    .show();
         }
+
     }
+
+
+
+
+
 
 }

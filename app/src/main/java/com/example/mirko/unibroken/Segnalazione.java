@@ -1,6 +1,7 @@
 package com.example.mirko.unibroken;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 
 import java.io.Serializable;
 
