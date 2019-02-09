@@ -10,23 +10,46 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:background="#003366"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
         <TextView
             android:id="@+id/tit"
-            android:text="Titolo"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="39dp"
+            android:layout_marginTop="10dp"
+            android:text="Titolo"
+            android:textAlignment="center" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
         <ImageView
             android:id="@+id/imgdett"
             android:layout_width="match_parent"
             android:layout_height="350px" />
+
         <TextView
             android:id="@+id/des"
-            android:text="Descrizione"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:text="Descrizione"
+            android:textColor="@color/colorPrimaryDark"/>
         <TextView
             android:id="@+id/loc"
+            android:layout_marginTop="15dp"
+            android:textColor= "@color/colorPrimaryDark"
             android:text="Luogo"
+            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Space

@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         accedi = (Button)findViewById(R.id.accedi);
-        errore = (TextView) findViewById(R.id.errore);
-        errore.setVisibility(View.GONE);
         link = (TextView) findViewById(R.id.link);
 
         //builder.setTitle("Attenzione!");
@@ -96,21 +94,6 @@ public class MainActivity extends AppCompatActivity {
         else
             password.setError(null);
 
-        switch (errors){
-            case 0:
-                errore.setVisibility(View.GONE);
-                errore.setText("");
-
-                break;
-            case 1:
-                errore.setVisibility(View.VISIBLE);
-                errore.setText("Si è verificato un errore");
-                break;
-            default:
-                errore.setVisibility(View.VISIBLE);
-                errore.setText("Si sono verificati " + errors+" errori" );
-                break;
-        }
 
 
         return errors==0; // se non trova errori rende TRUE
