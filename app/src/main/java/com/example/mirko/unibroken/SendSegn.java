@@ -51,7 +51,7 @@ public class SendSegn extends AppCompatActivity {
         setContentView(R.layout.activity_send_segn);
         save = (Button)findViewById(R.id.save);
         capturedImageButton= (Button)findViewById(R.id.addphoto);
-        Spinner luogo = (Spinner) findViewById(R.id.luogo);
+        final Spinner luogo = (Spinner) findViewById(R.id.luogo);
         imageHolder = (ImageView)findViewById(R.id.addedphoto);
         galleria = (Button)findViewById(R.id.addImage);
         t = (EditText)findViewById(R.id.mydescription);
@@ -63,7 +63,7 @@ public class SendSegn extends AppCompatActivity {
         array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         p = (Persona)obj;
         // Create an ArrayAdapter using the string array and a default spinner layout
-        Spinner dropdown = findViewById(R.id.tipologia);
+        final Spinner dropdown = findViewById(R.id.tipologia);
         String[] items = new String[]{"Danno Intonaco",
                 "Danno Finestre",
                 "Cedimento Soffitto",
@@ -104,8 +104,10 @@ public class SendSegn extends AppCompatActivity {
                 if (imgDecodableString != null){
                     bitmap = decodeFile(imgDecodableString);
                 }
+                s.setTipo(dropdown.getSelectedItem().toString());
                 s.setImage(bitmap);
                 s.setTesto(t.getText().toString());
+                s.setLuogo(luogo.getSelectedItem().toString());
                 SegnFactory.addSegnalazione(s);
                 Intent menu = new Intent(SendSegn.this, Homepage.class);
                 menu.putExtra(PERSONA_EXTRA,p);
