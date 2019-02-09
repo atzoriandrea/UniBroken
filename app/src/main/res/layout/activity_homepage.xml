@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+
     tools:context=".Homepage">
 
     <ScrollView
@@ -11,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
+
         tools:layout_editor_absoluteX="111dp"
         tools:layout_editor_absoluteY="0dp"
         tools:ignore="MissingConstraints">
@@ -34,8 +37,8 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
+                android:layout_height="40sp"
+                android:background="#003366"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme" />
 
@@ -44,9 +47,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/unibroken"
-                android:textSize="30sp" />
+                android:textSize="25sp" />
 
             <ImageView
                 android:id="@+id/logo"
@@ -56,34 +59,40 @@
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="35dp"
-                app:srcCompat="@drawable/logo"
-                android:contentDescription="@string/todo" />
+                android:src="@drawable/logo"
+                />
 
             <Button
                 android:id="@+id/invia"
                 android:layout_width="match_parent"
                 android:layout_gravity="center"
-                android:layout_height="74dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/background_button"
                 android:text="@string/invia_segnalazione" />
 
             <Button
                 android:id="@+id/mostra"
                 android:layout_width="match_parent"
-                android:layout_height="74dp"
+                android:layout_height="50dp"
                 android:layout_margin="15dp"
-                android:text="@string/mostra_segnalazioni" />
+                android:text="@string/mostra_segnalazioni"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/background_button"/>
 
             <Button
                 android:id="@+id/visualizzaMieSegnalazioni"
                 android:layout_width="match_parent"
-                android:layout_height="74dp"
+                android:layout_height="50dp"
                 android:layout_margin="15dp"
                 android:baselineAligned="false"
-                android:text="@string/le_mie_segnalazioni" />
+                android:text="@string/le_mie_segnalazioni"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/background_button"/>
 
             <TextView
                 android:id="@+id/logout"

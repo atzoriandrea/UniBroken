@@ -38,7 +38,7 @@ public class Homepage extends AppCompatActivity {
         p1 = (Persona)obj;
         r = (TextView)findViewById(R.id.uniBroken);
         if (!p1.getIsRaga()) {
-            r.setText("Benvenuto in UniBroken, " + p1.getNome());
+            r.setText("Benvenuto, " + p1.getNome());
         } else {
             Intent showResults = new Intent(Homepage.this, HomeRaga.class);
             showResults.putExtra(PERSONA_EXTRA,p1);

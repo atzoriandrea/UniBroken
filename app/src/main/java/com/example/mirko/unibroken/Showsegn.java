@@ -44,7 +44,5 @@ public class Showsegn extends AppCompatActivity {
         testotitolo.setText(s.getTipo());
         testoluogo.setText(s.getLuogo());
         img.setImageBitmap(s.getImage());
-
-
     }
 }
