@@ -1,6 +1,8 @@
 package com.example.mirko.unibroken;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,18 +15,21 @@ import java.util.ArrayList;
 public class MySegn extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
 
-    public static final String SEGN="com.example.mirko.esercitazionebonus.Segnalazione";
+    public static final String SEGN="java.lang.Integer";
 
     ListView lista;
     Persona p1;
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
-    SegnFactory sf = SegnFactory.getInstance();
     Segnalazione s;
+    Bitmap[] array = new Bitmap[3];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_segn);
+        array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
+        array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
+        array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         SegnFactory sf = SegnFactory.getInstance();
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
@@ -43,7 +48,7 @@ public class MySegn extends AppCompatActivity {
                 s = (Segnalazione) lista.getItemAtPosition(position);
                 Intent dettaglio = new Intent(MySegn.this , MySegnDetail.class);
                 dettaglio.putExtra(PERSONA_EXTRA,p1);
-                dettaglio.putExtra(SEGN, s);
+                dettaglio.putExtra(SEGN, new Integer(s.getId()));
                 startActivity(dettaglio);
 
             }

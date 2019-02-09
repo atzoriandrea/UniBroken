@@ -2,6 +2,8 @@ package com.example.mirko.unibroken;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,22 +18,25 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaSegn extends AppCompatActivity {
-    public static final String SEGN="com.example.mirko.esercitazionebonus.Segnalazione";
+    public static final String SEGN="java.lang.Integer";
 
     ListView lista;
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
-    SegnFactory sf = SegnFactory.getInstance();
+
     Segnalazione s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_segn);
+
+
+        SegnFactory sf = SegnFactory.getInstance();
         segn = SegnFactory.getListaSegnalazioni();
 
 
@@ -45,7 +50,7 @@ public class ListaSegn extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3){
                 s = (Segnalazione) lista.getItemAtPosition(position);
                 Intent dettaglio = new Intent(ListaSegn.this , Showsegn.class);
-                dettaglio.putExtra(SEGN, s);
+                dettaglio.putExtra(SEGN, new Integer(s.getId()));
                 startActivity(dettaglio);
 
             }

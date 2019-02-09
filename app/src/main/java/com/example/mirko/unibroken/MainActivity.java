@@ -1,7 +1,8 @@
 package com.example.mirko.unibroken;
 
 import android.content.Intent;
-import android.graphics.LightingColorFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Persona p2;
     boolean p;
     Toast t;
+    Bitmap[] array = new Bitmap[3];
+
     public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
     //AlertDialog.Builder builder=new AlertDialog.Builder(this);
 
@@ -32,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //recupero gli ID
-
+        array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
+        array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
+        array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
+        SegnFactory.setBitmaps(array);
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         accedi = (Button)findViewById(R.id.accedi);
