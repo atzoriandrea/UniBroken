@@ -9,6 +9,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:background="#003366"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="15sp"
+            >
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,17 +42,27 @@
             android:spinnerMode="dropdown"/>
         <TextView
             android:layout_width="match_parent"
+            android:elevation="10dp"
             android:layout_height="40px"
             android:text="Descrizione"/>
 
         <EditText
+            android:layout_marginTop="20sp"
             android:id="@+id/mydescription"
             android:layout_width="match_parent"
+            android:hint="Digita qui..."
             android:layout_height="200px" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="33dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40px"
             android:text="Luogo"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="33dp" />
         <Spinner
             android:id="@+id/luogo"
             android:layout_width="match_parent"
@@ -72,6 +103,7 @@
             android:layout_height="wrap_content"
             android:text="Invia Segnalazione"
             android:id="@+id/save"/>
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

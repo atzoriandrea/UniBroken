@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/tit"
             android:text="Titolo"
@@ -28,13 +29,18 @@
             android:text="Luogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="40sp"
             android:id="@+id/elimina"
-            android:text="Elimina"
-            android:textColor="#FFFFFF"
-            android:background="#FF0000"/>
+            android:text="Elimina Segnalazione"
+            android:background="@drawable/delete_button"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -9,6 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:background="#003366"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
         <TextView
             android:id="@+id/tit"
             android:layout_marginTop="5dp"
