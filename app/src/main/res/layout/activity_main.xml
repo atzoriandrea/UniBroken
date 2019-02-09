@@ -109,6 +109,11 @@
             android:layout_height="13dp" />
 
         <!-- bottone accedi -->
+        <TextView
+            android:id="@+id/errore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/accedi"
             android:layout_width="match_parent"
@@ -116,7 +121,7 @@
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
             android:background="#003366"
-            android:text="Accedi!"
+            android:text="Accedi"
             android:textColor="#FFFFFF"
             android:textSize="17dp" />
 
