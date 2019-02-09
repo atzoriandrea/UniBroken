@@ -30,21 +30,23 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tipologia Danno"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipologia Danno" />
         <Spinner
             android:id="@+id/tipologia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:elevation="10dp"
-            android:layout_height="40px"
-            android:text="Descrizione"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="10dp"
+                android:text="Descrizione" />
 
         <EditText
             android:layout_marginTop="20sp"
@@ -56,10 +58,11 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="33dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40px"
-            android:text="Luogo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Luogo" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="33dp" />
