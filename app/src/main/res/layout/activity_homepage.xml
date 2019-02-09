@@ -12,11 +12,13 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="111dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!--<Button
@@ -27,30 +29,53 @@
                 />-->
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp" />
+                android:layout_height="5dp" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme" />
 
             <TextView
-                android:id="@+id/result"
+                android:id="@+id/uniBroken"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="30dp" />
+                android:layout_marginTop="10dp"
+                android:text="@string/unibroken"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="254dp"
+                android:layout_height="165dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="35dp"
+                app:srcCompat="@drawable/logo"
+                android:contentDescription="@string/todo" />
 
             <Button
                 android:id="@+id/invia"
                 android:layout_width="match_parent"
+                android:layout_gravity="center"
                 android:layout_height="74dp"
-                android:layout_margin="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="Invia Segnalazione" />
+                android:text="@string/invia_segnalazione" />
 
             <Button
                 android:id="@+id/mostra"
                 android:layout_width="match_parent"
                 android:layout_height="74dp"
                 android:layout_margin="15dp"
-                android:text="Mostra Segnalazioni" />
+                android:text="@string/mostra_segnalazioni" />
 
             <Button
                 android:id="@+id/visualizzaMieSegnalazioni"
@@ -58,7 +83,7 @@
                 android:layout_height="74dp"
                 android:layout_margin="15dp"
                 android:baselineAligned="false"
-                android:text="Le mie segnalazioni" />
+                android:text="@string/le_mie_segnalazioni" />
 
             <TextView
                 android:id="@+id/logout"

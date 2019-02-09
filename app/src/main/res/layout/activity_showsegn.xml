@@ -11,8 +11,10 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/tit"
+            android:layout_marginTop="5dp"
             android:text="Titolo"
             android:layout_width="match_parent"
+            android:textAlignment="center"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tittext"

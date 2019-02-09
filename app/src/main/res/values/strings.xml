@@ -2,5 +2,10 @@
     <string name="app_name"><c>UniBroken</c></string>
     <string name="title_activity_home_raga">HomeRaga</string>
     <string name="title_activity_lista_segn">ListaSegn</string>
+    <string name="invia_segnalazione">Invia Segnalazione</string>
+    <string name="mostra_segnalazioni">Mostra Segnalazioni</string>
+    <string name="todo">TODO</string>
+    <string name="le_mie_segnalazioni">Le mie segnalazioni</string>
+    <string name="unibroken">UniBroken</string>
 
 </resources>
