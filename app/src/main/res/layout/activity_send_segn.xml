@@ -38,25 +38,39 @@
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:text="Carica Foto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+
+                android:id="@+id/addphoto"/>
+            <Button
+                android:text="Galleria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addImage"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/addphoto"
+                android:onClick="loadImagefromGallery"
+                />
+            <ImageView
+                android:id="@+id/addedphoto"
+                android:layout_width="250px"
+                android:layout_height="250px"
+                android:layout_toRightOf="@+id/addImage"
+
+                />
+        </RelativeLayout>
+
+
         <Button
-            android:text="Carica Foto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/addphoto"/>
-        <Button
-            android:text="Galleria"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addImage"
-            android:onClick="loadImagefromGallery"
-            />
-        <ImageView
-            android:id="@+id/addedphoto"
-            android:layout_width="250px"
-            android:layout_height="250px" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:text="Invia Segnalazione"
             android:id="@+id/save"/>
     </LinearLayout>
 
