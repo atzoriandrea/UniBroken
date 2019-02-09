@@ -10,15 +10,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="47dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:orientation="vertical">
         <!-- SPAZIO INIZIALE CON TEXTVIEW ERRORE-->
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
-
         <TextView
             android:id="@+id/errore"
             android:layout_width="match_parent"
@@ -27,7 +23,6 @@
             android:text="ERRORE"
             android:textSize="30dp"
             android:visibility="gone" />
-
         <ImageView
             android:id="@+id/logo"
             android:layout_width="100dp"
@@ -36,18 +31,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="35dp"
             app:srcCompat="@drawable/logo" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginLeft="180dp"
             android:layout_marginTop="-70dp"
             android:freezesText="false"
             android:text="UniBroken"
             android:textSize="30dp"
             android:textColor="#000000"/>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,12 +54,10 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="#000000"/>
-
         <!-- SPAZIO ED USERNAME -->
         <Space
             android:layout_width="match_parent"
             android:layout_height="40dp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,21 +67,17 @@
             android:text="Username:"
             android:textSize="19dp"
             android:textColor="#000000"/>
-
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="inserisci username"
-            />
-
+            android:hint="inserisci username"/>
         <!-- SPAZIO E PASSWORD -->
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +86,6 @@
             android:text="Password:"
             android:textColor="#000000"
             android:textSize="19dp" />
-
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
@@ -109,11 +94,9 @@
             android:layout_marginRight="30dp"
             android:hint="inserisci password"
             android:inputType="textPassword" />
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="13dp" />
-
         <!-- bottone accedi -->
         <Button
             android:id="@+id/accedi"
@@ -125,11 +108,9 @@
             android:text="Accedi!"
             android:textColor="#FFFFFF"
             android:textSize="17dp"/>
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="35dp" />
-
         <TextView
             android:id="@+id/link"
             android:layout_width="match_parent"
@@ -138,9 +119,6 @@
             android:textColor="#000000"
             android:text="Hai dimenticato la password?"
             android:textSize="16dp" />
-
-
-
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
