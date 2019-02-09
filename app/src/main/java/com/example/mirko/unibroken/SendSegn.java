@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 
 public class SendSegn extends AppCompatActivity {
@@ -41,6 +45,7 @@ public class SendSegn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         final Context c = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
@@ -97,7 +102,7 @@ public class SendSegn extends AppCompatActivity {
                 //bd = new BitmapDrawable(getResources(), bitmap);
                 //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
                 if (imgDecodableString != null){
-                    bitmap = BitmapFactory.decodeFile(imgDecodableString, new BitmapFactory.Options());
+                    bitmap = decodeFile(imgDecodableString);
                 }
                 s.setImage(bitmap);
                 s.setTesto(t.getText().toString());
@@ -121,25 +126,31 @@ public class SendSegn extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             // When an Image is picked
-            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
-                    && null != data) {
+            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                //String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
                 // Get the cursor
-                Cursor cursor = getContentResolver().query(selectedImage,
-                        filePathColumn, null, null, null);
+                //Cursor cursor = getContentResolver().query(selectedImage,
+                       // filePathColumn, null, null, null);
                 // Move to first row
-                cursor.moveToFirst();
+                //cursor.moveToFirst();
 
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
-                cursor.close();
-                imageHolder.setImageBitmap(BitmapFactory
-                        .decodeFile(imgDecodableString));
+                //int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                //imgDecodableString = cursor.getString(columnIndex);
+                //cursor.close();
+                //imageHolder.setImageBitmap(decodeFile(imgDecodableString));
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    Toast.makeText(SendSegn.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    imageHolder.setImageBitmap(bitmap);
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(SendSegn.this, "Failed!", Toast.LENGTH_SHORT).show();
+                }
 
             } else {
                 Toast.makeText(this, "You haven't picked Image",
@@ -150,6 +161,19 @@ public class SendSegn extends AppCompatActivity {
                     .show();
         }
 
+    }
+    public static Bitmap decodeFile(String photoPath){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(photoPath, options);
+
+        options.inJustDecodeBounds = false;
+        options.inDither = false;
+        options.inPurgeable = true;
+        options.inInputShareable = true;
+        options.inPreferQualityOverSpeed = true;
+
+        return BitmapFactory.decodeFile(photoPath, options);
     }
 
 
