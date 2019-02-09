@@ -126,6 +126,10 @@ public class SendSegn extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             // When an Image is picked
+            if(this.requestCode == requestCode && resultCode == RESULT_OK) {
+                bitmap = (Bitmap) data.getExtras().get("data");
+                imageHolder.setImageBitmap(bitmap);
+            }
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
                 // Get the Image from data
 
