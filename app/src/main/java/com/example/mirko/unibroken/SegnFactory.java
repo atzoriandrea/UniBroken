@@ -21,18 +21,22 @@ public class SegnFactory {
             s1.setAutore(4);
             s1.setImage(v[0]);
             s1.setTesto("Cedimento del soffitto dell'aula D");
+            s1.setIdIntervento(3);
 
             Segnalazione s2 = new Segnalazione();
             s2.setId(2);
             s2.setAutore(2);
             s2.setImage(v[1]);
             s2.setTesto("CCCedimento del soffitto dell'aula D");
+            s2.setIdIntervento(3);
 
             Segnalazione s3 = new Segnalazione();
             s3.setId(3);
             s3.setAutore(1);
             s3.setImage(v[2]);
             s3.setTesto("DDCedimento del soffitto dell'aula D");
+            s3.setIdIntervento(3);
+
 
             listaSegnalazioni.add(s1);
             listaSegnalazioni.add(s2);

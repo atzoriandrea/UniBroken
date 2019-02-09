@@ -12,6 +12,8 @@ public class Segnalazione implements Serializable {
     private String tipo;
     private String testo;
     private String luogo;
+    private int idIntervento;
+
     public Segnalazione(){
 
     }
@@ -30,6 +32,12 @@ public class Segnalazione implements Serializable {
 
     public int getAutore() {
         return autore;
+    }
+
+    public int getIdIntervento(){ return idIntervento; }
+
+    public void setIdIntervento(int idIntervento) {
+        this.idIntervento = idIntervento;
     }
 
     public void setAutore(int autore) {
