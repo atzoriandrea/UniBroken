@@ -9,11 +9,21 @@ public class Segnalazione implements Serializable {
     private int id;
     private int autore;
     public Bitmap image;
+    private String tipo;
     private String testo;
     private String luogo;
     public Segnalazione(){
 
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public int getId() {return id;}
 
     public void setId(int id){this.id = id;}

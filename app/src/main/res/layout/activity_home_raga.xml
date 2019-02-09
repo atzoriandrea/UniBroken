@@ -9,12 +9,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
         <TextView
-            android:id="@+id/result"
+            android:id="@+id/uniBroken"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="30dp" />
+            android:layout_marginTop="10dp"
+            android:text="@string/unibroken"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/logo2"
+            android:layout_width="match_parent"
+            android:layout_height="165dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="35dp"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/logo" />
 
         <Button
             android:id="@+id/invia"

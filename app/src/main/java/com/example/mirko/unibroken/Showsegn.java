@@ -14,7 +14,9 @@ public class Showsegn extends AppCompatActivity {
     TextView titolo;
     ImageView img;
     TextView descrizione;
+    TextView testotitolo;
     TextView luogo;
+    TextView testoluogo;
     Segnalazione s;
     Bitmap[] array = new Bitmap[3];
 
@@ -34,9 +36,13 @@ public class Showsegn extends AppCompatActivity {
         //s = (Segnalazione) obj;
         titolo = (TextView)findViewById(R.id.tit);
         img = (ImageView)findViewById(R.id.imgdett);
+        testotitolo = (TextView)findViewById(R.id.tittext);
         descrizione = (TextView)findViewById(R.id.des);
         luogo = (TextView)findViewById(R.id.loc);
+        testoluogo = (TextView)findViewById(R.id.loctext);
         descrizione.setText(s.getTesto());
+        testotitolo.setText(s.getTipo());
+        testoluogo.setText(s.getLuogo());
         img.setImageBitmap(s.getImage());
 
 

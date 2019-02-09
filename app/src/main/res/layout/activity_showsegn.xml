@@ -11,7 +11,14 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/tit"
+            android:layout_marginTop="5dp"
             android:text="Titolo"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tittext"
+            android:text="Titolotesto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
@@ -26,6 +33,11 @@
         <TextView
             android:id="@+id/loc"
             android:text="Luogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/loctext"
+            android:text="luogotesto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

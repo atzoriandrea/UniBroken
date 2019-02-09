@@ -28,7 +28,7 @@ public class Homepage extends AppCompatActivity {
         segnalazioni = (Button)findViewById(R.id.mostra);
         mio = (Button)findViewById(R.id.visualizzaMieSegnalazioni);
         invia = (Button)findViewById(R.id.invia);
-        r = (TextView) findViewById(R.id.result);
+        r = (TextView) findViewById(R.id.uniBroken);
         //indietro = (Button) findViewById(R.id.indietro);
 
         Intent intent = getIntent();
@@ -36,7 +36,7 @@ public class Homepage extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         p1 = (Persona)obj;
-        r = (TextView)findViewById(R.id.result);
+        r = (TextView)findViewById(R.id.uniBroken);
         if (!p1.getIsRaga()) {
             r.setText("Benvenuto in UniBroken, " + p1.getNome());
         } else {

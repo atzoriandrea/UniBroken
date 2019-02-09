@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+
         android:orientation="vertical"
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="0dp">
@@ -32,6 +32,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="35dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="35dp"
             app:srcCompat="@drawable/logo" />
 
@@ -39,14 +40,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginLeft="170dp"
-            android:layout_marginTop="-75dp"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="-70dp"
             android:freezesText="false"
             android:text="UniBroken"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textColor="#000000"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="45dp"
@@ -57,7 +59,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="#000000"/>
 
         <!-- SPAZIO ED USERNAME -->
         <Space
@@ -71,7 +74,8 @@
             android:layout_marginTop="-25dp"
             android:layout_marginRight="30dp"
             android:text="Username:"
-            android:textSize="19dp" />
+            android:textSize="19dp"
+            android:textColor="#000000"/>
 
         <EditText
             android:id="@+id/username"
@@ -79,7 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="inserisci username" />
+            android:hint="inserisci username"
+            />
 
         <!-- SPAZIO E PASSWORD -->
         <Space
@@ -92,6 +97,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:text="Password:"
+            android:textColor="#000000"
             android:textSize="19dp" />
 
         <EditText
@@ -114,7 +120,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
-            android:text="Accedi!" />
+            android:background="#008000"
+            android:text="Accedi!"
+            android:textColor="#FFFFFF"
+            android:textSize="17dp"/>
 
         <Space
             android:layout_width="match_parent"
@@ -125,17 +134,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="#000000"
             android:text="Hai dimenticato la password?"
             android:textSize="16dp" />
 
-        <TextView
-            android:id="@+id/incorrect_data"
-            android:layout_width="500dp"
-            android:layout_height="300dp"
-            android:autoLink="web"
-            android:layout_marginHorizontal="100dp"
-            android:layout_marginBottom="1500dp"
-            android:textAlignment="center" />
+
 
     </LinearLayout>
 
