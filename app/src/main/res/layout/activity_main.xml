@@ -23,18 +23,20 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="168dp"
-            android:layout_height="168dp"
+            android:layout_width="123dp"
+            android:layout_height="107dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="35dp"
-            app:srcCompat="@drawable/logo" />
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:src="@drawable/logo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="-100dp"
+
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="-70dp"
             android:freezesText="false"
             android:text="UniBroken"
             android:textColor="#000000"
@@ -43,17 +45,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginRight="0dp"
+            android:layout_marginTop="50dp"
             android:gravity="center_horizontal"
             android:text="Accedi con le tue credenziali ESSE3"
             android:textColor="#000000"
-            android:textSize="23dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="23dp" />
 
         <!-- SPAZIO ED USERNAME -->
         <Space
@@ -69,20 +65,22 @@
             android:text="Username:"
             android:textColor="#000000"
             android:textSize="19dp" />
-
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/shape"
-            android:hint="inserisci username" />
+            android:hint="  inserisci username" />
+
 
         <!-- SPAZIO E PASSWORD -->
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp" />
+            android:layout_height="15dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -93,15 +91,16 @@
             android:text="Password:"
             android:textColor="#000000"
             android:textSize="19dp" />
-
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/shape"
-            android:hint="inserisci password"
+            android:hint="  inserisci password"
             android:inputType="textPassword" />
 
         <Space
@@ -120,8 +119,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
             android:layout_marginRight="75dp"
-            android:background="#003366"
             android:text="Accedi"
+            android:background="@drawable/background_button"
             android:textColor="#FFFFFF"
             android:textSize="17dp" />
 
@@ -138,7 +137,7 @@
             android:textColor="#000000"
             android:textSize="16dp" />
 
-
+        
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,25 +1,32 @@
 package com.example.mirko.unibroken;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import java.io.Serializable;
 
 public class Homepage extends AppCompatActivity {
-    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p1;
     Persona p2;
     TextView r;
     Button invia;
     Button segnalazioni;
     Button mio;
-
     Button indietro;
 
+
+    private Toolbar mTopToolbar;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PersonaFactory pf = PersonaFactory.getInstance();
@@ -29,7 +36,8 @@ public class Homepage extends AppCompatActivity {
         mio = (Button)findViewById(R.id.visualizzaMieSegnalazioni);
         invia = (Button)findViewById(R.id.invia);
         r = (TextView) findViewById(R.id.uniBroken);
-        //indietro = (Button) findViewById(R.id.indietro);
+        mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mTopToolbar);
 
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(MainActivity.PERSONA_EXTRA);
@@ -73,17 +81,18 @@ public class Homepage extends AppCompatActivity {
 
 
 
-        /*indietro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent undo = new Intent(Homepage.this, MainActivity.class);
-                startActivity(undo);    //bottone per tornare alla prima activity
-            }
-        });*/
+
     }
     @Override
     public void onBackPressed() {
         Intent indietro = new Intent(Homepage.this, MainActivity.class);
         startActivity(indietro);
     }
+    public void logout(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent logout = new Intent(Homepage.this, MainActivity.class);
+        // Start the Intent
+        startActivity(logout);
+    }
+
 }

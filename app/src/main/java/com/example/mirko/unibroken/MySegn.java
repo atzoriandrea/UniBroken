@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MySegn extends AppCompatActivity {
-    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
 
     public static final String SEGN="java.lang.Integer";
 

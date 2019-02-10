@@ -53,7 +53,7 @@ public class OptionActivity extends ListActivity {
             author = PersonaFactory.getPersonaById(s.getAutore()).getNome() + " " +
                     PersonaFactory.getPersonaById(s.getAutore()).getCognome();
             txt.setText(author);
-            img.setImageBitmap(s.getImage());
+            img.setImageBitmap(s.getImage().get((s.getImage().size())-1));
 
             return v;
         }

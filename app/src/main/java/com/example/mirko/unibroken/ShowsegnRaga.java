@@ -18,6 +18,7 @@ public class ShowsegnRaga extends AppCompatActivity {
     Segnalazione s;
     Bitmap[] array = new Bitmap[3];
     TextView costoIntervento;
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class ShowsegnRaga extends AppCompatActivity {
         descrizione = (TextView)findViewById(R.id.des);
         luogo = (TextView)findViewById(R.id.loc);
         descrizione.setText(s.getTesto());
-        img.setImageBitmap(s.getImage());
+        img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
         costoIntervento=(TextView)findViewById(R.id.costo);
         double aux=(ifact.getInterventoById(s.getIdIntervento()).getImporto());
         costoIntervento.setText(String.valueOf(aux));

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +19,10 @@ public class Showsegn extends AppCompatActivity {
     TextView luogo;
     TextView testoluogo;
     Segnalazione s;
-    Bitmap[] array = new Bitmap[3];
+    //Bitmap[] array = new Bitmap[1];
+    public static final String BITMAP_EXTRA="java.lang.Integer";
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +30,8 @@ public class Showsegn extends AppCompatActivity {
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(ListaSegn.SEGN);
         Bundle bundle = getIntent().getExtras();
-        array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
-        array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
-        array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
+        //array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
+        //array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         SegnFactory sf = SegnFactory.getInstance();
         int i = (Integer) obj;
         s = SegnFactory.getSegnalazioneById(i);
@@ -42,6 +45,15 @@ public class Showsegn extends AppCompatActivity {
         descrizione.setText(s.getTesto());
         testotitolo.setText(s.getTipo());
         testoluogo.setText(s.getLuogo());
-        img.setImageBitmap(s.getImage());
+        img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
+        //array[0] = s.getImage();
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switcher = new Intent(Showsegn.this,ImgSwitcherShow.class);
+                switcher.putExtra(BITMAP_EXTRA, s.getId());
+                startActivity(switcher);
+            }
+        });
     }
 }

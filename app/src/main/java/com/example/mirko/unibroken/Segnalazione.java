@@ -4,18 +4,19 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Segnalazione implements Serializable {
     private int id;
     private int autore;
-    public Bitmap image;
+    public ArrayList<Bitmap> images;
     private String tipo;
     private String testo;
     private String luogo;
     private int idIntervento;
 
     public Segnalazione(){
-
+        images = new ArrayList<>();
     }
 
     public String getTipo() {
@@ -44,12 +45,12 @@ public class Segnalazione implements Serializable {
         this.autore = autore;
     }
 
-    public Bitmap getImage() {
-        return image;
+    public ArrayList<Bitmap> getImage() {
+        return images;
     }
 
     public void setImage(Bitmap image) {
-        this.image = image;
+        this.images.add(image);
     }
 
     public String getTesto() {

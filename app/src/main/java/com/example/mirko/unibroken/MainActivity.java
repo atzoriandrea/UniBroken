@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
 import android.app.AlertDialog;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -12,10 +14,15 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 public class MainActivity extends AppCompatActivity {
     EditText username, password;
@@ -26,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean p;
     Toast t;
     Bitmap[] array = new Bitmap[3];
-
-    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     //AlertDialog.Builder builder=new AlertDialog.Builder(this);
 
     @Override
@@ -46,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         errore.setVisibility(View.GONE);
         link = (TextView) findViewById(R.id.link);
 
-        //builder.setTitle("Attenzione!");
-        //builder.setMessage("Operazione non valida!");
 
         accedi.setOnClickListener(new View.OnClickListener() {
             @Override

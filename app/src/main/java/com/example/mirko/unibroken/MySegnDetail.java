@@ -15,7 +15,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 public class MySegnDetail extends AppCompatActivity {
-    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
 
     TextView titolo;
     ImageView img;
@@ -46,7 +46,7 @@ public class MySegnDetail extends AppCompatActivity {
         luogo = (TextView)findViewById(R.id.loc);
         elimina = (Button)findViewById(R.id.elimina);
         descrizione.setText(s.getTesto());
-        img.setImageBitmap(s.getImage());
+        img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
 
         elimina.setOnClickListener(new View.OnClickListener() {
             @Override

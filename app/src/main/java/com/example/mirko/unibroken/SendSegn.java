@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class SendSegn extends AppCompatActivity {
     private ImageView imageHolder;
@@ -39,13 +40,13 @@ public class SendSegn extends AppCompatActivity {
     Bitmap [] array = new Bitmap[3];
     private static final int PICK_IMAGE_REQUEST = 100;
     private static int RESULT_LOAD_IMG = 1;
-
-    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
+    //Segnalazione s = new Segnalazione();
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
+    ArrayList<Bitmap> tmp = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         final Context c = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
@@ -56,7 +57,7 @@ public class SendSegn extends AppCompatActivity {
         galleria = (Button)findViewById(R.id.addImage);
         t = (EditText)findViewById(R.id.mydescription);
         Intent intent = getIntent();
-        Serializable obj = intent.getSerializableExtra(MainActivity.PERSONA_EXTRA);
+        Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
         array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
@@ -101,14 +102,14 @@ public class SendSegn extends AppCompatActivity {
                 //getResourseId(SendSegn.this, "myIcon", "drawable", getPackageName());
                 //bd = new BitmapDrawable(getResources(), bitmap);
                 //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
-                if (imgDecodableString != null){
-                    bitmap = decodeFile(imgDecodableString);
-                }
                 s.setTipo(dropdown.getSelectedItem().toString());
-                s.setImage(bitmap);
                 s.setTesto(t.getText().toString());
                 s.setLuogo(luogo.getSelectedItem().toString());
+                for (Bitmap b : tmp){
+                    s.setImage(b);
+                }
                 SegnFactory.addSegnalazione(s);
+                factory = SegnFactory.getInstance();
                 Intent menu = new Intent(SendSegn.this, Homepage.class);
                 menu.putExtra(PERSONA_EXTRA,p);
                 startActivity(menu);
@@ -130,6 +131,7 @@ public class SendSegn extends AppCompatActivity {
             // When an Image is picked
             if(this.requestCode == requestCode && resultCode == RESULT_OK) {
                 bitmap = (Bitmap) data.getExtras().get("data");
+                tmp.add(bitmap);
                 imageHolder.setImageBitmap(bitmap);
             }
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
@@ -151,6 +153,7 @@ public class SendSegn extends AppCompatActivity {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                     Toast.makeText(SendSegn.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    tmp.add(bitmap);
                     imageHolder.setImageBitmap(bitmap);
 
                 } catch (IOException e) {

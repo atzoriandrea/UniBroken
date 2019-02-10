@@ -12,7 +12,7 @@ import android.widget.Button;
 import java.io.Serializable;
 
 public class HomeRaga extends AppCompatActivity {
-    public static final String PERSONA_EXTRA="com.example.mirko.esercitazionebonus.Persona";
+    public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
     Button invia, gestisci, budget;
     @Override
