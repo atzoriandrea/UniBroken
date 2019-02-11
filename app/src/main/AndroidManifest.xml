@@ -31,7 +31,8 @@
         <activity android:name=".MySegnDetail" />
         <activity android:name=".SendSegn" />
         <activity android:name=".ImgSwitcherShow" />
-        <activity android:name=".Raga_Budget"></activity>
+        <activity android:name=".Raga_Budget" />
+        <activity android:name=".PassRecovery"></activity>
     </application>
 
 </manifest>

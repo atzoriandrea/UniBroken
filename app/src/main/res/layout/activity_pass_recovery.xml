@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+
+    tools:context=".PassRecovery">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <!--<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/indietro"
+        android:text="indietro"
+        />-->
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        style="@style/HeaderBar"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/back"
+            android:background="@drawable/outline_arrow_back_ios_white_18dp"
+            android:onClick="back"
+            android:textColor="#FFFFFF"/>
+
+    </android.support.v7.widget.Toolbar>
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="254dp"
+            android:layout_height="165dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="35dp"
+            android:src="@drawable/logo"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:textSize="20sp"
+            android:text="Inserisci il tuo Codice Fiscale"
+            android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/codf"
+            android:hint="Codice Fiscale"
+            android:layout_marginHorizontal="25sp"
+            android:layout_marginTop="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="45sp"
+            android:textColor="#FFFFFF"
+            android:text="Invia"
+            android:background="@drawable/ok_button"
+            android:id="@+id/send"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -50,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
         accedi = (Button)findViewById(R.id.accedi);
         link = (TextView) findViewById(R.id.link);
 
-
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent recovery = new Intent(MainActivity.this, PassRecovery.class);
+                startActivity(recovery);
+            }
+        });
         accedi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         t.setGravity(Gravity.CENTER ,0 ,0);
         t.show();
     }
+
 
     private boolean checkInput()
     {

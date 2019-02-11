@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class MySegnDetail extends AppCompatActivity {
     ImageView img;
     TextView descrizione;
     TextView luogo;
+    Button indietro;
     Segnalazione s;
     Button elimina;
     Persona p;
@@ -47,6 +49,7 @@ public class MySegnDetail extends AppCompatActivity {
         descrizione = (TextView)findViewById(R.id.des);
         luogo = (TextView)findViewById(R.id.loc);
         elimina = (Button)findViewById(R.id.elimina);
+        indietro = (Button)findViewById(R.id.back);
         descrizione.setText(s.getTesto());
         img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
 
@@ -75,4 +78,37 @@ public class MySegnDetail extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        Intent indietro = new Intent(MySegnDetail.this, MySegn.class);
+        indietro.putExtra(PERSONA_EXTRA, p);
+        startActivity(indietro);
+    }
+    public void logout(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Sei sicuro di voler eseguire il logout?")
+                .setPositiveButton("CONFERMA", null)
+                .setNegativeButton("ANNULLA", null)
+                .show();
+
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logout = new Intent(MySegnDetail.this, MainActivity.class);
+                // Start the Intent
+                startActivity(logout);
+            }
+        });
+
+    }
+    public void back(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        indietro.setBackgroundColor(Color.GREEN);
+        onBackPressed();
+    }
+
 }
