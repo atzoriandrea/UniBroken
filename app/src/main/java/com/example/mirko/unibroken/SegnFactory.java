@@ -95,6 +95,7 @@ public class SegnFactory {
         SegnFactory factory = SegnFactory.getInstance();
         int max = getLastSegn();
         s.setId(max+1);
+        s.setData("15/02/2019");
         listaSegnalazioni.add(s);
 
     }

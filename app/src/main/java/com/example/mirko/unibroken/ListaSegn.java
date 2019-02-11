@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -61,10 +62,25 @@ public class ListaSegn extends AppCompatActivity {
         onBackPressed();
     }
     public void logout(View view) {
-        // Create intent to Open Image applications like Gallery, Google Photos
-        Intent logout = new Intent(ListaSegn.this, MainActivity.class);
-        // Start the Intent
-        startActivity(logout);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Sei sicuro di voler eseguire il logout?")
+                .setPositiveButton("CONFERMA", null)
+                .setNegativeButton("ANNULLA", null)
+                .show();
+
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent logout = new Intent(ListaSegn.this, MainActivity.class);
+                // Start the Intent
+                startActivity(logout);
+            }
+        });
+
     }
 
 

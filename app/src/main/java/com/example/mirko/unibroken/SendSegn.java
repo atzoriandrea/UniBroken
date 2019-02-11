@@ -115,6 +115,7 @@ public class SendSegn extends AppCompatActivity {
                         //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
                         s.setTipo(dropdown.getSelectedItem().toString());
                         s.setTesto(t.getText().toString());
+                        //s.setData("11/02/2019");
                         s.setLuogo(luogo.getSelectedItem().toString());
                         for (Bitmap b : tmp){
                             s.setImage(b);
@@ -205,10 +206,25 @@ public class SendSegn extends AppCompatActivity {
         startActivity(indietro);
     }
     public void logout(View view) {
-        // Create intent to Open Image applications like Gallery, Google Photos
-        Intent logout = new Intent(SendSegn.this, MainActivity.class);
-        // Start the Intent
-        startActivity(logout);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Sei sicuro di voler eseguire il logout?")
+                .setPositiveButton("CONFERMA", null)
+                .setNegativeButton("ANNULLA", null)
+                .show();
+
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                Intent logout = new Intent(SendSegn.this, MainActivity.class);
+                // Start the Intent
+                startActivity(logout);
+            }
+        });
+
     }
     public void back(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
