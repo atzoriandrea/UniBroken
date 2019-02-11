@@ -2,16 +2,15 @@ package com.example.mirko.unibroken;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,9 +18,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,10 +30,12 @@ public class SendSegn extends AppCompatActivity {
     Button save;
     Button galleria;
     Bitmap bitmap;
+    Button indietro;
     BitmapDrawable bd;
     String titolo;
     String imgDecodableString = null;
     Bitmap [] array = new Bitmap[3];
+    Context c;
     private static final int PICK_IMAGE_REQUEST = 100;
     private static int RESULT_LOAD_IMG = 1;
     //Segnalazione s = new Segnalazione();
@@ -47,7 +45,6 @@ public class SendSegn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Context c = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
         save = (Button)findViewById(R.id.save);
@@ -56,7 +53,9 @@ public class SendSegn extends AppCompatActivity {
         imageHolder = (ImageView)findViewById(R.id.addedphoto);
         galleria = (Button)findViewById(R.id.addImage);
         t = (EditText)findViewById(R.id.mydescription);
+        indietro = (Button)findViewById(R.id.back);
         Intent intent = getIntent();
+        c = this;
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
@@ -96,23 +95,38 @@ public class SendSegn extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegnFactory factory = SegnFactory.getInstance();
-                Segnalazione s = new Segnalazione();
-                s.setAutore(p.getId());
-                //getResourseId(SendSegn.this, "myIcon", "drawable", getPackageName());
-                //bd = new BitmapDrawable(getResources(), bitmap);
-                //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
-                s.setTipo(dropdown.getSelectedItem().toString());
-                s.setTesto(t.getText().toString());
-                s.setLuogo(luogo.getSelectedItem().toString());
-                for (Bitmap b : tmp){
-                    s.setImage(b);
-                }
-                SegnFactory.addSegnalazione(s);
-                factory = SegnFactory.getInstance();
-                Intent menu = new Intent(SendSegn.this, Homepage.class);
-                menu.putExtra(PERSONA_EXTRA,p);
-                startActivity(menu);
+                AlertDialog dialog = new AlertDialog.Builder(c)
+                        .setTitle("Invia Segnalazione")
+                        .setMessage("Sei sicuro di voler inviare la segnalazione?")
+                        .setPositiveButton("CONFERMA", null)
+                        .setNegativeButton("ANNULLA", null)
+                        .show();
+
+
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SegnFactory factory = SegnFactory.getInstance();
+                        Segnalazione s = new Segnalazione();
+                        s.setAutore(p.getId());
+                        //getResourseId(SendSegn.this, "myIcon", "drawable", getPackageName());
+                        //bd = new BitmapDrawable(getResources(), bitmap);
+                        //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
+                        s.setTipo(dropdown.getSelectedItem().toString());
+                        s.setTesto(t.getText().toString());
+                        s.setLuogo(luogo.getSelectedItem().toString());
+                        for (Bitmap b : tmp){
+                            s.setImage(b);
+                        }
+                        SegnFactory.addSegnalazione(s);
+                        factory = SegnFactory.getInstance();
+                        Intent menu = new Intent(SendSegn.this, Homepage.class);
+                        menu.putExtra(PERSONA_EXTRA,p);
+                        startActivity(menu);
+                    }
+                });
+
             }
         });
     }
@@ -183,6 +197,23 @@ public class SendSegn extends AppCompatActivity {
         options.inPreferQualityOverSpeed = true;
 
         return BitmapFactory.decodeFile(photoPath, options);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent indietro = new Intent(SendSegn.this, Homepage.class);
+        indietro.putExtra(Homepage.PERSONA_EXTRA,p);
+        startActivity(indietro);
+    }
+    public void logout(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent logout = new Intent(SendSegn.this, MainActivity.class);
+        // Start the Intent
+        startActivity(logout);
+    }
+    public void back(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        indietro.setBackgroundColor(Color.GREEN);
+        onBackPressed();
     }
 
 

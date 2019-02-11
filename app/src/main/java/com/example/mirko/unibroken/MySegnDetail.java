@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,13 +25,14 @@ public class MySegnDetail extends AppCompatActivity {
     Segnalazione s;
     Button elimina;
     Persona p;
+    Context c;
     Bitmap[] array = new Bitmap[3];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_segn_detail);
         SegnFactory factory = SegnFactory.getInstance();
-
+        c = this;
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(MySegn.SEGN);
         Serializable obj2 = intent.getSerializableExtra(MySegn.PERSONA_EXTRA);
@@ -51,10 +53,25 @@ public class MySegnDetail extends AppCompatActivity {
         elimina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SegnFactory.remSegnalazioneById(s.getId());
-                Intent segnalazioni = new Intent(MySegnDetail.this, MySegn.class);
-                segnalazioni.putExtra(PERSONA_EXTRA, p);
-                startActivity(segnalazioni);
+                AlertDialog dialog = new AlertDialog.Builder(c)
+                        .setTitle("Elimina segnalazione")
+                        .setMessage("Sei sicuro di voler rimuovere la segnalazione?")
+                        .setPositiveButton("CONFERMA", null)
+                        .setNegativeButton("ANNULLA", null)
+                        .show();
+
+
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SegnFactory.remSegnalazioneById(s.getId());
+                        Intent segnalazioni = new Intent(MySegnDetail.this, MySegn.class);
+                        segnalazioni.putExtra(PERSONA_EXTRA, p);
+                        startActivity(segnalazioni);
+                    }
+                });
+
             }
         });
     }

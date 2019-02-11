@@ -65,16 +65,14 @@
             android:text="Username:"
             android:textColor="#000000"
             android:textSize="19dp" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="  inserisci username" />
+            android:hint="inserisci username" />
 
 
         <!-- SPAZIO E PASSWORD -->
@@ -91,16 +89,14 @@
             android:text="Password:"
             android:textColor="#000000"
             android:textSize="19dp" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp" />
+
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:hint="  inserisci password"
+            android:hint="inserisci password"
             android:inputType="textPassword" />
 
         <Space

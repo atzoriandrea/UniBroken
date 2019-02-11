@@ -56,4 +56,10 @@ public class Showsegn extends AppCompatActivity {
             }
         });
     }
+    public void logout(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent logout = new Intent(Showsegn.this, MainActivity.class);
+        // Start the Intent
+        startActivity(logout);
+    }
 }

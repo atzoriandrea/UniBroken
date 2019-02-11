@@ -2,22 +2,27 @@ package com.example.mirko.unibroken;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+
+import java.io.Serializable;
 import java.lang.Integer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaSegn extends AppCompatActivity {
     public static final String SEGN="java.lang.Integer";
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
 
-
+    Button indietro;
     ListView lista;
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
-
+    Persona p1;
     Segnalazione s;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,11 @@ public class ListaSegn extends AppCompatActivity {
         SegnFactory sf = SegnFactory.getInstance();
         segn = SegnFactory.getListaSegnalazioni();
         OptionActivity.Adattatore a = new OptionActivity.Adattatore(this,segn);
+        Intent intent = getIntent();
+        Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
+        Bundle bundle = getIntent().getExtras();
+        p1 = (Persona)obj;
+        indietro = (Button)findViewById(R.id.back);
         lista = (ListView)findViewById(R.id.SegList);
         lista.setAdapter(a);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -39,6 +49,22 @@ public class ListaSegn extends AppCompatActivity {
 
             }
         });
+    }
+    public void onBackPressed() {
+        Intent indietro = new Intent(ListaSegn.this, Homepage.class);
+        indietro.putExtra(Homepage.PERSONA_EXTRA, p1);
+        startActivity(indietro);
+    }
+    public void back(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        indietro.setBackgroundColor(Color.GREEN);
+        onBackPressed();
+    }
+    public void logout(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        Intent logout = new Intent(ListaSegn.this, MainActivity.class);
+        // Start the Intent
+        startActivity(logout);
     }
 
 

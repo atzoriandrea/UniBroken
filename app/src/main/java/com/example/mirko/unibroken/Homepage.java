@@ -1,12 +1,13 @@
 package com.example.mirko.unibroken;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ public class Homepage extends AppCompatActivity {
     Button segnalazioni;
     Button mio;
     Button indietro;
+    Button indietroB;
 
 
     private Toolbar mTopToolbar;
@@ -35,6 +37,7 @@ public class Homepage extends AppCompatActivity {
         segnalazioni = (Button)findViewById(R.id.mostra);
         mio = (Button)findViewById(R.id.visualizzaMieSegnalazioni);
         invia = (Button)findViewById(R.id.invia);
+        indietro = (Button)findViewById(R.id.back) ;
         r = (TextView) findViewById(R.id.uniBroken);
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mTopToolbar);
@@ -66,6 +69,7 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent segnalazioni = new Intent(Homepage.this, ListaSegn.class);
+                segnalazioni.putExtra(PERSONA_EXTRA, p1);
                 startActivity(segnalazioni);
             }
         });
@@ -90,9 +94,29 @@ public class Homepage extends AppCompatActivity {
     }
     public void logout(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
-        Intent logout = new Intent(Homepage.this, MainActivity.class);
-        // Start the Intent
-        startActivity(logout);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Sei sicuro di voler eseguire il logout?")
+                .setPositiveButton("CONFERMA", null)
+                .setNegativeButton("ANNULLA", null)
+                .show();
+
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logout = new Intent(Homepage.this, MainActivity.class);
+                // Start the Intent
+                startActivity(logout);
+            }
+        });
+
+    }
+    public void back(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        indietro.setBackgroundColor(Color.GREEN);
+        logout(view);
     }
 
 }
