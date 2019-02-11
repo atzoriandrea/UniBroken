@@ -17,10 +17,30 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:layout_height="50sp"
+            style="@style/HeaderBar"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme">
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/back"
+                android:background="@drawable/outline_arrow_back_ios_white_18dp"
+                android:onClick="back"
+                android:textColor="#FFFFFF"/>
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/logout"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/outline_exit_to_app_white_18dp"
+                android:layout_alignParentEnd="true"
+                android:onClick="logout"
+                android:layout_alignParentRight="true"
+                android:textColor="#FFFFFF"
+                android:focusableInTouchMode="true"
+                android:layout_gravity="end"/>
+        </android.support.v7.widget.Toolbar>
 
         <TextView
             android:id="@+id/uniBroken"
@@ -42,31 +62,38 @@
             android:contentDescription="@string/todo"
             app:srcCompat="@drawable/logo" />
 
+
         <Button
             android:id="@+id/invia"
             android:layout_width="match_parent"
-            android:layout_height="74dp"
-            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="Invia Segnalazione" />
+            android:textColor="#FFFFFF"
+            android:background="@drawable/background_button"
+            android:text="@string/invia_segnalazione" />
 
         <Button
             android:id="@+id/gestisci"
             android:layout_width="match_parent"
-            android:layout_height="74dp"
+            android:layout_height="50dp"
             android:layout_margin="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:text="Gestisci Segnalazioni" />
+            android:text="Gestisci Segnalazioni"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/background_button"/>
 
         <Button
             android:id="@+id/budget"
             android:layout_width="match_parent"
-            android:layout_height="74dp"
+            android:layout_height="50dp"
             android:layout_margin="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:text="Budget" />
+            android:baselineAligned="false"
+            android:text="Budget"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/background_button"/>
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

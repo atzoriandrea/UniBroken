@@ -30,7 +30,8 @@
         <activity android:name=".MySegn" />
         <activity android:name=".MySegnDetail" />
         <activity android:name=".SendSegn" />
-        <activity android:name=".ImgSwitcherShow"/>
+        <activity android:name=".ImgSwitcherShow" />
+        <activity android:name=".Raga_Budget"></activity>
     </application>
 
 </manifest>
