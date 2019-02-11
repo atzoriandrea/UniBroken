@@ -14,6 +14,7 @@ import java.util.List;
 
 public class OptionActivity extends ListActivity {
     public static class Adattatore extends BaseAdapter {
+        String tmp;
         PersonaFactory factory = PersonaFactory.getInstance();
         private List<Segnalazione> lista=null;
         private Context context=null;
@@ -48,12 +49,14 @@ public class OptionActivity extends ListActivity {
             Segnalazione s=(Segnalazione) getItem(position);
             TextView txt=(TextView) v.findViewById(R.id.txt_article_description);
             ImageView img = (ImageView) v.findViewById(R.id.immagine) ;
-            txt.setText(s.getTesto());
+            tmp = s.getData() + "-" + s.getTipo();
+            txt.setText(tmp);
             txt=(TextView) v.findViewById(R.id.autore);
             author = PersonaFactory.getPersonaById(s.getAutore()).getNome() + " " +
                     PersonaFactory.getPersonaById(s.getAutore()).getCognome();
             txt.setText(author);
             img.setImageBitmap(s.getImage().get((s.getImage().size())-1));
+
 
             return v;
         }

@@ -8,7 +8,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SegnFactory {
         private static SegnFactory instance;
@@ -18,22 +21,31 @@ public class SegnFactory {
         private SegnFactory(){
             Segnalazione s1 = new Segnalazione();
             s1.setId(1);
+            s1.setLuogo("Aula D");
             s1.setAutore(4);
             s1.setImage(v[0]);
             s1.setTesto("Cedimento del soffitto dell'aula D");
+            s1.setTipo("Cedimento Soffitto");
+            s1.setData("12/12/2012");
             s1.setIdIntervento(3);
 
             Segnalazione s2 = new Segnalazione();
             s2.setId(2);
             s2.setAutore(2);
             s2.setImage(v[1]);
+            s2.setLuogo("Aula C");
+            s2.setTipo("Danno ELettrico");
+            s2.setData("15/01/2017");
             s2.setTesto("CCCedimento del soffitto dell'aula D");
             s2.setIdIntervento(3);
 
             Segnalazione s3 = new Segnalazione();
             s3.setId(3);
             s3.setAutore(1);
+            s3.setLuogo("Aula A");
             s3.setImage(v[2]);
+            s3.setData("10/02/2019");
+            s3.setTipo("Danno Idraulico");
             s3.setTesto("DDCedimento del soffitto dell'aula D");
             s3.setIdIntervento(3);
 
