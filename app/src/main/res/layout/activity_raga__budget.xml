@@ -38,24 +38,54 @@
                 android:focusableInTouchMode="true"
                 android:layout_gravity="end"/>
             </android.support.v7.widget.Toolbar>
+
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/budgetDisp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tipologia_danno"
+                android:text="Budget disponibile:"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="68dp"
                 tools:ignore="MissingConstraints" />
 
-            <Spinner
-                android:id="@+id/tipologia2"
+            <TextView
+                android:id="@+id/budgetValore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="87dp"
+                android:text=" "
                 tools:ignore="MissingConstraints" />
+
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/inRip"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                tools:ignore="MissingConstraints"
+            />
+
+
+            <TextView
+                android:id="@+id/consiglia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UniBroken consiglia"
+                tools:ignore="MissingConstraints" />
+
+            <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/listaConsigli"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                tools:ignore="MissingConstraints"
+            />
+
+            <Button
+                android:id="@+id/gestisciAutomaticamente"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:text="Gestisci Automaticamente"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/background_button"/>
+
         </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
