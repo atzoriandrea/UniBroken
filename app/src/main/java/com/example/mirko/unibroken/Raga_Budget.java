@@ -13,9 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.widget.ScrollView;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class Raga_Budget extends AppCompatActivity {
 
     Button indietro;
     Persona p;
+    TextView budgetValore;
+    ScrollView inRip;
+    ScrollView listaConsigli;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +38,15 @@ public class Raga_Budget extends AppCompatActivity {
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         p = (Persona)obj;
-        final Spinner dropdown = findViewById(R.id.tipologia2);
+        //final Spinner dropdown = findViewById(R.id.tipologia2);
         //Utilizzare item
 
+        double cost = 60000.00;//budget iniziale
+        budgetValore=(TextView)findViewById(R.id.budgetValore);
+        inRip=(ScrollView)findViewById(R.id.inRip);
+        listaConsigli=(ScrollView)findViewById(R.id.listaConsigli);
 
-        double cost = 60000.00;
-
-
-
+        budgetValore.setText("€ "+String.valueOf(cost));
 
 
     }
