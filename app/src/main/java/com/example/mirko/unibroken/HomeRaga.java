@@ -1,9 +1,11 @@
 package com.example.mirko.unibroken;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,7 +16,7 @@ import java.io.Serializable;
 public class HomeRaga extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
-    Button invia, gestisci, budget;
+    Button invia, gestisci, budget,indietro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,7 @@ public class HomeRaga extends AppCompatActivity {
         invia = (Button)findViewById(R.id.invia);
         gestisci = (Button)findViewById(R.id.gestisci);
         budget = (Button)findViewById(R.id.budget);
+        indietro = (Button)findViewById(R.id.back);
         invia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +54,37 @@ public class HomeRaga extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent indietro = new Intent(HomeRaga.this, MainActivity.class);
+        startActivity(indietro);
+    }
+    public void logout(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Sei sicuro di voler eseguire il logout?")
+                .setPositiveButton("CONFERMA", null)
+                .setNegativeButton("ANNULLA", null)
+                .show();
+
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logout = new Intent(HomeRaga.this, MainActivity.class);
+                // Start the Intent
+                startActivity(logout);
+            }
+        });
+
+    }
+    public void back(View view) {
+        // Create intent to Open Image applications like Gallery, Google Photos
+        indietro.setBackgroundColor(Color.GREEN);
+        logout(view);
     }
 
 }

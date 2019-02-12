@@ -4,25 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Showsegn">
+    tools:context=".ShowsegnRaga">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="5dp" />
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:background="#003366"
+            android:layout_height="50sp"
+            style="@style/HeaderBar"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme">
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/back"
+                android:background="@drawable/outline_arrow_back_ios_white_18dp"
+                android:onClick="back"
+                android:textColor="#FFFFFF"/>
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/logout"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/outline_exit_to_app_white_18dp"
+                android:layout_alignParentEnd="true"
+                android:onClick="logout"
+                android:layout_alignParentRight="true"
+                android:textColor="#FFFFFF"
+                android:focusableInTouchMode="true"
+                android:layout_gravity="end"/>
+        </android.support.v7.widget.Toolbar>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="30dp">
         <TextView
             android:id="@+id/tit"
-            android:text="Titolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
@@ -44,5 +64,18 @@
             android:text="Costo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/intconf"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:textColor="#ffffff"
+            android:layout_marginHorizontal="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Conferma Intervento"
+            android:background="@drawable/ok_button"
+            />
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

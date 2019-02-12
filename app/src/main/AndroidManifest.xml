@@ -24,10 +24,11 @@
         <activity
             android:name=".HomeRaga"
             android:label="@string/title_activity_home_raga"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListaSegn" />
         <activity android:name=".ListaSegnRaga" />
         <activity android:name=".Showsegn" />
+        <activity android:name=".ShowsegnRaga" />
         <activity android:name=".MySegn" />
         <activity android:name=".MySegnDetail" />
         <activity android:name=".SendSegn" />

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -45,7 +44,6 @@
             android:layout_marginTop="45dp"
             android:layout_marginRight="0dp"
             android:gravity="center_horizontal"
-
             android:text="Segnalazioni attive"
             android:textSize="23dp"/>
         <ListView
