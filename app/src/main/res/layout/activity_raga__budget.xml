@@ -5,33 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Raga_Budget">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tipologia_danno"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="68dp"
-        tools:ignore="MissingConstraints" />
-
-    <Spinner
-        android:id="@+id/tipologia2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="87dp"
-        tools:ignore="MissingConstraints" />
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,9 +38,24 @@
                 android:focusableInTouchMode="true"
                 android:layout_gravity="end"/>
             </android.support.v7.widget.Toolbar>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tipologia_danno"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="68dp"
+                tools:ignore="MissingConstraints" />
 
-
+            <Spinner
+                android:id="@+id/tipologia2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="87dp"
+                tools:ignore="MissingConstraints" />
         </LinearLayout>
-    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
