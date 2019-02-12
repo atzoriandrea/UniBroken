@@ -26,13 +26,15 @@
             android:label="@string/title_activity_home_raga"
             android:theme="@style/AppTheme" />
         <activity android:name=".ListaSegn" />
+        <activity android:name=".ListaSegnRaga" />
         <activity android:name=".Showsegn" />
         <activity android:name=".MySegn" />
         <activity android:name=".MySegnDetail" />
         <activity android:name=".SendSegn" />
         <activity android:name=".ImgSwitcherShow" />
         <activity android:name=".Raga_Budget" />
-        <activity android:name=".PassRecovery"></activity>
+        <activity android:name=".PassRecovery" />
+        <activity android:name=".OptionActivityRaga"></activity>
     </application>
 
 </manifest>

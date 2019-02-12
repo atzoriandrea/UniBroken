@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ListaSegnRaga">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            style="@style/HeaderBar"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme">
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/back"
+                android:background="@drawable/outline_arrow_back_ios_white_18dp"
+                android:onClick="back"
+                android:textColor="#FFFFFF"/>
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/logout"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/outline_exit_to_app_white_18dp"
+                android:layout_alignParentEnd="true"
+                android:onClick="logout"
+                android:layout_alignParentRight="true"
+                android:textColor="#FFFFFF"
+                android:focusableInTouchMode="true"
+                android:layout_gravity="end"/>
+        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="0dp"
+            android:gravity="center_horizontal"
+
+            android:text="Segnalazioni attive"
+            android:textSize="23dp"/>
+        <ListView
+            android:id="@+id/SegList"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+

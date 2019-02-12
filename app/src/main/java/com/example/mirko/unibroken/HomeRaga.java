@@ -37,7 +37,7 @@ public class HomeRaga extends AppCompatActivity {
         gestisci.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent segnalazioni = new Intent(HomeRaga.this, SendSegn.class);
+                Intent segnalazioni = new Intent(HomeRaga.this, ListaSegnRaga.class);
                 segnalazioni.putExtra(PERSONA_EXTRA, p);
                 startActivity(segnalazioni);
             }
