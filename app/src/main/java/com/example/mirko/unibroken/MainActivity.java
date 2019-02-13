@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Persona p2;
     boolean p;
     Toast t;
-    Bitmap[] array = new Bitmap[3];
+    Bitmap[] array = new Bitmap[11];
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     //AlertDialog.Builder builder=new AlertDialog.Builder(this);
 
@@ -44,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
         array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
         array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
         array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
+        array[3] = BitmapFactory.decodeResource(getResources(),R.drawable.fis_sedia1);
+        array[4] = BitmapFactory.decodeResource(getResources(),R.drawable.fis_sedia2);
+        array[5] = BitmapFactory.decodeResource(getResources(),R.drawable.fis_serr);
+        array[6] = BitmapFactory.decodeResource(getResources(),R.drawable.labrt_porta);
+        array[7] = BitmapFactory.decodeResource(getResources(),R.drawable.labrt_wifi);
+        array[8] = BitmapFactory.decodeResource(getResources(),R.drawable.scale_fin);
+        array[9] = BitmapFactory.decodeResource(getResources(),R.drawable.simaz_pav);
+        array[10] = BitmapFactory.decodeResource(getResources(),R.drawable.spano_ufficio);
         SegnFactory.setBitmaps(array);
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);

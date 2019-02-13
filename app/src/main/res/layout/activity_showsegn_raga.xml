@@ -76,6 +76,17 @@
             android:text="Conferma Intervento"
             android:background="@drawable/ok_button"
             />
+            <Button
+                android:id="@+id/intrem"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:textColor="#ffffff"
+                android:layout_marginHorizontal="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Rimuovi Conferma"
+                android:background="@drawable/delete_button"
+                />
         </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

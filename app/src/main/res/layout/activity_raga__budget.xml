@@ -59,23 +59,26 @@
                 android:id="@+id/inRip"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                tools:ignore="MissingConstraints"
-            />
+                tools:ignore="MissingConstraints">
+                <TextView
+                    android:id="@+id/content1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </ScrollView>
 
 
-            <TextView
-                android:id="@+id/consiglia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="UniBroken consiglia"
-                tools:ignore="MissingConstraints" />
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/listaConsigli"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                tools:ignore="MissingConstraints"
-            />
+                tools:ignore="MissingConstraints">
+                <TextView
+                    android:id="@+id/content2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </ScrollView>
 
             <Button
                 android:id="@+id/gestisciAutomaticamente"

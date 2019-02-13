@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +28,40 @@ public class Raga_Budget extends AppCompatActivity {
     Persona p;
     TextView budgetValore;
     ScrollView inRip;
+    TextView riparazione;
     ScrollView listaConsigli;
+    TextView consigliati;
+
+    public static class BulletListBuilder {
+
+        private static final String SPACE = " ";
+        private static final String BULLET_SYMBOL = "&#8226";
+        private static final String EOL = System.getProperty("line.separator");
+        private static final String TAB = "\t";
+
+        private BulletListBuilder() {
+
+        }
+
+        public static String getBulletList(String header, String []items) {
+            StringBuilder listBuilder = new StringBuilder();
+            if (header != null && !header.isEmpty()) {
+                listBuilder.append(header + EOL + EOL);
+            }
+            if (items != null && items.length != 0) {
+                for (String item : items) {
+                    Spanned formattedItem = Html.fromHtml(BULLET_SYMBOL + SPACE + item);
+                    listBuilder.append(TAB + formattedItem + EOL);
+                }
+            }
+            return listBuilder.toString();
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        SegnFactory sf = SegnFactory.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_raga__budget);
         indietro = (Button)findViewById(R.id.back);
@@ -40,15 +71,15 @@ public class Raga_Budget extends AppCompatActivity {
         p = (Persona)obj;
         //final Spinner dropdown = findViewById(R.id.tipologia2);
         //Utilizzare item
-
+        riparazione = (TextView)findViewById(R.id.content1);
+        consigliati = (TextView)findViewById(R.id.content2);
         double cost = 60000.00;//budget iniziale
         budgetValore=(TextView)findViewById(R.id.budgetValore);
         inRip=(ScrollView)findViewById(R.id.inRip);
         listaConsigli=(ScrollView)findViewById(R.id.listaConsigli);
-
         budgetValore.setText("€ "+String.valueOf(cost));
-
-
+        riparazione.setText(BulletListBuilder.getBulletList( "Attualmente confermati", SegnFactory.getListaTItoli() ));
+        consigliati.setText(BulletListBuilder.getBulletList( "UniBroken Consiglia:", SegnFactory.getListaTItoli() ));
     }
     @Override
     public void onBackPressed() {

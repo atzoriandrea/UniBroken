@@ -1,7 +1,6 @@
 package com.example.mirko.unibroken;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -16,6 +15,7 @@ public class Segnalazione implements Serializable {
     private String titolo;
     public ArrayList<Bitmap> images;
     private String tipo;
+    private boolean isConfirmed;
     private String testo;
     private String luogo;
     private Date data;
@@ -26,6 +26,7 @@ public class Segnalazione implements Serializable {
 
     public Segnalazione(){
         images = new ArrayList<>();
+        setConfirmed(false);
     }
 
     public String getTipo() {
@@ -111,5 +112,13 @@ public class Segnalazione implements Serializable {
             case "Dec" : return "Dic";
             default: return engDate;
         }
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
     }
 }

@@ -43,6 +43,7 @@ public class ListaSegnRaga extends AppCompatActivity {
                 s = (Segnalazione) lista.getItemAtPosition(position);
                 Intent dettaglio = new Intent(ListaSegnRaga.this , ShowsegnRaga.class);
                 dettaglio.putExtra(SEGN, new Integer(s.getId()));
+                dettaglio.putExtra(PERSONA_EXTRA, p1);
                 startActivity(dettaglio);
 
             }

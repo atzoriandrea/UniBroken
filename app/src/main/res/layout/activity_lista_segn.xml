@@ -48,13 +48,18 @@
 
             android:text="Segnalazioni attive"
             android:textSize="23dp"/>
+
         <ListView
             android:id="@+id/SegList"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:smoothScrollbar="true"
+            android:scrollingCache="false"
+            android:animationCache="false">
 
         </ListView>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -58,9 +58,6 @@ public class SendSegn extends AppCompatActivity {
         c = this;
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
-        array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
-        array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
-        array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         p = (Persona)obj;
         // Create an ArrayAdapter using the string array and a default spinner layout
         final Spinner dropdown = findViewById(R.id.tipologia);

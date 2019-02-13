@@ -21,6 +21,10 @@ public class ShowsegnRaga extends AppCompatActivity {
     TextView luogo;
     TextView costo;
     TextView testoluogo;
+    Button conf;
+    Button rconf;
+    Persona p1;
+
     Segnalazione s;
     //Bitmap[] array = new Bitmap[1];
     public static final String BITMAP_EXTRA="java.lang.Integer";
@@ -36,12 +40,16 @@ public class ShowsegnRaga extends AppCompatActivity {
         SegnFactory sf = SegnFactory.getInstance();
         InterventiFactory ifact = InterventiFactory.getInstance();
         int i = (Integer) obj;
+        Serializable obj2 = intent.getSerializableExtra(HomeRaga.PERSONA_EXTRA);
+        p1 = (Persona)obj2;
         s = SegnFactory.getSegnalazioneById(i);
         //s = (Segnalazione) obj;
         indietro = (Button)findViewById(R.id.back);
         titolo = (TextView)findViewById(R.id.tit);
         titolo.setText("Segnalazione #"+String.valueOf(s.getId()));
         img = (ImageView)findViewById(R.id.imgdett);
+        conf = (Button)findViewById(R.id.intconf);
+        rconf = (Button)findViewById(R.id.intrem);
         //testotitolo = (TextView)findViewById(R.id.tittext);
         descrizione = (TextView)findViewById(R.id.des);
         luogo = (TextView)findViewById(R.id.loc);
@@ -61,10 +69,47 @@ public class ShowsegnRaga extends AppCompatActivity {
                 startActivity(switcher);
             }
         });
+        conf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                s.setConfirmed(true);
+                if(s.isConfirmed() == true){
+                    conf.setVisibility(View.GONE);
+                    rconf.setVisibility(View.VISIBLE);
+                }else{
+                    rconf.setVisibility(View.GONE);
+                    conf.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+        rconf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                s.setConfirmed(false);
+                if(s.isConfirmed() == true){
+                    conf.setVisibility(View.GONE);
+                    rconf.setVisibility(View.VISIBLE);
+                }else{
+                    rconf.setVisibility(View.GONE);
+                    conf.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+        if(s.isConfirmed() == true){
+            conf.setVisibility(View.GONE);
+            rconf.setVisibility(View.VISIBLE);
+        }else{
+            rconf.setVisibility(View.GONE);
+            conf.setVisibility(View.VISIBLE);
+
+        }
     }
     @Override
     public void onBackPressed() {
         Intent indietro = new Intent(ShowsegnRaga.this, ListaSegnRaga.class);
+        indietro.putExtra(PERSONA_EXTRA,p1);
         startActivity(indietro);
     }
     public void logout(View view) {
