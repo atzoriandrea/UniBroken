@@ -63,6 +63,8 @@ public class OptionActivityRaga extends AppCompatActivity {
             txt.setText("Costo prev. appr: " + String.valueOf(aux));
             if(s.getImage().size() > 0)
                 img.setImageBitmap(s.getImage().get((s.getImage().size())-1));
+            else
+                img.setImageResource(R.drawable.dummy_image_square);
 
             return v;
         }

@@ -31,6 +31,7 @@ public class PersonaFactory {
         Persona p3 = new Persona();
         p3.setNome("Francesco");
         p3.setCognome("Raga");
+        p3.setId(3);
         p3.setUsername("ragafrancesco");
         p3.setPassword("unica");
         p3.setRaga(true);

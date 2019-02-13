@@ -45,8 +45,10 @@ public class Showsegn extends AppCompatActivity {
         descrizione.setText(s.getTesto());
         testotitolo.setText(s.getTipo());
         testoluogo.setText(s.getLuogo());
-        img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
-        //array[0] = s.getImage();
+        if(s.getImage().size()>0)
+            img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
+        else
+            img.setImageResource(R.drawable.dummy_image_square);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

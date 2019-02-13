@@ -1,6 +1,7 @@
 package com.example.mirko.unibroken;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -9,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Segnalazione implements Serializable {
+public class Segnalazione implements Serializable, Comparable<Segnalazione> {
     private int id;
     private int autore;
     private String titolo;
@@ -99,6 +100,9 @@ public class Segnalazione implements Serializable {
             e.printStackTrace();
         }
     }
+    public void setData(Date data)  {
+        this.data = data;
+    }
 
     public String traduciData (String engDate){
         switch (engDate){
@@ -120,5 +124,16 @@ public class Segnalazione implements Serializable {
 
     public void setConfirmed(boolean confirmed) {
         isConfirmed = confirmed;
+    }
+
+    @Override
+    public int compareTo(@NonNull Segnalazione o) {
+        InterventiFactory ifact = InterventiFactory.getInstance();
+        if (InterventiFactory.getInterventoById(this.getIdIntervento()).getPriorita() < InterventiFactory.getInterventoById(o.getIdIntervento()).getPriorita())
+            return 1;
+        if (InterventiFactory.getInterventoById(this.getIdIntervento()).getPriorita() > InterventiFactory.getInterventoById(o.getIdIntervento()).getPriorita())
+            return -1;
+        else
+            return 0;
     }
 }

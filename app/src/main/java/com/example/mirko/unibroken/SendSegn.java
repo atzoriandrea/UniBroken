@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SendSegn extends AppCompatActivity {
     private ImageView imageHolder;
@@ -104,7 +105,9 @@ public class SendSegn extends AppCompatActivity {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Date d = new Date();
                         SegnFactory factory = SegnFactory.getInstance();
+                        InterventiFactory ifact = InterventiFactory.getInstance();
                         Segnalazione s = new Segnalazione();
                         s.setAutore(p.getId());
                         //getResourseId(SendSegn.this, "myIcon", "drawable", getPackageName());
@@ -117,6 +120,8 @@ public class SendSegn extends AppCompatActivity {
                         for (Bitmap b : tmp){
                             s.setImage(b);
                         }
+                        s.setData(d);
+                        s.setIdIntervento(InterventiFactory.getInterventoByType(dropdown.getSelectedItem().toString()));
                         SegnFactory.addSegnalazione(s);
                         factory = SegnFactory.getInstance();
                         Intent menu = new Intent(SendSegn.this, Homepage.class);

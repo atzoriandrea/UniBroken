@@ -6,14 +6,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
-public class SegnFactory {
+public class SegnFactory{
         private static SegnFactory instance;
         private static Bitmap [] v = new Bitmap[11];
 
@@ -34,7 +38,7 @@ public class SegnFactory {
             s2.setAutore(2);
             s2.setImage(v[1]);
             s2.setLuogo("Aula C");
-            s2.setTipo("Danno ELettrico");
+            s2.setTipo("Danno Elettrico");
             s2.setData("15/01/2017");
             s2.setTesto("CCCedimento del soffitto dell'aula D");
             s2.setIdIntervento(3);
@@ -201,7 +205,7 @@ public class SegnFactory {
         SegnFactory factory = SegnFactory.getInstance();
         int max = getLastSegn();
         s.setId(max+1);
-        s.setData("15/02/2019");
+        s.setData(new Date());
         listaSegnalazioni.add(s);
 
     }
@@ -248,14 +252,39 @@ public class SegnFactory {
         return s;
 
         }
+        public static ArrayList<Segnalazione> sortByPriorita (){
+            SegnFactory sf = SegnFactory.getInstance();
+            ArrayList<Segnalazione> copia = new ArrayList<>();
+            for(Segnalazione s : listaSegnalazioni){
+                copia.add(s);
+            }
+            Collections.sort(copia);
+            return copia;
+        }
         public static String[] getConsigliati(){
             InterventiFactory ifact = InterventiFactory.getInstance();
             SegnFactory sfact = SegnFactory.getInstance();
+            int i = 0;
+            double temp;
             double budget = InterventiFactory.getBudget();
-            ArrayList<Segnalazione> lista = SegnFactory.getListaSegnalazioni();
-
-            return null;
+            ArrayList<Segnalazione> lista = SegnFactory.sortByPriorita();
+            ArrayList<Segnalazione> consigliati = new ArrayList<>();
+            for(Segnalazione s : lista){
+                temp = InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto();
+                if (budget - temp >= 0){
+                    budget = budget - temp;
+                    consigliati.add(s);
+                }
+            }
+            String[] c = new String[consigliati.size()];
+            for(Segnalazione s : consigliati){
+                c[i] = s.getTipo();
+                i++;
+            }
+            return c;
 
         }
+
+
 
 }

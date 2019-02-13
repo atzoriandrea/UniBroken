@@ -65,7 +65,7 @@ public class InterventiFactory {
         i1.setPriorita(3);
         i2.setPriorita(4);
         i3.setPriorita(10);
-        i4.setPriorita(8);
+        i4.setPriorita(7);
         i5.setPriorita(8);
         i6.setPriorita(2);
         i7.setPriorita(6);
@@ -104,6 +104,16 @@ public class InterventiFactory {
             }
         }
         return interventi;
+    }
+    public static int getInterventoByType(String tipo) {
+        InterventiFactory factory = InterventiFactory.getInstance();
+        int id = 0;
+        for (Intervento i : listaInterventi) {
+            if (i.getTipoIntervento().equals(tipo)) {
+                id = i.getId();
+            }
+        }
+        return id;
     }
 
 
@@ -147,7 +157,6 @@ public class InterventiFactory {
         }
         factory = InterventiFactory.getInstance();
     }
-
     public static ArrayList<Intervento> getListaInterventibyPriceMax(){
         ArrayList<Intervento> retList = listaInterventi;
         Collections.sort(retList);

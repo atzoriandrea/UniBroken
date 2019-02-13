@@ -78,8 +78,8 @@ public class Raga_Budget extends AppCompatActivity {
         inRip=(ScrollView)findViewById(R.id.inRip);
         listaConsigli=(ScrollView)findViewById(R.id.listaConsigli);
         budgetValore.setText("€ "+String.valueOf(cost));
-        riparazione.setText(BulletListBuilder.getBulletList( "Attualmente confermati", SegnFactory.getListaTItoli() ));
-        consigliati.setText(BulletListBuilder.getBulletList( "UniBroken Consiglia:", SegnFactory.getListaTItoli() ));
+        riparazione.setText(BulletListBuilder.getBulletList( "", SegnFactory.getListaTItoli() ));
+        consigliati.setText(BulletListBuilder.getBulletList( "", SegnFactory.getConsigliati() ));
     }
     @Override
     public void onBackPressed() {

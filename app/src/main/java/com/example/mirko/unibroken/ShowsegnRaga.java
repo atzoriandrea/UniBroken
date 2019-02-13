@@ -59,7 +59,10 @@ public class ShowsegnRaga extends AppCompatActivity {
         luogo.setText("Luogo: " + s.getLuogo());
         costo = (TextView)findViewById(R.id.costo);
         costo.setText("Costo approssimato: "+String.valueOf((ifact.getInterventoById(s.getIdIntervento()).getImporto())));
-        img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
+        if(s.getImage().size()>0)
+            img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
+        else
+            img.setImageResource(R.drawable.dummy_image_square);
         //array[0] = s.getImage();
         img.setOnClickListener(new View.OnClickListener() {
             @Override
