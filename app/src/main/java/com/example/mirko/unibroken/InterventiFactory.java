@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class InterventiFactory {
     private static InterventiFactory instance;
     private static ArrayList<Intervento> listaInterventi = new ArrayList<>();
-    private static  double budget = 70000.00;
+    private static  double budget = 48000.00;
     private InterventiFactory() {
         Intervento i1 = new Intervento();
         Intervento i2 = new Intervento();
@@ -31,15 +31,15 @@ public class InterventiFactory {
         i8.setId(8);
         i9.setId(9);
 
-        i1.setImporto(6500);
-        i2.setImporto(320);
-        i3.setImporto(32652.23);
-        i4.setImporto(1254.32);
-        i5.setImporto(5264.21);
-        i6.setImporto(653.73);
-        i7.setImporto(156.89);
-        i8.setImporto(782.51);
-        i9.setImporto(256.28);
+        i1.setImporto(5000.00);
+        i2.setImporto(1000.00);
+        i3.setImporto(40000.00);
+        i4.setImporto(450.00);
+        i5.setImporto(5500.00);
+        i6.setImporto(900.00);
+        i7.setImporto(400.00);
+        i8.setImporto(1200.00);
+        i9.setImporto(300.00);
 
         i1.setImpresa("ImpresaMuratura");
         i2.setImpresa("ImpresaInfissi");
@@ -83,7 +83,9 @@ public class InterventiFactory {
         listaInterventi.add(i9);
 
     }
-
+    public static String getImpresaByType(String tipo){
+        return listaInterventi.get(getInterventoByType(tipo)-1).getImpresa();
+    }
     public static InterventiFactory getInstance() {
         if (instance == null)
             instance = new InterventiFactory();

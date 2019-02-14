@@ -89,8 +89,7 @@ public class Homepage extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent indietro = new Intent(Homepage.this, MainActivity.class);
-        startActivity(indietro);
+        logout(new View(this));
     }
     public void logout(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos

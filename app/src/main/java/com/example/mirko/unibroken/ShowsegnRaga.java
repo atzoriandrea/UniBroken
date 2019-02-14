@@ -20,7 +20,7 @@ public class ShowsegnRaga extends AppCompatActivity {
     TextView testotitolo;
     TextView luogo;
     TextView costo;
-    TextView testoluogo;
+    TextView impresa;
     Button conf;
     Button rconf;
     Persona p1;
@@ -48,6 +48,7 @@ public class ShowsegnRaga extends AppCompatActivity {
         titolo = (TextView)findViewById(R.id.tit);
         titolo.setText("Segnalazione #"+String.valueOf(s.getId()));
         img = (ImageView)findViewById(R.id.imgdett);
+        impresa =(TextView)findViewById(R.id.impresa);
         conf = (Button)findViewById(R.id.intconf);
         rconf = (Button)findViewById(R.id.intrem);
         //testotitolo = (TextView)findViewById(R.id.tittext);
@@ -55,10 +56,10 @@ public class ShowsegnRaga extends AppCompatActivity {
         luogo = (TextView)findViewById(R.id.loc);
         //testoluogo = (TextView)findViewById(R.id.loctext);
         descrizione.setText(s.getTesto());
-        //testotitolo.setText(s.getTipo());
+        impresa.setText("Impresa convenzionata: " + InterventiFactory.getImpresaByType(s.getTipo()));
         luogo.setText("Luogo: " + s.getLuogo());
         costo = (TextView)findViewById(R.id.costo);
-        costo.setText("Costo approssimato: "+String.valueOf((ifact.getInterventoById(s.getIdIntervento()).getImporto())));
+        costo.setText("Costo approssimato: € "+String.valueOf((ifact.getInterventoById(s.getIdIntervento()).getImporto()))+"0");
         if(s.getImage().size()>0)
             img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
         else

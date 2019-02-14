@@ -46,7 +46,7 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:text="@string/unibroken"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <ImageView
             android:id="@+id/logo2"

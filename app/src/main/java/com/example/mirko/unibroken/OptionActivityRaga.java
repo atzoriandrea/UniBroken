@@ -43,6 +43,7 @@ public class OptionActivityRaga extends AppCompatActivity {
         @Override
         public View getView(int position, View v, ViewGroup vg)
         {
+            SegnFactory sfactory = SegnFactory.getInstance();
             String author;
             if (v==null)
             {
@@ -62,7 +63,7 @@ public class OptionActivityRaga extends AppCompatActivity {
             double aux=(ifact.getInterventoById(s.getIdIntervento()).getImporto());
             txt.setText("Costo prev. appr: " + String.valueOf(aux));
             if(s.getImage().size() > 0)
-                img.setImageBitmap(s.getImage().get((s.getImage().size())-1));
+                img.setImageBitmap(SegnFactory.getBitmapFromMemCache(String.valueOf(s.getId())));
             else
                 img.setImageResource(R.drawable.dummy_image_square);
 

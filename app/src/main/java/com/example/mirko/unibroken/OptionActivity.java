@@ -32,21 +32,25 @@ public class OptionActivity extends ListActivity {
         @Override
         public int getCount()
         {
+
             return lista.size();
         }
         @Override
         public Object getItem(int position)
         {
+
             return lista.get(position);
         }
         @Override
         public long getItemId(int position)
         {
+
             return getItem(position).hashCode();
         }
         @Override
         public View getView(int position, View v, ViewGroup vg)
         {
+            SegnFactory sfactory = SegnFactory.getInstance();
             String author;
             if (v==null)
             {
@@ -62,7 +66,7 @@ public class OptionActivity extends ListActivity {
                     PersonaFactory.getPersonaById(s.getAutore()).getCognome();
             txt.setText(author);
             if(s.getImage().size() > 0)
-                img.setImageBitmap(s.getImage().get((s.getImage().size())-1));
+                img.setImageBitmap(SegnFactory.getBitmapFromMemCache(String.valueOf(s.getId())));
             else
                 img.setImageResource(R.drawable.dummy_image_square);
 
@@ -71,39 +75,7 @@ public class OptionActivity extends ListActivity {
 
     }
 
-    /*private LruCache<String, Bitmap> mMemoryCache;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        // Get max available VM memory, exceeding this amount will throw an
-        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
-        // int in its constructor.
-        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-
-        // Use 1/8th of the available memory for this memory cache.
-        final int cacheSize = maxMemory / 8;
-
-        mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                // The cache size will be measured in kilobytes rather than
-                // number of items.
-                return bitmap.getByteCount() / 1024;
-            }
-        };
-    }
-
-    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
-        if (getBitmapFromMemCache(key) == null) {
-            mMemoryCache.put(key, bitmap);
-        }
-    }
-
-    public Bitmap getBitmapFromMemCache(String key) {
-        return mMemoryCache.get(key);
-    }
-    */
 
 
 

@@ -10,12 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.Serializable;
 
 public class HomeRaga extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
+    TextView r;
     Button invia, gestisci, budget,indietro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,8 @@ public class HomeRaga extends AppCompatActivity {
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         p = (Persona) obj;
+        r = (TextView)findViewById(R.id.uniBroken);
+        r.setText("Benvenuto, Ing. " + p.getCognome());
         invia = (Button)findViewById(R.id.invia);
         gestisci = (Button)findViewById(R.id.gestisci);
         budget = (Button)findViewById(R.id.budget);
@@ -57,8 +61,7 @@ public class HomeRaga extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent indietro = new Intent(HomeRaga.this, MainActivity.class);
-        startActivity(indietro);
+        logout(new View(this));
     }
     public void logout(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos

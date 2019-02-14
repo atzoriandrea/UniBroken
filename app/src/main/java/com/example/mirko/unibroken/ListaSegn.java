@@ -46,6 +46,7 @@ public class ListaSegn extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3){
                 s = (Segnalazione) lista.getItemAtPosition(position);
                 Intent dettaglio = new Intent(ListaSegn.this , Showsegn.class);
+                dettaglio.putExtra(PERSONA_EXTRA,p1);
                 dettaglio.putExtra(SEGN, new Integer(s.getId()));
                 startActivity(dettaglio);
 
@@ -55,7 +56,7 @@ public class ListaSegn extends AppCompatActivity {
     }
     public void onBackPressed() {
         Intent indietro = new Intent(ListaSegn.this, Homepage.class);
-        indietro.putExtra(Homepage.PERSONA_EXTRA, p1);
+        indietro.putExtra(PERSONA_EXTRA, p1);
         startActivity(indietro);
     }
     public void back(View view) {

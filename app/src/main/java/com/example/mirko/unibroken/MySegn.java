@@ -61,7 +61,7 @@ public class MySegn extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent indietro = new Intent(MySegn.this, Homepage.class);
-        indietro.putExtra(Homepage.PERSONA_EXTRA, p1);
+        indietro.putExtra(PERSONA_EXTRA, p1);
         startActivity(indietro);
     }
     public void back(View view) {
