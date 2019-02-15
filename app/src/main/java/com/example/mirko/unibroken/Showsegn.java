@@ -35,10 +35,7 @@ public class Showsegn extends AppCompatActivity {
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(ListaSegn.SEGN);
         Serializable obj2 = intent.getSerializableExtra(ListaSegn.PERSONA_EXTRA);
-
         Bundle bundle = getIntent().getExtras();
-        //array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
-        //array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         SegnFactory sf = SegnFactory.getInstance();
         int i = (Integer) obj;
         p = (Persona)obj2;

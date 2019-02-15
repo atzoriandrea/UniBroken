@@ -30,9 +30,6 @@ public class MySegn extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_segn);
-        array[0] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655402_908x560);
-        array[1] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_655404_514x318);
-        array[2] = BitmapFactory.decodeResource(getResources(),R.drawable.foto_693184_908x560);
         SegnFactory sf = SegnFactory.getInstance();
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);

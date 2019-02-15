@@ -88,7 +88,7 @@ public class Raga_Budget extends AppCompatActivity {
         inRip.setScrollbarFadingEnabled(false);
         listaConsigli=(ScrollView)findViewById(R.id.listaConsigli);
         listaConsigli.setScrollbarFadingEnabled(false);
-        budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget()));
+        budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0");
         riparazione.setText(BulletListBuilder.getBulletList( "", SegnFactory.getListaTItoli() ));
         consigliati.setText(BulletListBuilder.getBulletList( "", SegnFactory.getConsigliati() ));
         auto.setOnClickListener(new View.OnClickListener() {

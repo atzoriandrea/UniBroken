@@ -52,10 +52,10 @@ public class SegnFactory{
             s3.setAutore(1);
             s3.setLuogo("Aula A");
             s3.setImage(v[2]);
-            s3.setConfirmed(true);
             s3.setData("10/02/2019");
             s3.setTipo("Danno Idraulico");
             s3.setTesto("DDCedimento del soffitto dell'aula D");
+            s3.setConfirmed(true);
             s3.setIdIntervento(InterventiFactory.getInterventoByType(s3.getTipo()));
 
             Segnalazione s4 = new Segnalazione();
@@ -84,10 +84,10 @@ public class SegnFactory{
             s6.setAutore(1);
             s6.setLuogo("Laboratorio T");
             s6.setImage(v[6]);
-            s6.setConfirmed(true);
             s6.setData("11/02/2018");
             s6.setTipo("Danno Arredi Aule");
             s6.setTesto("Il perno della porta non funziona");
+            s6.setConfirmed(true);
             s6.setIdIntervento(InterventiFactory.getInterventoByType(s6.getTipo()));
 
             Segnalazione s7 = new Segnalazione();
@@ -115,10 +115,10 @@ public class SegnFactory{
             s9.setAutore(1);
             s9.setLuogo("SimAz");
             s9.setImage(v[9]);
-            s9.setConfirmed(true);
             s9.setData("10/02/2019");
             s9.setTipo("Danno Pavimento");
             s9.setTesto("Il pavimento è rotto");
+            s9.setConfirmed(true);
             s9.setIdIntervento(InterventiFactory.getInterventoByType(s9.getTipo()));
 
             Segnalazione s10 = new Segnalazione();
@@ -146,10 +146,10 @@ public class SegnFactory{
             s12.setAutore(1);
             s12.setLuogo("Aula A");
             s12.setImage(v[2]);
-            s12.setConfirmed(true);
             s12.setData("10/02/2019");
             s12.setTipo("Danno Idraulico");
             s12.setTesto("DDCedimento del soffitto dell'aula D");
+            s12.setConfirmed(true);
             s12.setIdIntervento(InterventiFactory.getInterventoByType(s12.getTipo()));
 
 

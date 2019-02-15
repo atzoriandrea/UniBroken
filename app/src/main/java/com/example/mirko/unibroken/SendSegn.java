@@ -4,8 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -25,6 +31,7 @@ import java.util.Date;
 
 public class SendSegn extends AppCompatActivity {
     private ImageView imageHolder;
+    ImageView overlay;
     private final int requestCode = 20;
     Button capturedImageButton;
     EditText t;
@@ -43,15 +50,17 @@ public class SendSegn extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
     ArrayList<Bitmap> tmp = new ArrayList<>();
-
+    float scale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
+        scale = getResources().getDisplayMetrics().density;
         save = (Button)findViewById(R.id.save);
         capturedImageButton= (Button)findViewById(R.id.addphoto);
         final Spinner luogo = (Spinner) findViewById(R.id.luogo);
         imageHolder = (ImageView)findViewById(R.id.addedphoto);
+        overlay = (ImageView)findViewById(R.id.overlay);
         galleria = (Button)findViewById(R.id.addImage);
         t = (EditText)findViewById(R.id.mydescription);
         indietro = (Button)findViewById(R.id.back);
@@ -93,6 +102,8 @@ public class SendSegn extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (t.getText() == null || t.getText().length()==0)
+                    t.setError(null);
                 AlertDialog dialog = new AlertDialog.Builder(c)
                         .setTitle("Invia Segnalazione")
                         .setMessage("Sei sicuro di voler inviare la segnalazione?")
@@ -110,12 +121,8 @@ public class SendSegn extends AppCompatActivity {
                         InterventiFactory ifact = InterventiFactory.getInstance();
                         Segnalazione s = new Segnalazione();
                         s.setAutore(p.getId());
-                        //getResourseId(SendSegn.this, "myIcon", "drawable", getPackageName());
-                        //bd = new BitmapDrawable(getResources(), bitmap);
-                        //MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, titolo , "foto");
                         s.setTipo(dropdown.getSelectedItem().toString());
                         s.setTesto(t.getText().toString());
-                        //s.setData("11/02/2019");
                         s.setLuogo(luogo.getSelectedItem().toString());
                         for (Bitmap b : tmp){
                             s.setImage(b);
@@ -150,6 +157,27 @@ public class SendSegn extends AppCompatActivity {
                 bitmap = (Bitmap) data.getExtras().get("data");
                 tmp.add(bitmap);
                 imageHolder.setImageBitmap(bitmap);
+                if (tmp.size()>1) {
+                    Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
+                    Canvas canvas = new Canvas(b2);
+                    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                    // text color - #3D3D3D
+                    paint.setColor(Color.rgb(255, 255, 255));
+                    // text size in pixels
+                    paint.setTextSize((int) (14 * scale));
+                    Rect bounds = new Rect();
+
+                    String s = "+" + String.valueOf(tmp.size()-1);
+                    paint.getTextBounds(s, 0, s.length(), bounds);
+                    int x = (b2.getWidth() - bounds.width())/2;
+                    int y = (b2.getHeight() + bounds.height())/2;
+
+                    canvas.drawText(s, x, y, paint);
+
+                    overlay.setBackgroundColor(Color.BLACK);
+                    overlay.setImageBitmap(b2);
+                    overlay.setAlpha(0.5f);
+                }
             }
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
                 // Get the Image from data
@@ -172,6 +200,27 @@ public class SendSegn extends AppCompatActivity {
                     Toast.makeText(SendSegn.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     tmp.add(bitmap);
                     imageHolder.setImageBitmap(bitmap);
+                    if (tmp.size()>1) {
+                        Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(b2);
+                        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                        // text color - #3D3D3D
+                        paint.setColor(Color.rgb(255, 255, 255));
+                        // text size in pixels
+                        paint.setTextSize((int) (14 * scale));
+                        Rect bounds = new Rect();
+
+                    String s = "+" + String.valueOf(tmp.size()-1);
+                    paint.getTextBounds(s, 0, s.length(), bounds);
+                    int x = (b2.getWidth() - bounds.width())/2;
+                    int y = (b2.getHeight() + bounds.height())/2;
+
+                    canvas.drawText(s, x, y, paint);
+
+                    overlay.setBackgroundColor(Color.BLACK);
+                    overlay.setImageBitmap(b2);
+                    overlay.setAlpha(0.5f);
+                    }
 
                 } catch (IOException e) {
                     e.printStackTrace();

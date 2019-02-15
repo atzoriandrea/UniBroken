@@ -61,7 +61,7 @@ public class OptionActivityRaga extends AppCompatActivity {
             txt.setText(author);
             txt=(TextView)v.findViewById(R.id.costo);
             double aux=(ifact.getInterventoById(s.getIdIntervento()).getImporto());
-            txt.setText("Costo prev. appr: " + String.valueOf(aux));
+            txt.setText("Costo prev. appr: € " + String.valueOf(aux+"0"));
             if(s.getImage().size() > 0)
                 img.setImageBitmap(SegnFactory.getBitmapFromMemCache(String.valueOf(s.getId())));
             else

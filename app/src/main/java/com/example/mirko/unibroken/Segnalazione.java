@@ -27,7 +27,7 @@ public class Segnalazione implements Serializable, Comparable<Segnalazione> {
 
     public Segnalazione(){
         images = new ArrayList<>();
-        setConfirmed(false);
+        isConfirmed = false;
     }
 
     public String getTipo() {
@@ -123,7 +123,20 @@ public class Segnalazione implements Serializable, Comparable<Segnalazione> {
     }
 
     public void setConfirmed(boolean confirmed) {
-        isConfirmed = confirmed;
+        if(isConfirmed != confirmed){
+            InterventiFactory.getInstance();
+            isConfirmed = confirmed;
+            if(isConfirmed == false){
+                InterventiFactory.setBudget(InterventiFactory.getBudget() + (InterventiFactory.getInterventoById(InterventiFactory.getInterventoByType(this.tipo)).getImporto()));
+            }
+            else
+                InterventiFactory.setBudget(InterventiFactory.getBudget() - (InterventiFactory.getInterventoById(InterventiFactory.getInterventoByType(this.tipo)).getImporto()));
+
+        }
+
+
+
+
     }
 
     @Override
