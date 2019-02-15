@@ -27,6 +27,16 @@ public class SegnFactory{
         private SegnFactory(){
             InterventiFactory ifact = InterventiFactory.getInstance();
             prepareCache();
+            Segnalazione stemp = new Segnalazione();
+            stemp.setId(-1000);
+            stemp.setLuogo("Aula D");
+            stemp.setAutore(4);
+            stemp.setTesto("Cedimento del soffitto dell'aula D");
+            stemp.setTipo("Cedimento Soffitto");
+            stemp.setData("12/12/2012");
+            stemp.setIdIntervento(InterventiFactory.getInterventoByType(stemp.getTipo()));
+
+
             Segnalazione s1 = new Segnalazione();
             s1.setId(1);
             s1.setLuogo("Aula D");
@@ -209,7 +219,7 @@ public class SegnFactory{
         }
         return m;
     }
-    public static void addSegnalazione(Segnalazione s ){
+    public static void addSegnalazione(Segnalazione s){
         SegnFactory factory = SegnFactory.getInstance();
         int max = getLastSegn();
         s.setId(max+1);
@@ -294,7 +304,14 @@ public class SegnFactory{
             return c;
 
         }
-
+    public static void removeTemp(){
+        SegnFactory sfact = SegnFactory.getInstance();
+        for(Segnalazione s: listaSegnalazioni){
+            if (s.isTemp())
+                remSegnalazioneById(s.getId());
+        }
+        sfact = SegnFactory.getInstance();
+    }
     public static String[] eseguiConsigliati(){
         InterventiFactory ifact = InterventiFactory.getInstance();
         SegnFactory sfact = SegnFactory.getInstance();

@@ -18,6 +18,7 @@ public class Segnalazione implements Serializable, Comparable<Segnalazione> {
     private String tipo;
     private boolean isConfirmed;
     private String testo;
+    private boolean isTemp;
     private String luogo;
     private Date data;
     private int idIntervento;
@@ -28,6 +29,7 @@ public class Segnalazione implements Serializable, Comparable<Segnalazione> {
     public Segnalazione(){
         images = new ArrayList<>();
         isConfirmed = false;
+        setTemp(false);
     }
 
     public String getTipo() {
@@ -148,5 +150,13 @@ public class Segnalazione implements Serializable, Comparable<Segnalazione> {
             return -1;
         else
             return 0;
+    }
+
+    public boolean isTemp() {
+        return isTemp;
+    }
+
+    public void setTemp(boolean temp) {
+        isTemp = temp;
     }
 }

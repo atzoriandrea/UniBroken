@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
@@ -119,6 +120,7 @@ public class SendSegn extends AppCompatActivity {
                         Date d = new Date();
                         SegnFactory factory = SegnFactory.getInstance();
                         InterventiFactory ifact = InterventiFactory.getInstance();
+                        SegnFactory.removeTemp();
                         Segnalazione s = new Segnalazione();
                         s.setAutore(p.getId());
                         s.setTipo(dropdown.getSelectedItem().toString());
@@ -136,6 +138,28 @@ public class SendSegn extends AppCompatActivity {
                         startActivity(menu);
                     }
                 });
+
+            }
+        });
+        imageHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(tmp.size()>0) {
+                    SegnFactory sf = SegnFactory.getInstance();
+                    Segnalazione s = new Segnalazione();
+                    for (Bitmap b : tmp){
+                        s.setImage(b);
+                    }
+                    s.setData(new Date());
+                    s.setTemp(true);
+                    SegnFactory.addSegnalazione(s);
+                    sf = SegnFactory.getInstance();
+                    Intent switcher = new Intent(SendSegn.this, ImgSwitcherShow.class);
+                    switcher.putExtra(Showsegn.BITMAP_EXTRA, SegnFactory.getLastSegn());
+                    startActivity(switcher);
+                }
+
 
             }
         });
@@ -166,14 +190,14 @@ public class SendSegn extends AppCompatActivity {
                     // text size in pixels
                     paint.setTextSize((int) (14 * scale));
                     Rect bounds = new Rect();
-
+                    RectF rectF = new RectF(bounds);
                     String s = "+" + String.valueOf(tmp.size()-1);
                     paint.getTextBounds(s, 0, s.length(), bounds);
                     int x = (b2.getWidth() - bounds.width())/2;
                     int y = (b2.getHeight() + bounds.height())/2;
 
                     canvas.drawText(s, x, y, paint);
-
+                    canvas.drawRoundRect(rectF, 100, 100, paint);
                     overlay.setBackgroundColor(Color.BLACK);
                     overlay.setImageBitmap(b2);
                     overlay.setAlpha(0.5f);
@@ -209,14 +233,14 @@ public class SendSegn extends AppCompatActivity {
                         // text size in pixels
                         paint.setTextSize((int) (14 * scale));
                         Rect bounds = new Rect();
+                        RectF rectF = new RectF(bounds);
 
-                    String s = "+" + String.valueOf(tmp.size()-1);
+                        String s = "+" + String.valueOf(tmp.size()-1);
                     paint.getTextBounds(s, 0, s.length(), bounds);
                     int x = (b2.getWidth() - bounds.width())/2;
                     int y = (b2.getHeight() + bounds.height())/2;
-
                     canvas.drawText(s, x, y, paint);
-
+                    canvas.drawRoundRect(rectF, 100, 100, paint);
                     overlay.setBackgroundColor(Color.BLACK);
                     overlay.setImageBitmap(b2);
                     overlay.setAlpha(0.5f);
@@ -224,15 +248,15 @@ public class SendSegn extends AppCompatActivity {
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(SendSegn.this, "Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendSegn.this, "Errore nel caricamento dell'immagine", Toast.LENGTH_SHORT).show();
                 }
 
             } else {
-                Toast.makeText(this, "You haven't picked Image",
+                Toast.makeText(this, "Foto importata con successo",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG)
+            Toast.makeText(this, "Qualcosa è andato storto", Toast.LENGTH_LONG)
                     .show();
         }
 
