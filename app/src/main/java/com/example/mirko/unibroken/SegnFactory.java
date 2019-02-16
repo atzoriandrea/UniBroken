@@ -192,15 +192,26 @@ public class SegnFactory{
             return listaSegnalazioni;
         }
         public static ArrayList<Segnalazione> getListaSegnalazioniByAuthor(int id){
-            SegnFactory factory = SegnFactory.getInstance();
-            ArrayList<Segnalazione> mysegnalations = new ArrayList<>();
-            for(Segnalazione s : listaSegnalazioni){
-                if (s.getAutore() == id){
-                    mysegnalations.add(s);
-                }
+        SegnFactory factory = SegnFactory.getInstance();
+        ArrayList<Segnalazione> mysegnalations = new ArrayList<>();
+        for(Segnalazione s : listaSegnalazioni){
+            if (s.getAutore() == id){
+                mysegnalations.add(s);
             }
-            return mysegnalations;
         }
+        return mysegnalations;
+    }
+
+    public static ArrayList<Segnalazione> getListaSegnalazioniByType(String type){
+        SegnFactory factory = SegnFactory.getInstance();
+        ArrayList<Segnalazione> typedsegnalations = new ArrayList<>();
+        for(Segnalazione s : listaSegnalazioni){
+            if (s.getTipo().equals(type)){
+                typedsegnalations.add(s);
+            }
+        }
+        return typedsegnalations;
+    }
     public static Segnalazione getSegnalazioneById(int id){
         SegnFactory factory = SegnFactory.getInstance();
         for(Segnalazione s : listaSegnalazioni){

@@ -93,7 +93,6 @@ public class Showsegn extends AppCompatActivity {
     }
     public void back(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
-        indietro.setBackgroundColor(Color.GREEN);
         onBackPressed();
     }
 }

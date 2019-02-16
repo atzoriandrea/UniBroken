@@ -35,7 +35,7 @@ public class SendSegn extends AppCompatActivity {
     ImageView overlay;
     private final int requestCode = 20;
     Button capturedImageButton;
-    EditText t;
+    static EditText t;
     Button save;
     Button galleria;
     Bitmap bitmap;
@@ -44,7 +44,7 @@ public class SendSegn extends AppCompatActivity {
     String titolo;
     String imgDecodableString = null;
     Bitmap [] array = new Bitmap[3];
-    Context c;
+    static Context c;
     private static final int PICK_IMAGE_REQUEST = 100;
     private static int RESULT_LOAD_IMG = 1;
     //Segnalazione s = new Segnalazione();
@@ -52,6 +52,8 @@ public class SendSegn extends AppCompatActivity {
     Persona p;
     ArrayList<Bitmap> tmp = new ArrayList<>();
     float scale;
+    static Spinner dropdown;
+    static Spinner luogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,7 @@ public class SendSegn extends AppCompatActivity {
         scale = getResources().getDisplayMetrics().density;
         save = (Button)findViewById(R.id.save);
         capturedImageButton= (Button)findViewById(R.id.addphoto);
-        final Spinner luogo = (Spinner) findViewById(R.id.luogo);
+        luogo  = (Spinner) findViewById(R.id.luogo);
         imageHolder = (ImageView)findViewById(R.id.addedphoto);
         overlay = (ImageView)findViewById(R.id.overlay);
         galleria = (Button)findViewById(R.id.addImage);
@@ -71,8 +73,8 @@ public class SendSegn extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         p = (Persona)obj;
         // Create an ArrayAdapter using the string array and a default spinner layout
-        final Spinner dropdown = findViewById(R.id.tipologia);
-        String[] items = new String[]{"Danno Intonaco",
+        dropdown = findViewById(R.id.tipologia);
+        String[] items = new String[]{"Seleziona un'opzione","Danno Intonaco",
                 "Danno Finestre",
                 "Cedimento Soffitto",
                 "Danno Idraulico",
@@ -82,7 +84,7 @@ public class SendSegn extends AppCompatActivity {
                 "Danno Condizionatore(i)",
                 "Danno Arredi Aule"};
 
-        String[] luoghi = new String[] {"Laboratorio T","Laboratorio M", "Aula Costa", "Aula M.Matematica", "Aula M.Fisica", "Aula Studio", "Laboratorio GARR", "Aula A", "Aula B", "Aula C", "Bagni P.Terra",
+        String[] luoghi = new String[] {"Seleziona un'opzione","Laboratorio T","Laboratorio M", "Aula Costa", "Aula M.Matematica", "Aula M.Fisica", "Aula Studio", "Laboratorio GARR", "Aula A", "Aula B", "Aula C", "Bagni P.Terra",
         "Bagni 1° Piano", "Bagni 2° Piano", "Bagni seminterrato"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, luoghi);
@@ -103,8 +105,7 @@ public class SendSegn extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (t.getText() == null || t.getText().length()==0)
-                    t.setError(null);
+                if (checkInput()){
                 AlertDialog dialog = new AlertDialog.Builder(c)
                         .setTitle("Invia Segnalazione")
                         .setMessage("Sei sicuro di voler inviare la segnalazione?")
@@ -126,7 +127,7 @@ public class SendSegn extends AppCompatActivity {
                         s.setTipo(dropdown.getSelectedItem().toString());
                         s.setTesto(t.getText().toString());
                         s.setLuogo(luogo.getSelectedItem().toString());
-                        for (Bitmap b : tmp){
+                        for (Bitmap b : tmp) {
                             s.setImage(b);
                         }
                         s.setData(d);
@@ -134,12 +135,13 @@ public class SendSegn extends AppCompatActivity {
                         SegnFactory.addSegnalazione(s);
                         factory = SegnFactory.getInstance();
                         Intent menu = new Intent(SendSegn.this, Homepage.class);
-                        menu.putExtra(PERSONA_EXTRA,p);
+                        menu.putExtra(PERSONA_EXTRA, p);
                         startActivity(menu);
                     }
                 });
-
             }
+            }
+
         });
         imageHolder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,21 +206,7 @@ public class SendSegn extends AppCompatActivity {
                 }
             }
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
-                // Get the Image from data
-
                 Uri selectedImage = data.getData();
-                //String[] filePathColumn = { MediaStore.Images.Media.DATA };
-
-                // Get the cursor
-                //Cursor cursor = getContentResolver().query(selectedImage,
-                       // filePathColumn, null, null, null);
-                // Move to first row
-                //cursor.moveToFirst();
-
-                //int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                //imgDecodableString = cursor.getString(columnIndex);
-                //cursor.close();
-                //imageHolder.setImageBitmap(decodeFile(imgDecodableString));
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
                     Toast.makeText(SendSegn.this, "Image Saved!", Toast.LENGTH_SHORT).show();
@@ -228,13 +216,10 @@ public class SendSegn extends AppCompatActivity {
                         Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
                         Canvas canvas = new Canvas(b2);
                         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                        // text color - #3D3D3D
                         paint.setColor(Color.rgb(255, 255, 255));
-                        // text size in pixels
                         paint.setTextSize((int) (14 * scale));
                         Rect bounds = new Rect();
                         RectF rectF = new RectF(bounds);
-
                         String s = "+" + String.valueOf(tmp.size()-1);
                     paint.getTextBounds(s, 0, s.length(), bounds);
                     int x = (b2.getWidth() - bounds.width())/2;
@@ -302,11 +287,34 @@ public class SendSegn extends AppCompatActivity {
 
     }
     public void back(View view) {
-        // Create intent to Open Image applications like Gallery, Google Photos
-        indietro.setBackgroundColor(Color.GREEN);
         onBackPressed();
     }
-
+    public boolean checkInput(){
+        int errori = 0;
+        boolean dd = false;
+        boolean l = false;
+        if(t.getText() == null || t.getText().length() == 0) {
+            t.setError("Inserire un commento");
+            errori ++;
+        }
+        if(dropdown.getSelectedItem().toString().equals("Seleziona un'opzione")) {
+            dd = true;
+            errori++;
+        }
+        if(luogo.getSelectedItem().toString().equals("Seleziona un'opzione")) {
+            l = true;
+            errori++;
+        }
+        if (l || dd) {
+            if (l && dd)
+                Toast.makeText(SendSegn.this, "Non hai inserito la tipologia e il luogo",Toast.LENGTH_LONG).show();
+            if (l && !dd)
+                Toast.makeText(SendSegn.this, "Non hai inserito il luogo",Toast.LENGTH_LONG).show();
+            if(!l && dd)
+                Toast.makeText(SendSegn.this, "Non hai inserito la tipologia",Toast.LENGTH_LONG).show();
+        }
+        return errori==0;
+    }
 
 
 

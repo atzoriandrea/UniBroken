@@ -133,8 +133,6 @@ public class Raga_Budget extends AppCompatActivity {
         startActivity(indietro);
     }
     public void back(View view) {
-        // Create intent to Open Image applications like Gallery, Google Photos
-        indietro.setBackgroundColor(Color.GREEN);
         onBackPressed();
     }
 

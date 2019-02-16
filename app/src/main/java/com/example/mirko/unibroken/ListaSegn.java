@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.lang.Integer;
@@ -26,14 +28,28 @@ public class ListaSegn extends AppCompatActivity {
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
     Persona p1;
     Segnalazione s;
+    Spinner dropdown;
+    OptionActivity.Adattatore a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_segn);
         SegnFactory sf = SegnFactory.getInstance();
         segn = SegnFactory.getListaSegnalazioni();
-        OptionActivity.Adattatore a = new OptionActivity.Adattatore(this,segn);
+        a = new OptionActivity.Adattatore(this,segn);
         Intent intent = getIntent();
+        dropdown = findViewById(R.id.tipologia);//aggiunngere a xml
+        String[] items = new String[]{"Tutte le segnalazioni",
+                "Danno Finestre",
+                "Cedimento Soffitto",
+                "Danno Idraulico",
+                "Danno Elettrico",
+                "Danno Pavimento",
+                "Danno Connettività",
+                "Danno Condizionatore(i)",
+                "Danno Arredi Aule"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         p1 = (Persona)obj;
@@ -52,6 +68,23 @@ public class ListaSegn extends AppCompatActivity {
 
             }
         });
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+                //prevent onCreate event fire and the loop
+                if(!dropdown.getSelectedItem().toString().equals("Tutte le segnalazioni")){
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getListaSegnalazioniByType(dropdown.getSelectedItem().toString()));
+                    lista.setAdapter(a);
+                }
+                else{
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getListaSegnalazioni());
+                    lista.setAdapter(a);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {}
+        });
 
     }
     public void onBackPressed() {
@@ -61,7 +94,6 @@ public class ListaSegn extends AppCompatActivity {
     }
     public void back(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
-        indietro.setBackgroundColor(Color.GREEN);
         onBackPressed();
     }
     public void logout(View view) {

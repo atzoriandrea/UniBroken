@@ -34,23 +34,23 @@
             android:onClick="back"
             android:textColor="#FFFFFF"/>
         <ImageView
-            android:id="@+id/logo"
+            android:id="@+id/logo2"
             android:layout_marginRight="10dp"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo_tr" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:elevation="100dp"
+            android:layout_marginRight="20dp"
             android:gravity="bottom|center"
             android:text="UniBroken"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
-            app:layout_behavior="com.uhg.ent.mobile.quit4life.UrgeIntervention.TitleTextViewBehavior" />
+            android:textSize="25sp"/>
 
     </android.support.v7.widget.Toolbar>
 

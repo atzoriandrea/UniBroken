@@ -41,6 +41,7 @@
                     android:background="@drawable/outline_arrow_back_ios_white_18dp"
                     android:onClick="back"
                     android:textColor="#FFFFFF"/>
+
                 <Button
                     android:layout_width="25dp"
                     android:layout_height="25dp"

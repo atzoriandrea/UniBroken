@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
     EditText username, password;
     Button accedi;
@@ -78,11 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     p2 = PersonaFactory.login(persona.getUsername(),persona.getPassword());
                     if(p2 != null){
                         showResults.putExtra(PERSONA_EXTRA, p2);
-                        //passo i dati del mio utente ed attivo la seconda activity
                         startActivity(showResults);}
                     else{
                         text_msg(v);
-                        //builder.show();
                     }
 
 
@@ -91,9 +91,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }//CHIUDO ONCREATE
     public void text_msg(View view){
-        t = Toast.makeText(getApplicationContext(), "Username e / o password non corretti", Toast.LENGTH_LONG);
-        t.setGravity(Gravity.CENTER ,0 ,0);
-        t.show();
+        if (checkInput()){
+            final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Credenziali errate")
+                    .setMessage("L'username e / o la password non sono corrette")
+                    .setPositiveButton("RIPROVA", null)
+                    .show();
+            Button positiveButton = dialog.getButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.hide();
+                }
+            });
+        }
     }
 
     private boolean checkInput(){
