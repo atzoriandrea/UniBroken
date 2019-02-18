@@ -18,7 +18,7 @@ public class HomeRaga extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
     TextView r;
-    Button invia, gestisci, budget,indietro;
+    Button invia, gestisci, budget,indietro, resoconti;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ public class HomeRaga extends AppCompatActivity {
         gestisci = (Button)findViewById(R.id.gestisci);
         budget = (Button)findViewById(R.id.budget);
         indietro = (Button)findViewById(R.id.back);
+        resoconti = (Button)findViewById(R.id.resoconti);
         invia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +55,13 @@ public class HomeRaga extends AppCompatActivity {
             public void onClick(View v) {
                 Intent segnalazioni = new Intent(HomeRaga.this, Raga_Budget.class);
                 segnalazioni.putExtra(PERSONA_EXTRA, p);
+                startActivity(segnalazioni);
+            }
+        });
+        resoconti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent segnalazioni = new Intent(HomeRaga.this, Resoconti.class);
                 startActivity(segnalazioni);
             }
         });

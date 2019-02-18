@@ -44,7 +44,8 @@ public class SegnFactory{
             s1.setImage(v[0]);
             s1.setTesto("Cedimento del soffitto dell'aula D");
             s1.setTipo("Cedimento Soffitto");
-            s1.setData("12/12/2012");
+            s1.setData("12/12/2016");
+            s1.setSolved(true);
             s1.setIdIntervento(InterventiFactory.getInterventoByType(s1.getTipo()));
 
             Segnalazione s2 = new Segnalazione();
@@ -53,7 +54,7 @@ public class SegnFactory{
             s2.setImage(v[1]);
             s2.setLuogo("Aula C");
             s2.setTipo("Danno Elettrico");
-            s2.setData("15/01/2017");
+            s2.setData("15/01/2018");
             s2.setTesto("CCCedimento del soffitto dell'aula D");
             s2.setIdIntervento(InterventiFactory.getInterventoByType(s2.getTipo()));
 
@@ -85,7 +86,7 @@ public class SegnFactory{
             s5.setImage(v[5]);
             s5.setLuogo("Aula M.Fisica");
             s5.setTipo("Danno Arredi Aule");
-            s5.setData("19/01/2017");
+            s5.setData("19/01/2018");
             s5.setTesto("Serranda non funzionante");
             s5.setIdIntervento(InterventiFactory.getInterventoByType(s5.getTipo()));
 
@@ -189,12 +190,17 @@ public class SegnFactory{
         }
         public static ArrayList<Segnalazione> getListaSegnalazioni(){
             SegnFactory factory = SegnFactory.getInstance();
-            return listaSegnalazioni;
+            ArrayList<Segnalazione> not = new ArrayList<>();
+            for(Segnalazione s:listaSegnalazioni){
+                if (!s.isSolved())
+                    not.add(s);
+            }
+            return not;
         }
         public static ArrayList<Segnalazione> getListaSegnalazioniByAuthor(int id){
         SegnFactory factory = SegnFactory.getInstance();
         ArrayList<Segnalazione> mysegnalations = new ArrayList<>();
-        for(Segnalazione s : listaSegnalazioni){
+        for(Segnalazione s : getListaSegnalazioni()){
             if (s.getAutore() == id){
                 mysegnalations.add(s);
             }
@@ -205,7 +211,7 @@ public class SegnFactory{
     public static ArrayList<Segnalazione> getListaSegnalazioniByType(String type){
         SegnFactory factory = SegnFactory.getInstance();
         ArrayList<Segnalazione> typedsegnalations = new ArrayList<>();
-        for(Segnalazione s : listaSegnalazioni){
+        for(Segnalazione s : getListaSegnalazioni()){
             if (s.getTipo().equals(type)){
                 typedsegnalations.add(s);
             }
@@ -214,7 +220,7 @@ public class SegnFactory{
     }
     public static Segnalazione getSegnalazioneById(int id){
         SegnFactory factory = SegnFactory.getInstance();
-        for(Segnalazione s : listaSegnalazioni){
+        for(Segnalazione s : getListaSegnalazioni()){
             if (s.getId() == id){
                 return  s;
             }
@@ -224,7 +230,7 @@ public class SegnFactory{
     public static int getLastSegn(){
         SegnFactory factory = SegnFactory.getInstance();
         int m = 0;
-        for(Segnalazione s:listaSegnalazioni){
+        for(Segnalazione s:getListaSegnalazioni()){
             if (m<s.getId())
                 m = s.getId();
         }
@@ -256,7 +262,7 @@ public class SegnFactory{
     public static void remSegnalazioneById(int id){
         SegnFactory factory = SegnFactory.getInstance();
         ArrayList<Segnalazione> tmp = new ArrayList<>();
-        for(Segnalazione s : listaSegnalazioni){
+        for(Segnalazione s : getListaSegnalazioni()){
             tmp.add(s);
         }
         for(Segnalazione s : tmp){
@@ -271,7 +277,7 @@ public class SegnFactory{
         SegnFactory factory = SegnFactory.getInstance();
         ArrayList<String> lista = new ArrayList<>();
         int i = 0;
-        for(Segnalazione s : listaSegnalazioni){
+        for(Segnalazione s : getListaSegnalazioni()){
             if(s.isConfirmed())
                 lista.add("Segn. #" + String.valueOf(s.getId()) + " - " + s.getTipo() + " - € " + String.valueOf(InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto())+"0");
         }
@@ -286,7 +292,7 @@ public class SegnFactory{
         public static ArrayList<Segnalazione> sortByPriorita (){
             SegnFactory sf = SegnFactory.getInstance();
             ArrayList<Segnalazione> copia = new ArrayList<>();
-            for(Segnalazione s : listaSegnalazioni){
+            for(Segnalazione s : getListaSegnalazioni()){
                 copia.add(s);
             }
             Collections.sort(copia);
@@ -317,7 +323,7 @@ public class SegnFactory{
         }
     public static void removeTemp(){
         SegnFactory sfact = SegnFactory.getInstance();
-        for(Segnalazione s: listaSegnalazioni){
+        for(Segnalazione s: getListaSegnalazioni()){
             if (s.isTemp())
                 remSegnalazioneById(s.getId());
         }
@@ -339,7 +345,29 @@ public class SegnFactory{
         InterventiFactory.setBudget(budget);
         return getConsigliati();
     }
+    public static int getUnchecked(){
+            SegnFactory sf = SegnFactory.getInstance();
+        ArrayList<Segnalazione> lista = new ArrayList<>();
+        int consigliati = getConsigliati().length;
+        for(Segnalazione s : getListaSegnalazioni()){
+            if(consigliati==0) {
+                if (!s.isConfirmed())
+                    lista.add(s);
+            }
+        }
+        return lista.size();
+    }
 
+    public static ArrayList<Segnalazione> getSegnalazioniperAnno(){
+            SegnFactory sf = SegnFactory.getInstance();
+            ArrayList<Segnalazione> anno = new ArrayList<>();
+            for(Segnalazione s : getListaSegnalazioni()){
+                if(s.getData().substring(7,11).equals("2018"))
+                    anno.add(s);
+            }
+            return anno;
+
+    }
         public static void prepareCache(){
 
                 // Get max available VM memory, exceeding this amount will throw an

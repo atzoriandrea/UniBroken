@@ -51,7 +51,7 @@
         <ImageView
             android:id="@+id/logo2"
             android:layout_width="match_parent"
-            android:layout_height="165dp"
+            android:layout_height="130dp"
             android:layout_gravity="center"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="10dp"
@@ -89,6 +89,16 @@
             android:layout_margin="15dp"
             android:baselineAligned="false"
             android:text="Budget"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/background_button"/>
+
+        <Button
+            android:id="@+id/resoconti"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="15dp"
+            android:baselineAligned="false"
+            android:text="resoconti"
             android:textColor="#FFFFFF"
             android:background="@drawable/background_button"/>
 

@@ -8,10 +8,13 @@ import android.app.AlertDialog;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.View;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Persona p2;
     boolean p;
     Toast t;
+    TextInputLayout show;
     static Bitmap[] array;
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     //AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -59,10 +63,24 @@ public class MainActivity extends AppCompatActivity {
             array[10] = BitmapFactory.decodeResource(getResources(),R.drawable.spano_ufficio);
             SegnFactory.setBitmaps(array);
         }
+        show = (TextInputLayout)findViewById(R.id.showP);
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
         accedi = (Button)findViewById(R.id.accedi);
         link = (TextView) findViewById(R.id.link);
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (password.getText().length()>0)
+                    show.setPasswordVisibilityToggleEnabled(true);
+                else
+                    show.setPasswordVisibilityToggleEnabled(false);
+            }
+        });
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

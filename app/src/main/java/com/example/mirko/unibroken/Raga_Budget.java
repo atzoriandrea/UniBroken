@@ -37,7 +37,9 @@ public class Raga_Budget extends AppCompatActivity {
     TextView riparazione;
     ScrollView listaConsigli;
     TextView consigliati;
+    TextView nonGestiti;
     Toast t;
+    int non_gestiti;
 
     public static class BulletListBuilder {
 
@@ -79,6 +81,7 @@ public class Raga_Budget extends AppCompatActivity {
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         p = (Persona)obj;
+        non_gestiti = SegnFactory.getUnchecked();
         //final Spinner dropdown = findViewById(R.id.tipologia2);
         //Utilizzare item
         riparazione = (TextView)findViewById(R.id.content1);
@@ -87,10 +90,13 @@ public class Raga_Budget extends AppCompatActivity {
         inRip=(ScrollView)findViewById(R.id.inRip);
         inRip.setScrollbarFadingEnabled(false);
         listaConsigli=(ScrollView)findViewById(R.id.listaConsigli);
+        nonGestiti = (TextView)findViewById(R.id.non);
         listaConsigli.setScrollbarFadingEnabled(false);
         budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0");
         riparazione.setText(BulletListBuilder.getBulletList( "", SegnFactory.getListaTItoli() ));
         consigliati.setText(BulletListBuilder.getBulletList( "", SegnFactory.getConsigliati() ));
+        if (non_gestiti!=0)
+            nonGestiti.setText("NB: Il budget è stato insufficiente per coprire le "+String.valueOf(non_gestiti)+" segnalazioni con priorità inferiore");
         auto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +116,9 @@ public class Raga_Budget extends AppCompatActivity {
                         public void onClick(View v) {
                             consigliati.setText(BulletListBuilder.getBulletList( "", SegnFactory.eseguiConsigliati() ));
                             riparazione.setText(BulletListBuilder.getBulletList( "", SegnFactory.getListaTItoli() ));
+                            non_gestiti = SegnFactory.getUnchecked();
+                            if (non_gestiti!=0)
+                                nonGestiti.setText("NB: Il budget è stato insufficiente per coprire le "+String.valueOf(non_gestiti)+" segnalazioni con priorità inferiore");
                             budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0");
                             dialog.hide();
                               }
