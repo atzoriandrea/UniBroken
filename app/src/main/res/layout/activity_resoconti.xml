@@ -37,6 +37,22 @@
                 android:layout_gravity="end"/>
         </android.support.v7.widget.Toolbar>
         <TextView
+            android:id="@+id/titolo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Resoconti UniBroken"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/ddiciassette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Resoconto 2017"
+            android:gravity="center"/>
+        <TextView
             android:id="@+id/ddiciotto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

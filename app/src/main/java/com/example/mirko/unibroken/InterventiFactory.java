@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class InterventiFactory {
     private static InterventiFactory instance;
     private static ArrayList<Intervento> listaInterventi = new ArrayList<>();
-    private static  double budget = 48000.00;
+    private static  double budget = 30000.00;
     private InterventiFactory() {
         Intervento i1 = new Intervento();
         Intervento i2 = new Intervento();
@@ -33,7 +33,7 @@ public class InterventiFactory {
 
         i1.setImporto(800.00);
         i2.setImporto(1000.00);
-        i3.setImporto(40000.00);
+        i3.setImporto(20000.00);
         i4.setImporto(450.00);
         i5.setImporto(5500.00);
         i6.setImporto(900.00);

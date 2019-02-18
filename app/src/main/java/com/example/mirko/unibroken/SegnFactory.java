@@ -44,28 +44,27 @@ public class SegnFactory{
             s1.setImage(v[0]);
             s1.setTesto("Cedimento del soffitto dell'aula D");
             s1.setTipo("Cedimento Soffitto");
-            s1.setData("12/12/2016");
-            s1.setSolved(true);
+            s1.setData("12/12/2017");
             s1.setIdIntervento(InterventiFactory.getInterventoByType(s1.getTipo()));
 
             Segnalazione s2 = new Segnalazione();
             s2.setId(2);
             s2.setAutore(2);
-            s2.setImage(v[1]);
+            //s2.setImage(v[1]);
             s2.setLuogo("Aula C");
             s2.setTipo("Danno Elettrico");
             s2.setData("15/01/2018");
-            s2.setTesto("CCCedimento del soffitto dell'aula D");
+            s2.setTesto("Cavi scoperti in Aula C");
             s2.setIdIntervento(InterventiFactory.getInterventoByType(s2.getTipo()));
 
             Segnalazione s3 = new Segnalazione();
             s3.setId(3);
             s3.setAutore(1);
             s3.setLuogo("Aula A");
-            s3.setImage(v[2]);
-            s3.setData("10/02/2019");
+            //s3.setImage(v[2]);
+            s3.setData("10/02/2017");
             s3.setTipo("Danno Idraulico");
-            s3.setTesto("DDCedimento del soffitto dell'aula D");
+            s3.setTesto("Esce acqua dal muro");
             s3.setConfirmed(true);
             s3.setIdIntervento(InterventiFactory.getInterventoByType(s3.getTipo()));
 
@@ -75,7 +74,7 @@ public class SegnFactory{
             s4.setAutore(4);
             s4.setImage(v[3]);
             s4.setImage(v[4]);
-            s4.setTesto("Sedie Mancandi in Aula Magna di FIsica");
+            s4.setTesto("Sedie Mancandi in Aula Magna di Fisica");
             s4.setTipo("Danno Arredi Aule");
             s4.setData("22/11/2018");
             s4.setIdIntervento(InterventiFactory.getInterventoByType(s4.getTipo()));
@@ -108,7 +107,7 @@ public class SegnFactory{
             s7.setImage(v[7]);
             s7.setTesto("Il segnale wifi è estremamente debole o peggio...");
             s7.setTipo("Danno Connettività");
-            s7.setData("13/02/2019");
+            s7.setData("13/02/2017");
             s7.setIdIntervento(InterventiFactory.getInterventoByType(s7.getTipo()));
 
             Segnalazione s8 = new Segnalazione();
@@ -125,6 +124,7 @@ public class SegnFactory{
             s9.setId(9);
             s9.setAutore(1);
             s9.setLuogo("SimAz");
+            s9.setSolved(true);
             s9.setImage(v[9]);
             s9.setData("10/02/2019");
             s9.setTipo("Danno Pavimento");
@@ -139,29 +139,156 @@ public class SegnFactory{
             s10.setImage(v[10]);
             s10.setTesto("Il muro presenta un grosso buco");
             s10.setTipo("Danno Intonaco");
-            s10.setData("17/12/2012");
+            s10.setData("17/12/2017");
             s10.setIdIntervento(InterventiFactory.getInterventoByType(s10.getTipo()));
 
             Segnalazione s11 = new Segnalazione();
             s11.setId(11);
             s11.setAutore(2);
-            s11.setImage(v[1]);
-            s11.setLuogo("Aula C");
-            s11.setTipo("Danno Elettrico");
-            s11.setData("15/01/2017");
-            s11.setTesto("CCCedimento del soffitto dell'aula D");
+            //s11.setImage(v[1]);
+            s11.setLuogo("Bagni Primo Piano");
+            s11.setTipo("Danno Idraulico");
+
+            s11.setData("15/01/2018");
+            s11.setTesto("Il pavimento è allagato per una perdita dal rubinetto");
             s11.setIdIntervento(InterventiFactory.getInterventoByType(s11.getTipo()));
 
             Segnalazione s12 = new Segnalazione();
             s12.setId(12);
             s12.setAutore(1);
-            s12.setLuogo("Aula A");
-            s12.setImage(v[2]);
-            s12.setData("10/02/2019");
+            s12.setLuogo("Bagni P. Terra");
+            //s12.setImage(v[2]);
+            s12.setData("18/02/2017");
             s12.setTipo("Danno Idraulico");
-            s12.setTesto("DDCedimento del soffitto dell'aula D");
+            s12.setTesto("Manca l'acqua nei servizi");
             s12.setConfirmed(true);
             s12.setIdIntervento(InterventiFactory.getInterventoByType(s12.getTipo()));
+
+            Segnalazione s13 = new Segnalazione();
+            s13.setId(13);
+            s13.setLuogo("Lab M");
+            s13.setAutore(4);
+            //s13.setSolved(true);
+            s13.setTesto("Grosso buco sul soffitto");
+            s13.setTipo("Cedimento Soffitto");
+            s13.setData("15/09/2018");
+            //s13.setSolved(true);
+            s13.setIdIntervento(InterventiFactory.getInterventoByType(s13.getTipo()));
+
+            Segnalazione s14 = new Segnalazione();
+            s14.setId(14);
+            s14.setAutore(2);
+            s14.setSolved(true);
+            s14.setLuogo("Aula C");
+            s14.setTipo("Danno Elettrico");
+            s14.setData("05/02/2018");
+            s14.setTesto("Nessuna apparecchiatura elettrica sembra funzionare");
+            s14.setIdIntervento(InterventiFactory.getInterventoByType(s14.getTipo()));
+
+            Segnalazione s15 = new Segnalazione();
+            s15.setId(15);
+            s15.setAutore(1);
+            s15.setLuogo("Aula A");
+            s15.setSolved(true);
+            s15.setData("07/02/2019");
+            s15.setTipo("Danno Pavimento");
+            s15.setTesto("Le pianelle sono spezzate e taglienti");
+            s15.setConfirmed(true);
+            s15.setIdIntervento(InterventiFactory.getInterventoByType(s15.getTipo()));
+
+            Segnalazione s16 = new Segnalazione();
+            s16.setId(16);
+            s16.setLuogo("Aula M.Fisica");
+            s16.setAutore(4);
+            s16.setTesto("Quasi tutte le finestre sono rotte");
+            s16.setSolved(true);
+            s16.setTipo("Danno Arredi Aule");
+            s16.setData("22/11/2018");
+            s16.setIdIntervento(InterventiFactory.getInterventoByType(s16.getTipo()));
+
+            Segnalazione s17 = new Segnalazione();
+            s17.setId(17);
+            s17.setAutore(2);
+            //s17.setImage(v[5]);
+            s17.setLuogo("Aula M.Matematica");
+            s17.setTipo("Danno Arredi Aule");
+            s17.setData("12/01/2018");
+            s17.setTesto("Serranda non funzionante");
+            s17.setIdIntervento(InterventiFactory.getInterventoByType(s17.getTipo()));
+
+            Segnalazione s18 = new Segnalazione();
+            s18.setId(18);
+            s18.setAutore(1);
+            s18.setLuogo("Laboratorio T");
+            //s18.setImage(v[6]);
+            s18.setData("11/02/2018");
+            s18.setTipo("Danno Arredi Aule");
+            s18.setTesto("Il perno della porta non funziona");
+            s18.setConfirmed(true);
+            s18.setSolved(true);
+            s18.setIdIntervento(InterventiFactory.getInterventoByType(s18.getTipo()));
+
+            Segnalazione s19 = new Segnalazione();
+            s19.setId(19);
+            s19.setLuogo("Andito docenti");
+            s19.setAutore(4);
+            s19.setSolved(true);
+            s19.setTesto("Il segnale wifi è assente");
+            s19.setTipo("Danno Connettività");
+            s19.setData("13/05/2017");
+            s19.setIdIntervento(InterventiFactory.getInterventoByType(s19.getTipo()));
+
+            Segnalazione s20 = new Segnalazione();
+            s20.setId(20);
+            s20.setAutore(2);
+            s20.setSolved(true);
+            s20.setLuogo("Scale interne");
+            s20.setTipo("Danno Pavimento");
+            s20.setData("15/01/2017");
+            s20.setTesto("Il pavimento presenta buchi e pianelle mancanti");
+            s20.setIdIntervento(InterventiFactory.getInterventoByType(s20.getTipo()));
+
+            Segnalazione s21 = new Segnalazione();
+            s21.setId(21);
+            s21.setAutore(1);
+            s21.setLuogo("Laboratorio GARR");
+            //s21.setImage(v[9]);
+            s21.setData("20/04/2018");
+            s21.setTipo("Danno Pavimento");
+            s21.setTesto("Il pavimento è rotto");
+            s21.setConfirmed(true);
+            s21.setIdIntervento(InterventiFactory.getInterventoByType(s21.getTipo()));
+
+            Segnalazione s22 = new Segnalazione();
+            s22.setId(22);
+            s22.setLuogo("Ufficio dirigenza");
+            s22.setAutore(4);
+            //s22.setImage(v[10]);
+            s22.setTesto("Il muro è completamente scrostato");
+            s22.setTipo("Danno Intonaco");
+            s22.setData("17/12/2017");
+            s22.setIdIntervento(InterventiFactory.getInterventoByType(s22.getTipo()));
+
+            Segnalazione s23 = new Segnalazione();
+            s23.setId(23);
+            s23.setAutore(2);
+            //s23.setImage(v[1]);
+            s23.setLuogo("Ufficio Segreteria");
+            s23.setTipo("Danno Elettrico");
+            s23.setData("25/01/2018");
+            s23.setTesto("Tutte le prese producono scintille");
+            s23.setIdIntervento(InterventiFactory.getInterventoByType(s23.getTipo()));
+
+            Segnalazione s24 = new Segnalazione();
+            s24.setId(24);
+            s24.setAutore(1);
+            s24.setLuogo("Aula A");
+            s24.setSolved(true);
+            s24.setData("16/07/2017");
+            s24.setTipo("Danno Idraulico");
+            s24.setTesto("I tubi del muro hanno allagato la classe");
+            s24.setConfirmed(true);
+            s24.setIdIntervento(InterventiFactory.getInterventoByType(s24.getTipo()));
 
 
 
@@ -178,8 +305,21 @@ public class SegnFactory{
             listaSegnalazioni.add(s10);
             listaSegnalazioni.add(s11);
             listaSegnalazioni.add(s12);
+            listaSegnalazioni.add(s13);
+            listaSegnalazioni.add(s14);
+            listaSegnalazioni.add(s15);
+            listaSegnalazioni.add(s16);
+            listaSegnalazioni.add(s17);
+            listaSegnalazioni.add(s18);
+            listaSegnalazioni.add(s19);
+            listaSegnalazioni.add(s20);
+            listaSegnalazioni.add(s21);
+            listaSegnalazioni.add(s22);
+            listaSegnalazioni.add(s23);
+            listaSegnalazioni.add(s24);
             for(Segnalazione s : listaSegnalazioni){
-                addBitmapToMemoryCache(String.valueOf(s.getId()),s.getImage().get((s.getImage().size())-1));
+                if(s.getImage().size()>0)
+                    addBitmapToMemoryCache(String.valueOf(s.getId()),s.getImage().get((s.getImage().size())-1));
             }
 
         }
@@ -358,11 +498,11 @@ public class SegnFactory{
         return lista.size();
     }
 
-    public static ArrayList<Segnalazione> getSegnalazioniperAnno(){
+    public static ArrayList<Segnalazione> getSegnalazioniperAnno(String year){
             SegnFactory sf = SegnFactory.getInstance();
             ArrayList<Segnalazione> anno = new ArrayList<>();
-            for(Segnalazione s : getListaSegnalazioni()){
-                if(s.getData().substring(7,11).equals("2018"))
+            for(Segnalazione s : sortByPriorita()){
+                if(s.getData().substring(7,11).equals(year))
                     anno.add(s);
             }
             return anno;
