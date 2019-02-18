@@ -39,15 +39,15 @@ public class ListaSegn extends AppCompatActivity {
         a = new OptionActivity.Adattatore(this,segn);
         Intent intent = getIntent();
         dropdown = findViewById(R.id.tipologia);//aggiunngere a xml
-        String[] items = new String[]{"Tutte le segnalazioni",
-                "Danno Finestre",
-                "Cedimento Soffitto",
-                "Danno Idraulico",
-                "Danno Elettrico",
-                "Danno Pavimento",
-                "Danno Connettività",
-                "Danno Condizionatore(i)",
-                "Danno Arredi Aule"};
+        String[] items = new String[]{"Tutte le segnalazioni (" + String.valueOf(segn.size())+")",
+                "Danno Finestre (" + String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Finestre").size())+")",
+                "Cedimento Soffitto ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Cedimento Soffitto").size())+")",
+                "Danno Idraulico ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Idraulico").size())+")",
+                "Danno Elettrico ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Elettrico").size())+")",
+                "Danno Pavimento ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Pavimento").size())+")",
+                "Danno Connettività ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Connettività").size())+")",
+                "Danno Condizionatore(i) ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Condizionatore(i)").size())+")",
+                "Danno Arredi Aule ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Arredi Aule").size())+")"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);

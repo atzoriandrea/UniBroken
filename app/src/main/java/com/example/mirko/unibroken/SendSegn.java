@@ -303,9 +303,27 @@ public class SendSegn extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent indietro = new Intent(SendSegn.this, Homepage.class);
-        indietro.putExtra(Homepage.PERSONA_EXTRA,p);
-        startActivity(indietro);
+        AlertDialog dialog = new AlertDialog.Builder(c)
+                .setTitle("Elimina Segnalazione")
+                .setMessage("Vuoi interrompere l'invio della segnalazione?\n" +
+                        "I dati non salvati andranno persi.")
+                .setPositiveButton("CONFERMA", null)
+                .setNegativeButton("ANNULLA", null)
+                .show();
+
+
+        Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SegnFactory sf = SegnFactory.getInstance();
+                SegnFactory.removeTemp();
+                Intent indietro = new Intent(SendSegn.this, Homepage.class);
+                indietro.putExtra(Homepage.PERSONA_EXTRA,p);
+                startActivity(indietro);
+            }
+        });
+
     }
     public void logout(View view) {
         AlertDialog dialog = new AlertDialog.Builder(this)

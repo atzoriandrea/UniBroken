@@ -3,7 +3,11 @@ package com.example.mirko.unibroken;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +20,15 @@ import java.io.Serializable;
 
 public class Showsegn extends AppCompatActivity {
     TextView titolo;
-    ImageView img;
+    ImageView img, overlay;
     TextView descrizione;
     TextView testotitolo;
     TextView luogo;
     TextView testoluogo;
+    TextView data;
     Segnalazione s;
     Persona p;
+    float scale;
     Button indietro;
     //Bitmap[] array = new Bitmap[1];
     public static final String BITMAP_EXTRA="java.lang.Integer";
@@ -32,6 +38,7 @@ public class Showsegn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showsegn);
+        scale = getResources().getDisplayMetrics().density;
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(ListaSegn.SEGN);
         Serializable obj2 = intent.getSerializableExtra(ListaSegn.PERSONA_EXTRA);
@@ -45,15 +52,40 @@ public class Showsegn extends AppCompatActivity {
         img = (ImageView)findViewById(R.id.imgdett);
         testotitolo = (TextView)findViewById(R.id.tittext);
         descrizione = (TextView)findViewById(R.id.des);
-        luogo = (TextView)findViewById(R.id.loc);
+        data = (TextView)findViewById(R.id.datetext);
+        //luogo = (TextView)findViewById(R.id.loc);
         testoluogo = (TextView)findViewById(R.id.loctext);
         indietro = (Button)findViewById(R.id.back);
+        overlay = (ImageView)findViewById(R.id.overlay);
         descrizione.setText(s.getTesto());
-        testotitolo.setText(s.getTipo());
+        testotitolo.setText("Segnalazione #"+String.valueOf(s.getId()));
         testoluogo.setText(s.getLuogo());
-        if(s.getImage().size()>0)
-            img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
-        else
+        data.setText(s.getData());
+        if(s.getImage().size()>0) {
+            img.setImageBitmap(s.getImage().get(s.getImage().size() - 1));
+            if (s.getImage().size()>1) {
+                Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(b2);
+                Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                // text color - #3D3D3D
+                paint.setColor(Color.rgb(255, 255, 255));
+                // text size in pixels
+                paint.setTextSize((int) (14 * scale));
+                Rect bounds = new Rect();
+                RectF rectF = new RectF(bounds);
+                String str = "+" + String.valueOf(s.getImage().size()-1);
+                paint.getTextBounds(str, 0, str.length(), bounds);
+                int x = (b2.getWidth() - bounds.width())/2;
+                int y = (b2.getHeight() + bounds.height())/2;
+
+                canvas.drawText(str, x, y, paint);
+                canvas.drawRoundRect(rectF, 100, 100, paint);
+                overlay.setBackgroundColor(Color.BLACK);
+                overlay.setImageBitmap(b2);
+                overlay.setAlpha(0.5f);
+            }
+
+        }else
             img.setImageResource(R.drawable.dummy_image_square);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
