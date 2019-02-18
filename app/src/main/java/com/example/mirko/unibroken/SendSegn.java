@@ -18,7 +18,10 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,12 +55,15 @@ public class SendSegn extends AppCompatActivity {
     Persona p;
     ArrayList<Bitmap> tmp = new ArrayList<>();
     float scale;
-    static Spinner dropdown;
-    static Spinner luogo;
+    Spinner dropdown;
+    Spinner luogo;
+    Spinner floor;
+    ArrayAdapter<String> adapter2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
+
         scale = getResources().getDisplayMetrics().density;
         save = (Button)findViewById(R.id.save);
         capturedImageButton= (Button)findViewById(R.id.addphoto);
@@ -74,6 +80,8 @@ public class SendSegn extends AppCompatActivity {
         p = (Persona)obj;
         // Create an ArrayAdapter using the string array and a default spinner layout
         dropdown = findViewById(R.id.tipologia);
+        floor = findViewById(R.id.piano);
+        String[] floors = new String[]{"Seleziona il Piano","Piano Terra", "Primo Piano","Secondo Piano"};
         String[] items = new String[]{"Seleziona un'opzione","Danno Intonaco",
                 "Danno Finestre",
                 "Cedimento Soffitto",
@@ -84,16 +92,50 @@ public class SendSegn extends AppCompatActivity {
                 "Danno Condizionatore(i)",
                 "Danno Arredi Aule"};
 
-        String[] luoghi = new String[] {"Seleziona un'opzione","Laboratorio T","Laboratorio M", "Aula Costa", "Aula M.Matematica", "Aula M.Fisica", "Aula Studio", "Laboratorio GARR", "Aula A", "Aula B", "Aula C", "Bagni P.Terra",
-        "Bagni 1° Piano", "Bagni 2° Piano", "Bagni seminterrato"};
+        final String[] pianoT = new String[]{"Seleziona un'opzione","Laboratorio T","Laboratorio M","Aula M.Fisica", "Aula Studio", "Laboratorio GARR","Bagni P.Terra","Bagni seminterrato","Atrio"};
+        final String[] piano1 = new String[]{"Seleziona un'opzione","Aula M.Matematica","Aula A","Bagni 1° Piano","Andito docenti","Scale","Atrio","Ufficio dirigenza"};
+        final String[] piano2 = new String[]{"Seleziona un'opzione","Aula B", "Aula C","Bagni 2° Piano","Atrio","Ufficio Segreteria"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, luoghi);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, floors);
 
         dropdown.setAdapter(adapter);
-        luogo.setAdapter(adapter2);
+        floor.setAdapter(adapter3);
+        luogo.setEnabled(false);
 
+        floor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+                //prevent onCreate event fire and the loop
 
+                switch (floor.getSelectedItem().toString()){
+                    case("Piano Terra"):{
+                        adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, pianoT);
+                        luogo.setAdapter(adapter2);
+                        luogo.setEnabled(true);
+                        break;
+                    }
+                    case("Primo Piano"):{
+                        adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano1);
+                        luogo.setAdapter(adapter2);
+                        luogo.setEnabled(true);
+                        break;
+                    }
+                    case("Secondo Piano"):{
+                        adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano2);
+                        luogo.setAdapter(adapter2);
+                        luogo.setEnabled(true);
+                        break;
+                    }
+                    default:{
+                        luogo.setEnabled(false);
+                        break;
+                    }
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {}
+        });
         capturedImageButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,25 +335,28 @@ public class SendSegn extends AppCompatActivity {
         int errori = 0;
         boolean dd = false;
         boolean l = false;
+        boolean edit = false;
+        String messaggio = "";
         if(t.getText() == null || t.getText().length() == 0) {
             t.setError("Inserire un commento");
+            edit = true;
+            messaggio = messaggio+"&#8226 Non hai inserito il commento;<br>";
             errori ++;
         }
         if(dropdown.getSelectedItem().toString().equals("Seleziona un'opzione")) {
             dd = true;
+            messaggio = messaggio+"&#8226 Non hai inserito la tipologia del danno;<br>";
             errori++;
         }
-        if(luogo.getSelectedItem().toString().equals("Seleziona un'opzione")) {
+        if(floor.getSelectedItem().toString().equals("Seleziona il Piano") || luogo.getSelectedItem().toString().equals("Seleziona un'opzione")) {
             l = true;
+            messaggio = messaggio+"&#8226 Non hai inserito il luogo;";
             errori++;
         }
-        if (l || dd) {
-            if (l && dd)
-                Toast.makeText(SendSegn.this, "Non hai inserito la tipologia e il luogo",Toast.LENGTH_LONG).show();
-            if (l && !dd)
-                Toast.makeText(SendSegn.this, "Non hai inserito il luogo",Toast.LENGTH_LONG).show();
-            if(!l && dd)
-                Toast.makeText(SendSegn.this, "Non hai inserito la tipologia",Toast.LENGTH_LONG).show();
+        if (l || dd || edit)  {
+            Spanned formatted = Html.fromHtml(messaggio);
+
+            Toast.makeText(SendSegn.this, formatted.toString(),Toast.LENGTH_LONG).show();
         }
         return errori==0;
     }

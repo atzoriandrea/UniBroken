@@ -71,8 +71,8 @@ public class ListaSegn extends AppCompatActivity {
         dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
                 //prevent onCreate event fire and the loop
-                if(!dropdown.getSelectedItem().toString().equals("Tutte le segnalazioni")){
-                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getListaSegnalazioniByType(dropdown.getSelectedItem().toString()));
+                if(!removeQty(dropdown.getSelectedItem().toString()).equals("Tutte le segnalazioni")){
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getListaSegnalazioniByType(removeQty(dropdown.getSelectedItem().toString())));
                     lista.setAdapter(a);
                 }
                 else{
@@ -117,6 +117,17 @@ public class ListaSegn extends AppCompatActivity {
         });
 
     }
-
+    public String removeQty (String s){
+        char [] array = s.toCharArray();
+        int lenght = s.length();
+        int fine = 0;
+        String temp;
+        for(int i = 0; i<lenght; i++){
+            if (array[i]==' ' && array[i+1]=='(')
+                fine = i;
+        }
+        temp = s.substring(0,fine);
+        return temp;
+    }
 
 }

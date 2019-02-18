@@ -31,7 +31,7 @@ public class InterventiFactory {
         i8.setId(8);
         i9.setId(9);
 
-        i1.setImporto(5000.00);
+        i1.setImporto(800.00);
         i2.setImporto(1000.00);
         i3.setImporto(40000.00);
         i4.setImporto(450.00);

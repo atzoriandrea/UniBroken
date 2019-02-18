@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+
     tools:context=".ShowsegnRaga">
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,10 +63,15 @@
             android:layout_marginHorizontal="30dp">
         <TextView
             android:id="@+id/tit"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <ImageView
             android:id="@+id/imgdett"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="350px" />
         <TextView

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+
     tools:context=".ListaSegnRaga">
 
     <LinearLayout
@@ -61,13 +63,27 @@
             />
 
         </android.support.v7.widget.Toolbar>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/spinner">
+            <Spinner
+                android:id="@+id/tipologia"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                style="@drawable/spinner"
+                android:layout_marginHorizontal="20dp"
+                android:spinnerMode="dropdown"/>
+        </RelativeLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="0dp"
             android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
             android:text="Segnalazioni attive"
             android:textSize="23dp"/>
 

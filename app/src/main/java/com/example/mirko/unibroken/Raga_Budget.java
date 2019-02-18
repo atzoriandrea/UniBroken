@@ -110,7 +110,7 @@ public class Raga_Budget extends AppCompatActivity {
                         public void onClick(View v) {
                             consigliati.setText(BulletListBuilder.getBulletList( "", SegnFactory.eseguiConsigliati() ));
                             riparazione.setText(BulletListBuilder.getBulletList( "", SegnFactory.getListaTItoli() ));
-                            budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget()));
+                            budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0");
                             dialog.hide();
                               }
                 });

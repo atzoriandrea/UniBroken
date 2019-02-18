@@ -7,8 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,14 +24,28 @@ public class ListaSegnRaga extends AppCompatActivity {
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
     Persona p1;
     Segnalazione s;
+    Spinner dropdown;
+    OptionActivityRaga.Adattatore a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_segn_raga);
         SegnFactory sf = SegnFactory.getInstance();
         segn = SegnFactory.getListaSegnalazioni();
-        OptionActivityRaga.Adattatore a = new OptionActivityRaga.Adattatore(this,segn);
+        a = new OptionActivityRaga.Adattatore(this,segn);
         Intent intent = getIntent();
+        dropdown = findViewById(R.id.tipologia);//aggiunngere a xml
+        String[] items = new String[]{"Tutte le segnalazioni (" + String.valueOf(segn.size())+")",
+                "Danno Finestre (" + String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Finestre").size())+")",
+                "Cedimento Soffitto ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Cedimento Soffitto").size())+")",
+                "Danno Idraulico ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Idraulico").size())+")",
+                "Danno Elettrico ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Elettrico").size())+")",
+                "Danno Pavimento ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Pavimento").size())+")",
+                "Danno Connettività ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Connettività").size())+")",
+                "Danno Condizionatore(i) ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Condizionatore(i)").size())+")",
+                "Danno Arredi Aule ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Arredi Aule").size())+")"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
         Serializable obj = intent.getSerializableExtra(HomeRaga.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
         p1 = (Persona)obj;
@@ -47,6 +63,23 @@ public class ListaSegnRaga extends AppCompatActivity {
                 startActivity(dettaglio);
 
             }
+        });
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+                //prevent onCreate event fire and the loop
+                if(!removeQty(dropdown.getSelectedItem().toString()).equals("Tutte le segnalazioni")){
+                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioniByType(removeQty(dropdown.getSelectedItem().toString())));
+                    lista.setAdapter(a);
+                }
+                else{
+                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioni());
+                    lista.setAdapter(a);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {}
         });
     }
     public void onBackPressed() {
@@ -78,6 +111,18 @@ public class ListaSegnRaga extends AppCompatActivity {
             }
         });
 
+    }
+    public String removeQty (String s){
+        char [] array = s.toCharArray();
+        int lenght = s.length();
+        int fine = 0;
+        String temp;
+        for(int i = 0; i<lenght; i++){
+            if (array[i]==' ' && array[i+1]=='(')
+                fine = i;
+        }
+        temp = s.substring(0,fine);
+        return temp;
     }
 
 
