@@ -57,41 +57,93 @@
                 android:textColor="@android:color/white"
                 android:textSize="25sp"/>
         </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="vertical"
+        >
+
 
         <TextView
-            android:id="@+id/tit"
+            android:id="@+id/tittext"
+            android:text="Titolotesto"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
             android:textSize="25dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:layout_marginTop="10dp"
-            android:text="Titolo"
-            android:textAlignment="center" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-
-        <ImageView
-            android:id="@+id/imgdett"
-            android:layout_width="match_parent"
-            android:layout_height="350px" />
-
-        <TextView
-            android:id="@+id/des"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="15dp"
-            android:text="Descrizione"
-            android:textColor="@color/colorPrimaryDark"/>
-        <TextView
-            android:id="@+id/loc"
-            android:layout_marginTop="15dp"
-            android:textColor= "@color/colorPrimaryDark"
-            android:text="Luogo"
-            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <ImageView
+                android:id="@+id/imgdett"
+                android:layout_width="600px"
+                android:layout_height="500px"
+                android:background="@android:color/black"
+                android:layout_centerInParent="true"
+                />
+            <ImageView
+                android:id="@+id/overlay"
+                android:layout_width="600px"
+                android:layout_height="500px"
+                android:layout_centerInParent="true"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Descrizione: "/>
+            <TextView
+                android:id="@+id/des"
+                android:layout_toRightOf="@+id/dt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/lt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textStyle="bold"
+                android:text="Luogo: "/>
+            <TextView
+                android:id="@+id/loctext"
+                android:layout_toRightOf="@+id/lt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="end">
+            <TextView
+                android:id="@+id/st"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#888888"
+                android:text="Segnalato il: "/>
+            <TextView
+                android:id="@+id/datetext"
+                android:layout_toRightOf="@+id/st"
+                android:layout_width="wrap_content"
+                android:textColor="#888888"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
         <Space
             android:layout_width="match_parent"
             android:layout_height="45dp" />
@@ -104,6 +156,7 @@
             android:text="Elimina Segnalazione"
             android:background="@drawable/delete_button"
             android:textColor="#FFFFFF"/>
+    </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

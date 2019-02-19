@@ -12,6 +12,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -47,13 +48,20 @@ public class DrawPDF extends AppCompatActivity {
         }
 
     }
-    TextView resoconti;
+    TextView resoconti,bud,rimanenza;
+    Button send;
     int year;
+    ScrollView sv;
+    Persona p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw_pdf);
         resoconti = (TextView)findViewById(R.id.lista);
+        bud = (TextView)findViewById(R.id.budg);
+        rimanenza = (TextView)findViewById(R.id.rimanenza);
+        send = (Button)findViewById(R.id.send);
+        sv = (ScrollView)findViewById(R.id.sv);
         double spesaTot = 0;
         int i = 0;
         SegnFactory sf = SegnFactory.getInstance();
@@ -73,7 +81,36 @@ public class DrawPDF extends AppCompatActivity {
             }
             i++;
         }
-        resoconti.setText("Budget "+String.valueOf(year)+": € 30000,00\nSono state effettuati i seguenti interventi: \n"+DrawPDF.BulletListBuilder.getBulletList( "", array)+"\nBudget Rimanente: "+String.valueOf(30000-spesaTot));
+        sv.setScrollbarFadingEnabled(false);
+        bud.setText("Budget "+String.valueOf(year)+":");
+        rimanenza.setText("Budget Rimanente: € "+String.valueOf(30000-spesaTot)+"0");
+        resoconti.setText(DrawPDF.BulletListBuilder.getBulletList( "", array));
+        send.setText("Invia Resoconto "+String.valueOf(year));
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create intent to Open Image applications like Gallery, Google Photos
+                AlertDialog dialog = new AlertDialog.Builder(DrawPDF.this)
+                        .setTitle("Invia Resoconto")
+                        .setMessage("Vuoi davvero inviare il resoconto all'Amministrazione?\n\nTale documento avrà validità ufficiale ai fini della rendicontazione dell'Università degli Studi di Cagliari")
+                        .setPositiveButton("CONFERMA", null)
+                        .setNegativeButton("ANNULLA", null)
+                        .show();
+
+
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent raga = new Intent(DrawPDF.this, HomeRaga.class);
+                        PersonaFactory pf = PersonaFactory.getInstance();
+                        p = PersonaFactory.getPersonaById(3);
+                        raga.putExtra(HomeRaga.PERSONA_EXTRA,p);
+                        startActivity(raga);
+                    }
+                });
+            }
+        });
     }
     @Override
     public void onBackPressed() {
@@ -98,7 +135,7 @@ public class DrawPDF extends AppCompatActivity {
             public void onClick(View v) {
                 // Create intent to Open Image applications like Gallery, Google Photos
                 Intent logout = new Intent(DrawPDF.this, MainActivity.class);
-                // Start the Intent
+
                 startActivity(logout);
             }
         });

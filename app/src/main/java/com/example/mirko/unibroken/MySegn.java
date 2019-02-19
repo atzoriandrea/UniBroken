@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ public class MySegn extends AppCompatActivity {
     Persona p1;
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
     Segnalazione s;
-    Bitmap[] array = new Bitmap[3];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,6 +40,7 @@ public class MySegn extends AppCompatActivity {
         OptionActivity.Adattatore a = new OptionActivity.Adattatore(this,segn);
         lista = (ListView)findViewById(R.id.SegList);
         lista.setAdapter(a);
+        lista.setScrollbarFadingEnabled(false);
         indietro = (Button)findViewById(R.id.back);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {

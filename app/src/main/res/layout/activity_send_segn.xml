@@ -144,36 +144,51 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
 
             <Button
                 android:id="@+id/addphoto"
-                android:layout_width="190px"
-                android:layout_height="190px"
+                android:layout_width="180px"
+                android:layout_height="180px"
                 android:layout_marginLeft="30sp"
                 android:layout_centerVertical="true"
                 android:background="@drawable/camera"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scatta Foto"
+                android:layout_marginLeft="27sp"
+                android:layout_marginTop="20sp"
+                android:layout_below="@+id/addphoto"/>
             <Button
-                android:layout_width="190px"
-                android:layout_height="190px"
+                android:layout_width="180px"
+                android:layout_height="180px"
                 android:background="@drawable/galleria"
                 android:id="@+id/addImage"
-                android:layout_marginLeft="30sp"
+                android:layout_marginLeft="40sp"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/addphoto"
                 android:onClick="loadImagefromGallery"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carica Foto"
+                android:layout_marginLeft="123sp"
+                android:layout_marginTop="20sp"
+                android:layout_below="@+id/addImage"/>
             <RelativeLayout
                 android:layout_width="250px"
                 android:layout_height="250px"
                 android:layout_marginLeft="25dp"
                 android:background="@drawable/imageviewcorners"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/addImage">
             <ImageView
                 android:id="@+id/addedphoto"
                 android:layout_width="240px"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:layout_height="240px"
                 android:layout_margin="10dp"
                 />
@@ -181,7 +196,7 @@
                     android:id="@+id/overlay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
 
                     />
             </RelativeLayout>

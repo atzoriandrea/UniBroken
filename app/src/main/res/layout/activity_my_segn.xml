@@ -60,11 +60,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="0dp"
             android:gravity="center_horizontal"
-
-            android:text="Segnalazioni attive"
+            android:layout_gravity="center_vertical"
+            android:text="Le mie segnalazioni"
             android:textSize="23dp"/>
         <ListView
             android:id="@+id/SegList"

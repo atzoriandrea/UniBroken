@@ -5,7 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +24,7 @@ public class MySegnDetail extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
 
     TextView titolo;
-    ImageView img;
+    ImageView img, overlay;
     TextView descrizione;
     TextView luogo;
     Button indietro;
@@ -28,12 +32,14 @@ public class MySegnDetail extends AppCompatActivity {
     Button elimina;
     Persona p;
     Context c;
-    Bitmap[] array = new Bitmap[3];
+    float scale;
+    TextView testotitolo,data,testoluogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_segn_detail);
         SegnFactory factory = SegnFactory.getInstance();
+        scale = getResources().getDisplayMetrics().density;
         c = this;
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(MySegn.SEGN);
@@ -42,7 +48,7 @@ public class MySegnDetail extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         int i = (Integer) obj;
         s = SegnFactory.getSegnalazioneById(i);
-        //s = (Segnalazione) obj;
+        testotitolo = (TextView)findViewById(R.id.tittext);
         p = (Persona) obj2;
         titolo = (TextView)findViewById(R.id.tit);
         img = (ImageView)findViewById(R.id.imgdett);
@@ -52,7 +58,12 @@ public class MySegnDetail extends AppCompatActivity {
         indietro = (Button)findViewById(R.id.back);
         descrizione.setText(s.getTesto());
         img.setImageBitmap(s.getImage().get(s.getImage().size()-1));
-
+        testotitolo.setText("Segnalazione #"+String.valueOf(s.getId()));
+        data = (TextView)findViewById(R.id.datetext);
+        data.setText(s.getData());
+        testoluogo = (TextView)findViewById(R.id.loctext);
+        overlay = (ImageView)findViewById(R.id.overlay);
+        testoluogo.setText(s.getLuogo());
         elimina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +86,40 @@ public class MySegnDetail extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+        if(s.getImage().size()>0) {
+            img.setImageBitmap(s.getImage().get(s.getImage().size() - 1));
+            if (s.getImage().size()>1) {
+                Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(b2);
+                Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                // text color - #3D3D3D
+                paint.setColor(Color.rgb(255, 255, 255));
+                // text size in pixels
+                paint.setTextSize((int) (14 * scale));
+                Rect bounds = new Rect();
+                RectF rectF = new RectF(bounds);
+                String str = "+" + String.valueOf(s.getImage().size()-1);
+                paint.getTextBounds(str, 0, str.length(), bounds);
+                int x = (b2.getWidth() - bounds.width())/2;
+                int y = (b2.getHeight() + bounds.height())/2;
+
+                canvas.drawText(str, x, y, paint);
+                canvas.drawRoundRect(rectF, 100, 100, paint);
+                overlay.setBackgroundColor(Color.BLACK);
+                overlay.setImageBitmap(b2);
+                overlay.setAlpha(0.5f);
+            }
+
+        }else
+            img.setImageResource(R.drawable.dummy_image_square);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switcher = new Intent(MySegnDetail.this,ImgSwitcherShow.class);
+                switcher.putExtra(Showsegn.BITMAP_EXTRA, s.getId());
+                startActivity(switcher);
             }
         });
     }

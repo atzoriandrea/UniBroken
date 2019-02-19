@@ -56,6 +56,7 @@ public class ListaSegn extends AppCompatActivity {
         indietro = (Button)findViewById(R.id.back);
         lista = (ListView)findViewById(R.id.SegList);
         lista.setAdapter(a);
+        lista.setScrollbarFadingEnabled(false);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
