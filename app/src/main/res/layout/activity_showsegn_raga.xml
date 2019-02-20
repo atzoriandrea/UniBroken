@@ -69,11 +69,31 @@
             android:textSize="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/imgdett"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="350px" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/imgdett"
+                    android:layout_width="600px"
+                    android:layout_height="500px"
+                    android:background="@android:color/black"
+                    android:layout_centerHorizontal="true"
+                    />
+                <ImageView
+                    android:id="@+id/overlay"
+                    android:layout_width="600px"
+                    android:layout_height="500px"
+                    android:layout_centerHorizontal="true"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tocca per ingrandire"
+                    android:textAlignment="center"
+                    android:layout_below="@+id/overlay"/>
+
+            </RelativeLayout>
         <TextView
             android:id="@+id/des"
             android:text="Descrizione"

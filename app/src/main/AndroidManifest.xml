@@ -37,7 +37,8 @@
         <activity android:name=".PassRecovery" />
         <activity android:name=".OptionActivityRaga" />
         <activity android:name=".Resoconti" />
-        <activity android:name=".DrawPDF"></activity>
+        <activity android:name=".DrawPDF" />
+        <activity android:name=".ChooseType"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package com.example.mirko.unibroken;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,12 +16,14 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,13 +31,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SendSegn extends AppCompatActivity {
+import static java.lang.Thread.sleep;
+
+public class SendSegn extends Activity {
     private ImageView imageHolder;
     ImageView overlay;
     private final int requestCode = 20;
@@ -58,6 +65,7 @@ public class SendSegn extends AppCompatActivity {
     Spinner dropdown;
     Spinner luogo;
     Spinner floor;
+    boolean isok = false;
     ArrayAdapter<String> adapter2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,11 +152,12 @@ public class SendSegn extends AppCompatActivity {
             }
         });
 
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (checkInput()){
-                AlertDialog dialog = new AlertDialog.Builder(c)
+                 final AlertDialog dialog = new AlertDialog.Builder(c)
                         .setTitle("Invia Segnalazione")
                         .setMessage("Sei sicuro di voler inviare la segnalazione?")
                         .setPositiveButton("CONFERMA", null)
@@ -158,6 +167,7 @@ public class SendSegn extends AppCompatActivity {
 
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
                         Date d = new Date();
@@ -176,12 +186,18 @@ public class SendSegn extends AppCompatActivity {
                         s.setIdIntervento(InterventiFactory.getInterventoByType(dropdown.getSelectedItem().toString()));
                         SegnFactory.addSegnalazione(s);
                         factory = SegnFactory.getInstance();
-                        Intent menu = new Intent(SendSegn.this, Homepage.class);
-                        menu.putExtra(PERSONA_EXTRA, p);
-                        startActivity(menu);
+                        isok = true;
+                        showFeedbackWindows(c);
+                        //while(!isok){
+
+                        //}
+
                     }
+
                 });
-            }
+
+
+                }
             }
 
         });
@@ -207,7 +223,56 @@ public class SendSegn extends AppCompatActivity {
 
             }
         });
+
     }
+    public void result() {
+        if(isok) {
+
+
+        }
+
+    }
+    //Mostra la finiestra di feedback della lista per x secondi
+    public void showFeedbackWindows(Context c){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        final AlertDialog alert = dialog.create();
+
+        alert.setCanceledOnTouchOutside(false);
+
+        TextView titoloCustom = new TextView(c);
+        titoloCustom.setText("Segnalazione Inviata");
+        titoloCustom.setPadding(10, 20, 10, 0);
+        titoloCustom.setGravity(Gravity.CENTER);
+        titoloCustom.setTextColor(Color.rgb(2, 45, 126));
+        titoloCustom.setTextSize(20);
+        alert.setCustomTitle(titoloCustom);
+        alert.show();
+        alert.getWindow().setLayout(800, 210);  //Per settare le dimensioni del dialog
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+                Intent menu = new Intent(SendSegn.this, Homepage.class);
+                menu.putExtra(PERSONA_EXTRA, p);
+                startActivity(menu);
+            }
+        });
+
+        handler.postDelayed(runnable, 1500);
+        //isok = false;//Ritardo di scomparsa della finestra a 1 secondoo
+    }
+
     public void loadImagefromGallery(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,

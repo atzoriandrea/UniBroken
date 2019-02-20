@@ -63,13 +63,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/spinner">
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/tipologia"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:scrollbarSize="100dp"
                 style="@drawable/spinner"
                 android:layout_marginHorizontal="20dp"
-                android:spinnerMode="dropdown"/>
+                android:spinnerMode="dialog"/>-->
+
+            <TextView
+                android:id="@+id/tipologia"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textSize="18dp"
+                style="@drawable/spinner"
+                android:layout_marginHorizontal="20dp"/>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignEnd="@+id/tipologia"
+                android:src="@drawable/outline_navigate_next_black_18dp" />
         </RelativeLayout>
         <TextView
             android:layout_width="match_parent"
@@ -77,6 +93,8 @@
             android:layout_marginLeft="0dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="0dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
             android:text="Segnalazioni attive"

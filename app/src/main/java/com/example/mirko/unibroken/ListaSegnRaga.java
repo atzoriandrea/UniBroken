@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public class ListaSegnRaga extends AppCompatActivity {
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
     Persona p1;
     Segnalazione s;
-    Spinner dropdown;
+    String selected;
+    TextView dropdown;
     OptionActivityRaga.Adattatore a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,8 @@ public class ListaSegnRaga extends AppCompatActivity {
         segn = SegnFactory.getListaSegnalazioni();
         a = new OptionActivityRaga.Adattatore(this,segn);
         Intent intent = getIntent();
-        dropdown = findViewById(R.id.tipologia);//aggiunngere a xml
-        String[] items = new String[]{"Tutte le segnalazioni (" + String.valueOf(segn.size())+")",
+        dropdown = (TextView)findViewById(R.id.tipologia);//aggiunngere a xml
+        /*String[] items = new String[]{"Tutte le segnalazioni (" + String.valueOf(segn.size())+")",
                 "Danno Finestre (" + String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Finestre").size())+")",
                 "Cedimento Soffitto ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Cedimento Soffitto").size())+")",
                 "Danno Idraulico ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Idraulico").size())+")",
@@ -45,45 +47,63 @@ public class ListaSegnRaga extends AppCompatActivity {
                 "Danno Condizionatore(i) ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Condizionatore(i)").size())+")",
                 "Danno Arredi Aule ("+ String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Arredi Aule").size())+")"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter);
-        Serializable obj = intent.getSerializableExtra(HomeRaga.PERSONA_EXTRA);
+        dropdown.setAdapter(adapter);*/
+        Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
+        dropdown.setText(SegnFactory.getSelectedCategory());
         p1 = (Persona)obj;
         indietro = (Button)findViewById(R.id.back);
         lista = (ListView)findViewById(R.id.SegList);
         lista.setAdapter(a);
+        lista.setScrollbarFadingEnabled(false);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3){
+            public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3){
                 s = (Segnalazione) lista.getItemAtPosition(position);
-                Intent dettaglio = new Intent(ListaSegnRaga.this , ShowsegnRaga.class);
+                Intent dettaglio = new Intent(ListaSegnRaga.this , Showsegn.class);
+                dettaglio.putExtra(PERSONA_EXTRA,p1);
                 dettaglio.putExtra(SEGN, new Integer(s.getId()));
-                dettaglio.putExtra(PERSONA_EXTRA, p1);
                 startActivity(dettaglio);
 
             }
         });
-        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        dropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent choose = new Intent(ListaSegnRaga.this,ChooseType.class);
+                choose.putExtra(PERSONA_EXTRA,p1);
+                startActivity(choose);
+            }
+        });
+        selected = SegnFactory.getSelectedCategory();
+        if(!selected.equals("Tutte le segnalazioni")){
+            a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioniByType(selected));
+            lista.setAdapter(a);
+        }
+        else{
+            a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioni());
+            lista.setAdapter(a);
+        }
+        /*dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
                 //prevent onCreate event fire and the loop
                 if(!removeQty(dropdown.getSelectedItem().toString()).equals("Tutte le segnalazioni")){
-                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioniByType(removeQty(dropdown.getSelectedItem().toString())));
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getListaSegnalazioniByType(removeQty(dropdown.getSelectedItem().toString())));
                     lista.setAdapter(a);
                 }
                 else{
-                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioni());
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getListaSegnalazioni());
                     lista.setAdapter(a);
                 }
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {}
-        });
+        });*/
     }
     public void onBackPressed() {
         Intent indietro = new Intent(ListaSegnRaga.this, Homepage.class);
+        SegnFactory.setSelectedCategory("Tutte le segnalazioni");
         indietro.putExtra(Homepage.PERSONA_EXTRA, p1);
         startActivity(indietro);
     }

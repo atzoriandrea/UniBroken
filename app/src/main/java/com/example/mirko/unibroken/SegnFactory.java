@@ -23,6 +23,7 @@ public class SegnFactory{
         private static SegnFactory instance;
         private static Bitmap [] v = new Bitmap[11];
         private static LruCache<String, Bitmap> mMemoryCache;
+        private static String selectedCategory = "Tutte le segnalazioni";
     private static ArrayList<Segnalazione> listaSegnalazioni = new ArrayList<>();
         private SegnFactory(){
             InterventiFactory ifact = InterventiFactory.getInstance();
@@ -538,7 +539,11 @@ public class SegnFactory{
             }
 
 
+    public static String getSelectedCategory() {
+        return selectedCategory;
+    }
 
-
-
+    public static void setSelectedCategory(String selectedCategory) {
+        SegnFactory.selectedCategory = selectedCategory;
+    }
 }

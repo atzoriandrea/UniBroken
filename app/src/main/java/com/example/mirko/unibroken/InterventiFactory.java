@@ -91,7 +91,14 @@ public class InterventiFactory {
             instance = new InterventiFactory();
         return instance;
     }
-
+    public static ArrayList<String> getListaTipi(){
+        InterventiFactory factory = InterventiFactory.getInstance();
+        ArrayList<String> list = new ArrayList<>();
+        for(Intervento i : listaInterventi){
+            list.add(i.getTipoIntervento());
+        }
+        return list;
+    }
     public static ArrayList<Intervento> getListaInterventi() {
         InterventiFactory factory = InterventiFactory.getInstance();
         return listaInterventi;

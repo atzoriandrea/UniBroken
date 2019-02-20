@@ -98,7 +98,7 @@ public class Showsegn extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent indietro = new Intent(Showsegn.this, Homepage.class);
+        Intent indietro = new Intent(Showsegn.this, ListaSegn.class);
         indietro.putExtra(Homepage.PERSONA_EXTRA,p);
         startActivity(indietro);
     }

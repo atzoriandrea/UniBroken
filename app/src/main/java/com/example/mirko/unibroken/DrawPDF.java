@@ -1,15 +1,20 @@
 package com.example.mirko.unibroken;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfDocument.PageInfo;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -96,17 +101,11 @@ public class DrawPDF extends AppCompatActivity {
                         .setPositiveButton("CONFERMA", null)
                         .setNegativeButton("ANNULLA", null)
                         .show();
-
-
                 Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent raga = new Intent(DrawPDF.this, HomeRaga.class);
-                        PersonaFactory pf = PersonaFactory.getInstance();
-                        p = PersonaFactory.getPersonaById(3);
-                        raga.putExtra(HomeRaga.PERSONA_EXTRA,p);
-                        startActivity(raga);
+                        showFeedbackWindows(DrawPDF.this);
                     }
                 });
             }
@@ -140,5 +139,45 @@ public class DrawPDF extends AppCompatActivity {
             }
         });
 
+    }
+    //Mostra la finiestra di feedback della lista per x secondi
+    public void showFeedbackWindows(Context c){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        final AlertDialog alert = dialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        TextView titoloCustom = new TextView(c);
+        titoloCustom.setText("Rapporto Inviato");
+        titoloCustom.setPadding(10, 20, 10, 0);
+        titoloCustom.setGravity(Gravity.CENTER);
+        titoloCustom.setTextColor(Color.rgb(2, 45, 126));
+        titoloCustom.setTextSize(20);
+        alert.setCustomTitle(titoloCustom);
+        alert.show();
+        alert.getWindow().setLayout(800, 210);  //Per settare le dimensioni del dialog
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+                Intent raga = new Intent(DrawPDF.this, HomeRaga.class);
+                PersonaFactory pf = PersonaFactory.getInstance();
+                p = PersonaFactory.getPersonaById(3);
+                raga.putExtra(HomeRaga.PERSONA_EXTRA,p);
+                startActivity(raga);
+            }
+        });
+
+        handler.postDelayed(runnable, 1500);
+        //isok = false;//Ritardo di scomparsa della finestra a 1 secondoo
     }
 }
