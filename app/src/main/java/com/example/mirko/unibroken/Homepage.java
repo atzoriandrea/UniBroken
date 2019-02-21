@@ -41,7 +41,7 @@ public class Homepage extends AppCompatActivity {
         r = (TextView) findViewById(R.id.uniBroken);
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mTopToolbar);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(MainActivity.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
