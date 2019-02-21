@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="15dp"
-            android:text="Gestisci Segnalazioni"
+            android:text="Lista Segnalazioni"
             android:textColor="#FFFFFF"
             android:background="@drawable/background_button"/>
 
@@ -106,7 +106,7 @@
             android:layout_height="50dp"
             android:layout_margin="15dp"
             android:baselineAligned="false"
-            android:text="Budget"
+            android:text="Gestisci Budget"
             android:textColor="#FFFFFF"
             android:background="@drawable/background_button"/>
 

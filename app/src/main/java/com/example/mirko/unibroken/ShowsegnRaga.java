@@ -27,7 +27,7 @@ public class ShowsegnRaga extends AppCompatActivity {
     ImageView img, overlay;
     Button indietro;
     TextView descrizione;
-    TextView testotitolo;
+    TextView soldi;
     TextView luogo;
     TextView costo;
     TextView impresa;
@@ -56,12 +56,14 @@ public class ShowsegnRaga extends AppCompatActivity {
         sv = (ScrollView)findViewById(R.id.scroll);
         sv.setScrollbarFadingEnabled(false);
         Serializable obj2 = intent.getSerializableExtra(HomeRaga.PERSONA_EXTRA);
+        soldi = (TextView)findViewById(R.id.disponibile);
+        soldi.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0 disp.");
         p1 = (Persona)obj2;
         s = SegnFactory.getSegnalazioneById(i);
         scale = getResources().getDisplayMetrics().density;
         indietro = (Button)findViewById(R.id.back);
         titolo = (TextView)findViewById(R.id.tit);
-        titolo.setText("Segnalazione #"+String.valueOf(s.getId()));
+        titolo.setText("Segn. #"+String.valueOf(s.getId()));
         img = (ImageView)findViewById(R.id.imgdett);
         impresa =(TextView)findViewById(R.id.impresa);
         conf = (Button)findViewById(R.id.intconf);
@@ -129,9 +131,19 @@ public class ShowsegnRaga extends AppCompatActivity {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        s.setConfirmed(true);
-                        showPositiveFeedbackWindows(ShowsegnRaga.this);
-                        dialog.hide();
+                        InterventiFactory ifact;
+                        double bud = InterventiFactory.getBudget();
+                        if (bud - InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto() >= 0){
+                            s.setConfirmed(true);
+                            InterventiFactory.setBudget(bud - InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto());
+                            showPositiveFeedbackWindows(ShowsegnRaga.this);
+                            soldi.setText(String.valueOf(InterventiFactory.getBudget())+"0");
+                            dialog.hide();
+                        }else{
+                            dialog.hide();
+                            showImpossibleFeedbackWindows(ShowsegnRaga.this);
+                        }
+
                         if(s.isConfirmed() == true){
                             conf.setVisibility(View.GONE);
                             rconf.setVisibility(View.VISIBLE);
@@ -206,6 +218,38 @@ public class ShowsegnRaga extends AppCompatActivity {
             conf.setVisibility(View.VISIBLE);
 
         }
+    }
+    public void showImpossibleFeedbackWindows(Context c){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        final AlertDialog alert = dialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        TextView titoloCustom = new TextView(c);
+        titoloCustom.setText("Budget Insufficiente");
+        titoloCustom.setPadding(10, 20, 10, 0);
+        titoloCustom.setGravity(Gravity.CENTER);
+        titoloCustom.setTextColor(Color.rgb(2, 45, 126));
+        titoloCustom.setTextSize(20);
+        alert.setCustomTitle(titoloCustom);
+        alert.show();
+        alert.getWindow().setLayout(800, 210);  //Per settare le dimensioni del dialog
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                }
+            }
+        };
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+
+            }
+        });
+        handler.postDelayed(runnable, 1500);
+        //isok = false;//Ritardo di scomparsa della finestra a 1 secondoo
     }
     public void showPositiveFeedbackWindows(Context c){
         final AlertDialog.Builder dialog = new AlertDialog.Builder(c);

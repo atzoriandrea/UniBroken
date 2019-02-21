@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.password);
         accedi = (Button)findViewById(R.id.accedi);
         link = (TextView) findViewById(R.id.link);
+        link.setPaintFlags(link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}

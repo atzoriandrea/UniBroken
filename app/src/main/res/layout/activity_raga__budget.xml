@@ -165,6 +165,12 @@
                 android:text="Gestisci Automaticamente"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/background_button"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:text="Invia le N segnalazioni più importanti in base al budget"
+                android:layout_marginHorizontal="30dp"/>
 
         </LinearLayout>
 

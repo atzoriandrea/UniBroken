@@ -15,6 +15,7 @@ import java.util.List;
 public class OptionActivityRaga extends AppCompatActivity {
 
     public static class Adattatore extends BaseAdapter {
+        ImageView flag;
         InterventiFactory ifact;
         String tmp;
         PersonaFactory factory = PersonaFactory.getInstance();
@@ -22,6 +23,7 @@ public class OptionActivityRaga extends AppCompatActivity {
         private Context context=null;
         public Adattatore(Context context, List<Segnalazione> lista)
         {
+
             this.lista=lista;
             this.context=context;
         }
@@ -56,10 +58,17 @@ public class OptionActivityRaga extends AppCompatActivity {
             tmp = s.getData() + "-" + s.getTipo();
             txt.setText(tmp);
             txt=(TextView) v.findViewById(R.id.autore);
+            flag = flag = (ImageView)v.findViewById(R.id.flag);
             author = PersonaFactory.getPersonaById(s.getAutore()).getNome() + " " +
                     PersonaFactory.getPersonaById(s.getAutore()).getCognome();
             txt.setText(author);
             txt=(TextView)v.findViewById(R.id.costo);
+            if(s.isConfirmed()){
+                flag.setVisibility(View.VISIBLE);
+            }else{
+                flag.setVisibility(View.INVISIBLE);
+            }
+
             double aux=(ifact.getInterventoById(s.getIdIntervento()).getImporto());
             txt.setText("Costo prev. appr: € " + String.valueOf(aux+"0"));
             if(s.getImage().size() > 0)

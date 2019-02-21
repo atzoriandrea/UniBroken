@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class ListaSegnRaga extends AppCompatActivity {
         dropdown.setAdapter(adapter);*/
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
+
         dropdown.setText(SegnFactory.getSelectedCategory());
         p1 = (Persona)obj;
         indietro = (Button)findViewById(R.id.back);
