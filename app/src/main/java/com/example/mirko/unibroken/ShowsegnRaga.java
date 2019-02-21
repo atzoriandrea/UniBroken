@@ -137,7 +137,7 @@ public class ShowsegnRaga extends AppCompatActivity {
                             s.setConfirmed(true);
                             InterventiFactory.setBudget(bud - InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto());
                             showPositiveFeedbackWindows(ShowsegnRaga.this);
-                            soldi.setText(String.valueOf(InterventiFactory.getBudget())+"0");
+                            soldi.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0 disp.");
                             dialog.hide();
                         }else{
                             dialog.hide();
