@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.mirko.unibroken.CircleImageView
+            <ImageView
                 android:id="@+id/immagine"
                 android:layout_width="200px"
                 android:layout_height="200px"

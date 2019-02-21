@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,15 +21,16 @@ public class Resoconti extends AppCompatActivity {
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     public static final String INTERO="java.lang.Integer";
     Persona p;
+    RelativeLayout rl2017,rl2018;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resoconti);
         PersonaFactory pf = PersonaFactory.getInstance();
         p = PersonaFactory.getPersonaById(3);
-        resoconti2017 = (TextView)findViewById(R.id.ddiciassette);
-        resoconti2018 = (TextView)findViewById(R.id.ddiciotto);
-        resoconti2017.setOnClickListener(new View.OnClickListener() {
+        rl2017 = (RelativeLayout) findViewById(R.id.btndcst);
+        rl2018 = (RelativeLayout) findViewById(R.id.btndctt);
+        rl2017.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent creaPDF = new Intent(Resoconti.this,DrawPDF.class);
@@ -36,7 +38,7 @@ public class Resoconti extends AppCompatActivity {
                 startActivity(creaPDF);
             }
         });
-        resoconti2018.setOnClickListener(new View.OnClickListener() {
+        rl2018.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent creaPDF = new Intent(Resoconti.this,DrawPDF.class);

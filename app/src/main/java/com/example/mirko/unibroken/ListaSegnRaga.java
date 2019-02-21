@@ -61,7 +61,7 @@ public class ListaSegnRaga extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3){
                 s = (Segnalazione) lista.getItemAtPosition(position);
-                Intent dettaglio = new Intent(ListaSegnRaga.this , Showsegn.class);
+                Intent dettaglio = new Intent(ListaSegnRaga.this , ShowsegnRaga.class);
                 dettaglio.putExtra(PERSONA_EXTRA,p1);
                 dettaglio.putExtra(SEGN, new Integer(s.getId()));
                 startActivity(dettaglio);

@@ -99,43 +99,58 @@
                 android:layout_below="@+id/overlay"/>
 
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/dt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Descrizione: "/>
-            <TextView
-                android:id="@+id/des"
-                android:layout_toRightOf="@+id/dt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/lt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_marginTop="20dp"
 
-                android:textStyle="bold"
-                android:text="Luogo: "/>
-            <TextView
-                android:id="@+id/loctext"
-                android:layout_toRightOf="@+id/lt"
+        android:id="@+id/scroll"
+        android:background="@drawable/list_shape"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/dt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="Descrizione: "/>
+                <TextView
+                    android:id="@+id/des"
+                    android:layout_toRightOf="@+id/dt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:id="@+id/lt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textStyle="bold"
+                    android:text="Luogo: "/>
+                <TextView
+                    android:id="@+id/loctext"
+                    android:layout_toRightOf="@+id/lt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+        </LinearLayout></ScrollView>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:gravity="end">
             <TextView
                 android:id="@+id/st"
@@ -152,7 +167,7 @@
         </RelativeLayout>
         <Space
             android:layout_width="match_parent"
-            android:layout_height="45dp" />
+            android:layout_height="30dp" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

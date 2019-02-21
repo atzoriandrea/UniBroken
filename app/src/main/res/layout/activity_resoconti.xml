@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".Resoconti">
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,24 +60,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:textColor="@android:color/black"
+
             android:text="Resoconti UniBroken"
             android:textStyle="bold"
             android:textSize="25dp"
             android:gravity="center"/>
-        <TextView
-            android:id="@+id/ddiciassette"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Resoconto 2017"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/ddiciotto"
+            android:background="@drawable/shape"
+            android:id="@+id/btndcst"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:id="@+id/ddiciassette"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:text="Resoconto 2017"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                />
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ddiciassette"
+                android:src="@drawable/outline_navigate_next_black_18dp" />
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Resoconto 2018"
-            android:gravity="center"/>
+            android:background="@drawable/shape"
+            android:id="@+id/btndctt"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:id="@+id/ddiciotto"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:text="Resoconto 2018"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                />
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ddiciotto"
+                android:src="@drawable/outline_navigate_next_black_18dp" />
+        </RelativeLayout>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

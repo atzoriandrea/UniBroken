@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -32,9 +33,12 @@ public class ShowsegnRaga extends AppCompatActivity {
     TextView impresa;
     Button conf;
     Button rconf;
+    Button ok;
     Persona p1;
     float scale;
     Segnalazione s;
+    ScrollView sv;
+    TextView data;
     //Bitmap[] array = new Bitmap[1];
     public static final String BITMAP_EXTRA="java.lang.Integer";
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
@@ -49,6 +53,8 @@ public class ShowsegnRaga extends AppCompatActivity {
         SegnFactory sf = SegnFactory.getInstance();
         InterventiFactory ifact = InterventiFactory.getInstance();
         int i = (Integer) obj;
+        sv = (ScrollView)findViewById(R.id.scroll);
+        sv.setScrollbarFadingEnabled(false);
         Serializable obj2 = intent.getSerializableExtra(HomeRaga.PERSONA_EXTRA);
         p1 = (Persona)obj2;
         s = SegnFactory.getSegnalazioneById(i);
@@ -59,16 +65,19 @@ public class ShowsegnRaga extends AppCompatActivity {
         img = (ImageView)findViewById(R.id.imgdett);
         impresa =(TextView)findViewById(R.id.impresa);
         conf = (Button)findViewById(R.id.intconf);
+        data = (TextView)findViewById(R.id.datetext);
         rconf = (Button)findViewById(R.id.intrem);
+        ok = (Button)findViewById(R.id.gestita);
         overlay = (ImageView)findViewById(R.id.overlay);
         descrizione = (TextView)findViewById(R.id.des);
         luogo = (TextView)findViewById(R.id.loc);
         //testoluogo = (TextView)findViewById(R.id.loctext);
         descrizione.setText(s.getTesto());
-        impresa.setText("Impresa convenzionata: " + InterventiFactory.getImpresaByType(s.getTipo()));
-        luogo.setText("Luogo: " + s.getLuogo());
+        impresa.setText(InterventiFactory.getImpresaByType(s.getTipo()));
+        luogo.setText(s.getLuogo());
         costo = (TextView)findViewById(R.id.costo);
-        costo.setText("Costo approssimato: € "+String.valueOf((ifact.getInterventoById(s.getIdIntervento()).getImporto()))+"0");
+        data.setText(s.getData());
+        costo.setText("€ "+String.valueOf((ifact.getInterventoById(s.getIdIntervento()).getImporto()))+"0");
         if(s.getImage().size()>0) {
             img.setImageBitmap(s.getImage().get(s.getImage().size() - 1));
             if (s.getImage().size()>1) {
@@ -166,6 +175,29 @@ public class ShowsegnRaga extends AppCompatActivity {
                 });
             }
         });
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog dialog = new AlertDialog.Builder(ShowsegnRaga.this)
+                        .setTitle("Intervento Effettuato")
+                        .setMessage("La segnalazione non sarà più visibile nella lista delle segnalazioni, ma verrà comunque rendicontata.\n\nConfermare?")
+                        .setPositiveButton("CONFERMA", null)
+                        .setNegativeButton("ANNULLA", null)
+                        .show();
+
+
+                Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        s.setSolved(true);
+                        dialog.hide();
+                        showSolvedFeedbackWindows(ShowsegnRaga.this);
+
+                    }
+                });
+            }
+        });
         if(s.isConfirmed() == true){
             conf.setVisibility(View.GONE);
             rconf.setVisibility(View.VISIBLE);
@@ -233,6 +265,39 @@ public class ShowsegnRaga extends AppCompatActivity {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 handler.removeCallbacks(runnable);
+
+            }
+        });
+        handler.postDelayed(runnable, 1500);
+        //isok = false;//Ritardo di scomparsa della finestra a 1 secondoo
+    }
+    public void showSolvedFeedbackWindows(Context c){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
+        final AlertDialog alert = dialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        TextView titoloCustom = new TextView(c);
+        titoloCustom.setText("Segnalazione Gestita");
+        titoloCustom.setPadding(10, 20, 10, 0);
+        titoloCustom.setGravity(Gravity.CENTER);
+        titoloCustom.setTextColor(Color.rgb(2, 45, 126));
+        titoloCustom.setTextSize(20);
+        alert.setCustomTitle(titoloCustom);
+        alert.show();
+        alert.getWindow().setLayout(800, 210);  //Per settare le dimensioni del dialog
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                }
+            }
+        };
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+                onBackPressed();
             }
         });
         handler.postDelayed(runnable, 1500);

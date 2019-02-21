@@ -98,9 +98,22 @@
                 android:layout_below="@+id/overlay"/>
 
         </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="20dp"
+
+            android:id="@+id/scroll"
+            android:background="@drawable/list_shape"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/dt"
@@ -117,7 +130,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
         <TextView
                 android:id="@+id/lt"
                 android:layout_width="wrap_content"
@@ -131,6 +144,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+
+        </LinearLayout></ScrollView>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -41,15 +41,15 @@ public class InterventiFactory {
         i8.setImporto(1200.00);
         i9.setImporto(300.00);
 
-        i1.setImpresa("ImpresaMuratura");
-        i2.setImpresa("ImpresaInfissi");
-        i3.setImpresa("ImpresaMuratura");
-        i4.setImpresa("ImpresaIdraulico");
-        i5.setImpresa("ImpresaElettricista");
-        i6.setImpresa("ImpresaMuratura");
-        i7.setImpresa("ImpresaTecnici");
-        i8.setImpresa("ImpresaTecnici");
-        i9.setImpresa("ImpresaArredi");
+        i1.setImpresa("EdilCalaris s.r.l.");
+        i2.setImpresa("PianuInfissi s.r.l.");
+        i3.setImpresa("EdilCalaris s.r.l.");
+        i4.setImpresa("IdraoCaralis s.r.l.");
+        i5.setImpresa("Fulminati s.r.l.");
+        i6.setImpresa("EdilCalaris s.r.l");
+        i7.setImpresa("NetBusiness S.p.A");
+        i8.setImpresa("Gi.MA Impianti");
+        i9.setImpresa("ScuolArreda s.r.l.s.");
 
 
         i1.setTipoIntervento("Danno Intonaco");

@@ -211,7 +211,7 @@ public class SegnFactory{
             s17.setId(17);
             s17.setAutore(2);
             //s17.setImage(v[5]);
-            s17.setLuogo("Aula M.Matematica");
+            s17.setLuogo("Aula M.Matem");
             s17.setTipo("Danno Arredi Aule");
             s17.setData("12/01/2018");
             s17.setTesto("Serranda non funzionante");

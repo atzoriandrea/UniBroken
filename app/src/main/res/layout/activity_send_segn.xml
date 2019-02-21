@@ -92,6 +92,7 @@
                 android:layout_height="31dp"
                 android:layout_weight="-5"
                 android:elevation="10dp"
+                android:layout_marginLeft="3dp"
                 android:text="Descrizione" />
         <RelativeLayout
             android:layout_width="match_parent"

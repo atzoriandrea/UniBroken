@@ -75,7 +75,14 @@ public class ChooseType extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3){
                 SegnFactory.setSelectedCategory((String) listaCat.getItemAtPosition(position));
-                Intent backToList = new Intent(ChooseType.this,ListaSegn.class);
+                Intent backToList;
+                if(p1.getId()==3){
+                    backToList = new Intent(ChooseType.this,ListaSegnRaga.class);
+
+                }
+                else{
+                    backToList = new Intent(ChooseType.this,ListaSegn.class);
+                }
                 backToList.putExtra(ListaSegn.PERSONA_EXTRA,p1);
                 startActivity(backToList);
 
@@ -84,7 +91,14 @@ public class ChooseType extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent indietro = new Intent(ChooseType.this, ListaSegn.class);
+        Intent indietro;
+        if(p1.getId()==3){
+            indietro = new Intent(ChooseType.this,ListaSegnRaga.class);
+
+        }
+        else{
+            indietro = new Intent(ChooseType.this, ListaSegn.class);        }
+
         SegnFactory.setSelectedCategory("Tutte le segnalazioni");
         indietro.putExtra(Homepage.PERSONA_EXTRA,p1);
         startActivity(indietro);

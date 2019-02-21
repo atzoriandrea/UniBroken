@@ -95,7 +95,7 @@
                 android:background="@drawable/list_shape"
                 >
             <ScrollView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/sv"
                 android:layout_marginTop="10dp">
