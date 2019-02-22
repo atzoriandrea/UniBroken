@@ -60,7 +60,12 @@ public class ListaSegn extends AppCompatActivity {
                 waiting.setBackgroundResource(R.drawable.back_scelto);
                 gestite.setTextColor(Color.WHITE);
                 gestite.setBackgroundResource(R.drawable.backg_scelta);
-                a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getWaiting(true,segn));
+                if(!selected.equals("Tutte le segnalazioni")){
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getWaiting(true,SegnFactory.getListaSegnalazioniByType(selected)));
+                }
+                else{
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getWaiting(true,SegnFactory.getListaSegnalazioni()));
+                }
                 lista.setAdapter(a);
             }
         });
@@ -71,7 +76,14 @@ public class ListaSegn extends AppCompatActivity {
                 gestite.setBackgroundResource(R.drawable.back_scelto);
                 waiting.setTextColor(Color.WHITE);
                 waiting.setBackgroundResource(R.drawable.backg_scelta);
-                a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getWaiting(false,segn));
+                selected = SegnFactory.getSelectedCategory();
+                if(!selected.equals("Tutte le segnalazioni")){
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getWaiting(false,SegnFactory.getListaSegnalazioniByType(selected)));
+                }
+                else{
+                    a = new OptionActivity.Adattatore(ListaSegn.this,SegnFactory.getWaiting(false,SegnFactory.getListaSegnalazioni()));
+                    lista.setAdapter(a);
+                }
                 lista.setAdapter(a);
 
             }
