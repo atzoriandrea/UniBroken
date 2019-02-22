@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Homepage" />
-        <activity android:name=".Pop" />
         <activity
             android:name=".HomeRaga"
             android:label="@string/title_activity_home_raga"

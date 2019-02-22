@@ -118,7 +118,7 @@ public class Raga_Budget extends AppCompatActivity {
                             riparazione.setText(BulletListBuilder.getBulletList( "", SegnFactory.getListaTItoli() ));
                             non_gestiti = SegnFactory.getUnchecked();
                             if (non_gestiti!=0)
-                                nonGestiti.setText("NB: Il budget è stato insufficiente per coprire le "+String.valueOf(non_gestiti)+" segnalazioni con priorità inferiore");
+                                nonGestiti.setText("NB: Il budget è stato insufficiente per coprire "+String.valueOf(non_gestiti)+" segnalazioni");
                             budgetValore.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0");
                             dialog.hide();
                               }

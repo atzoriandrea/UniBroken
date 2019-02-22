@@ -1,11 +1,9 @@
 package com.example.mirko.unibroken;
 
-import android.app.Person;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -59,6 +57,7 @@ public class MySegnDetail extends AppCompatActivity {
         luogo = (TextView)findViewById(R.id.loc);
         elimina = (Button)findViewById(R.id.elimina);
         indietro = (Button)findViewById(R.id.back);
+        overlay = (ImageView)findViewById(R.id.overlay);
         descrizione.setText(s.getTesto());
         if(s.getImage().size()>0) {
             img.setImageBitmap(s.getImage().get(s.getImage().size() - 1));

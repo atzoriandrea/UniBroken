@@ -105,11 +105,8 @@
         </android.support.design.widget.TextInputLayout>
         <Space
             android:layout_width="match_parent"
-            android:layout_height="13dp" />
-        <TextView
-            android:id="@+id/errore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="20dp" />
+
 
         <Button
             android:id="@+id/accedi"
