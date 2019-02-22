@@ -501,7 +501,15 @@ public class SegnFactory{
         }
         return lista.size();
     }
-
+    public static ArrayList<Segnalazione> getWaiting(boolean isWaiting, ArrayList<Segnalazione> input){
+            SegnFactory sf = SegnFactory.getInstance();
+            ArrayList<Segnalazione> lista = new ArrayList<>();
+            for(Segnalazione s : input){
+             if(s.isConfirmed()!=isWaiting)
+                 lista.add(s);
+            }
+            return lista;
+    }
     public static ArrayList<Segnalazione> getSegnalazioniperAnno(String year){
             SegnFactory sf = SegnFactory.getInstance();
             ArrayList<Segnalazione> anno = new ArrayList<>();

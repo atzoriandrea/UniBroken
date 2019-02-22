@@ -2,6 +2,7 @@ package com.example.mirko.unibroken;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,8 @@ public class ListaSegnRaga extends AppCompatActivity {
     ArrayList<Segnalazione> segn = new ArrayList<Segnalazione>();
     Persona p1;
     Segnalazione s;
+    TextView waiting, gestite;
+
     String selected;
     TextView dropdown;
     OptionActivityRaga.Adattatore a;
@@ -35,8 +38,10 @@ public class ListaSegnRaga extends AppCompatActivity {
         setContentView(R.layout.activity_lista_segn_raga);
         SegnFactory sf = SegnFactory.getInstance();
         segn = SegnFactory.getListaSegnalazioni();
-        a = new OptionActivityRaga.Adattatore(this,segn);
+        a = new OptionActivityRaga.Adattatore(this,SegnFactory.getWaiting(true,segn));
         Intent intent = getIntent();
+        waiting = (TextView)findViewById(R.id.waiting);
+        gestite = (TextView)findViewById(R.id.gestite);
         dropdown = (TextView)findViewById(R.id.tipologia);//aggiunngere a xml
         /*String[] items = new String[]{"Tutte le segnalazioni (" + String.valueOf(segn.size())+")",
                 "Danno Finestre (" + String.valueOf(SegnFactory.getListaSegnalazioniByType("Danno Finestre").size())+")",
@@ -55,6 +60,43 @@ public class ListaSegnRaga extends AppCompatActivity {
         dropdown.setText(SegnFactory.getSelectedCategory());
         p1 = (Persona)obj;
         indietro = (Button)findViewById(R.id.back);
+        waiting.setPaintFlags(waiting.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        gestite.setPaintFlags(gestite.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        waiting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                waiting.setTextColor(Color.BLACK);
+                waiting.setBackgroundResource(R.drawable.back_scelto);
+                gestite.setTextColor(Color.WHITE);
+                gestite.setBackgroundResource(R.drawable.backg_scelta);
+                if(!selected.equals("Tutte le segnalazioni")){
+                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getWaiting(true,SegnFactory.getListaSegnalazioniByType(selected)));
+                }
+                else{
+                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getWaiting(true,SegnFactory.getListaSegnalazioni()));
+                }
+                lista.setAdapter(a);
+            }
+        });
+        gestite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gestite.setTextColor(Color.BLACK);
+                gestite.setBackgroundResource(R.drawable.back_scelto);
+                waiting.setTextColor(Color.WHITE);
+                waiting.setBackgroundResource(R.drawable.backg_scelta);
+                selected = SegnFactory.getSelectedCategory();
+                if(!selected.equals("Tutte le segnalazioni")){
+                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getWaiting(false,SegnFactory.getListaSegnalazioniByType(selected)));
+                }
+                else{
+                    a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getWaiting(false,SegnFactory.getListaSegnalazioni()));
+                    lista.setAdapter(a);
+                }
+                lista.setAdapter(a);
+
+            }
+        });
         lista = (ListView)findViewById(R.id.SegList);
         lista.setAdapter(a);
         lista.setScrollbarFadingEnabled(false);
@@ -80,11 +122,11 @@ public class ListaSegnRaga extends AppCompatActivity {
         });
         selected = SegnFactory.getSelectedCategory();
         if(!selected.equals("Tutte le segnalazioni")){
-            a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioniByType(selected));
+            a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getWaiting(true,SegnFactory.getListaSegnalazioniByType(selected)));
             lista.setAdapter(a);
         }
         else{
-            a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getListaSegnalazioni());
+            a = new OptionActivityRaga.Adattatore(ListaSegnRaga.this,SegnFactory.getWaiting(true,SegnFactory.getListaSegnalazioni()));
             lista.setAdapter(a);
         }
         /*dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

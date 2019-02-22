@@ -1,6 +1,7 @@
 package com.example.mirko.unibroken;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,14 @@ public class ChooseType extends AppCompatActivity {
         }
         a = new CategoryOption.Adattatore(this,cat);
         searchView = (SearchView)findViewById(R.id.search_bar);
+        searchView.onActionViewExpanded();
+        searchView.setIconified(false);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                searchView.clearFocus();
+            }
+        }, 1);
         Intent intent = getIntent();
         Serializable obj = intent.getSerializableExtra(Homepage.PERSONA_EXTRA);
         Bundle bundle = getIntent().getExtras();
