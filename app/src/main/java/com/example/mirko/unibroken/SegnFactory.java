@@ -408,6 +408,7 @@ public class SegnFactory{
         }
         for(Segnalazione s : tmp){
             if (s.getId() == id){
+                deleteBitmapToMemoryCache(String.valueOf(s.getId()));
                 listaSegnalazioni.remove(s);
             }
         }
@@ -465,8 +466,10 @@ public class SegnFactory{
     public static void removeTemp(){
         SegnFactory sfact = SegnFactory.getInstance();
         for(Segnalazione s: getListaSegnalazioni()){
-            if (s.isTemp())
+            if (s.isTemp()) {
+                deleteBitmapToMemoryCache(String.valueOf(s.getId()));
                 remSegnalazioneById(s.getId());
+            }
         }
         sfact = SegnFactory.getInstance();
     }
@@ -514,6 +517,7 @@ public class SegnFactory{
                 // Get max available VM memory, exceeding this amount will throw an
                 // OutOfMemory exception. Stored in kilobytes as LruCache takes an
                 // int in its constructor.
+            mMemoryCache = null;
                 final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
 
                 // Use 1/8th of the available memory for this memory cache.
@@ -531,6 +535,10 @@ public class SegnFactory{
 
             public static void addBitmapToMemoryCache(String key, Bitmap bitmap) {
                 mMemoryCache.put(key, Bitmap.createScaledBitmap(bitmap, 100, 100, false));
+
+            }
+            public static void deleteBitmapToMemoryCache(String key) {
+                mMemoryCache.remove(key);
 
             }
 

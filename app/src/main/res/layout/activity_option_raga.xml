@@ -53,7 +53,7 @@
                     android:layout_width="60px"
                     android:layout_height="60px"
                     android:layout_marginTop="10sp"
-                    android:background="@drawable/flag"
+                    android:background="@drawable/ic_check_black_24dp"
                     android:layout_below="@id/costo"
                     android:layout_toEndOf="@+id/costo"/>
             </RelativeLayout>
