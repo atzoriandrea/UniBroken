@@ -16,6 +16,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -52,6 +53,7 @@ public class SendSegn extends Activity {
     Button indietro;
     BitmapDrawable bd;
     String titolo;
+    Bitmap imgCtrl;
     String imgDecodableString = null;
     Bitmap [] array = new Bitmap[3];
     static Context c;
@@ -424,12 +426,22 @@ public class SendSegn extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        int photos_size = 0;
+        for(Bitmap b : tmp){
+            photos_size = photos_size + sizeOf(b);
+        }
         try {
             // When an Image is picked
             if(this.requestCode == requestCode && resultCode == RESULT_OK) {
-                bitmap = (Bitmap) data.getExtras().get("data");
-                tmp.add(bitmap);
-                imageHolder.setImageBitmap(bitmap);
+                imgCtrl = (Bitmap) data.getExtras().get("data");
+                if(sizeOf(imgCtrl) + photos_size <= 15728640) {
+                    bitmap = imgCtrl;
+                    tmp.add(bitmap);
+                    imageHolder.setImageBitmap(bitmap);
+                }
+                else {
+                    Toast.makeText(SendSegn.this, "La dimensione degli allegati ha superato i 15MB.\nImpossibile caricare la foto",Toast.LENGTH_LONG).show();
+                }
                 if (tmp.size()>1) {
                     Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
                     Canvas canvas = new Canvas(b2);
@@ -455,10 +467,16 @@ public class SendSegn extends Activity {
             if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK && null != data) {
                 Uri selectedImage = data.getData();
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
-                    Toast.makeText(SendSegn.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    tmp.add(bitmap);
-                    imageHolder.setImageBitmap(bitmap);
+                    imgCtrl = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    if(sizeOf(imgCtrl) + photos_size <= 15728640) {
+                        bitmap = imgCtrl;
+                        tmp.add(bitmap);
+                        imageHolder.setImageBitmap(bitmap);
+                        Toast.makeText(SendSegn.this, "Immagine Salvata", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(SendSegn.this, "La dimensione degli allegati ha superato i 15MB.\nImpossibile caricare la foto",Toast.LENGTH_LONG).show();
+                    }
                     if (tmp.size()>1) {
                         Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
                         Canvas canvas = new Canvas(b2);
@@ -585,7 +603,13 @@ public class SendSegn extends Activity {
         }
         return errori==0;
     }
-
+    protected int sizeOf(Bitmap data) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
+            return data.getRowBytes() * data.getHeight();
+        } else {
+            return data.getByteCount();
+        }
+    }
 
 
 
