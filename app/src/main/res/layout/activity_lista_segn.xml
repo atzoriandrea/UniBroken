@@ -64,14 +64,6 @@
             android:gravity="center"
 
             android:background="@drawable/spinner">
-            <!--<Spinner
-                android:id="@+id/tipologia"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:scrollbarSize="100dp"
-                style="@drawable/spinner"
-                android:layout_marginHorizontal="20dp"
-                android:spinnerMode="dialog"/>-->
 
             <TextView
                 android:id="@+id/tipologia"

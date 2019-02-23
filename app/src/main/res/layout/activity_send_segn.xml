@@ -75,12 +75,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/spinner">
-            <Spinner
-                android:id="@+id/tipologia"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                style="@drawable/spinner"
-                android:spinnerMode="dropdown"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:background="@drawable/spinner">
+
+                    <TextView
+                        android:id="@+id/tipologia"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        style="@drawable/spinner"
+                        android:layout_marginHorizontal="20dp"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignEnd="@+id/tipologia"
+                        android:src="@drawable/outline_navigate_next_black_18dp" />
+                </RelativeLayout>
             </RelativeLayout>
 
             <Space

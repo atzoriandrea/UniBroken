@@ -60,18 +60,28 @@ public class SendSegn extends Activity {
     //Segnalazione s = new Segnalazione();
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
-    ArrayList<Bitmap> tmp = new ArrayList<>();
+    ArrayList<Bitmap> tmp;
     float scale;
-    Spinner dropdown;
+    TextView dropdown;
     Spinner luogo;
     Spinner floor;
     boolean isok = false;
     ArrayAdapter<String> adapter2;
+    static String[] pianoT = new String[]{"Seleziona un'opzione","Laboratorio T","Laboratorio M","Aula M.Fisica", "Aula Studio", "Laboratorio GARR","Bagni P.Terra","Bagni seminterrato","Atrio","Lab2"};
+     static String[] piano1 = new String[]{"Seleziona un'opzione","Aula M.Matematica","Aula A","Bagni 1° Piano","Andito docenti","Scale","Atrio","Ufficio dirigenza"};
+     static String[] piano2 = new String[]{"Seleziona un'opzione","Aula B", "Aula C","Bagni 2° Piano","Atrio","Ufficio Segreteria"};
+     static ArrayList<String[]> matrix = new ArrayList<>();
+    final static int terra = pianoT.length;
+    final static int first = piano1.length;
+    final static int second = piano2.length;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
-
+        tmp = new ArrayList<>();
+        matrix.add(pianoT) ;
+        matrix.add(piano1);
+        matrix.add(piano2);
         scale = getResources().getDisplayMetrics().density;
         save = (Button)findViewById(R.id.save);
         capturedImageButton= (Button)findViewById(R.id.addphoto);
@@ -90,7 +100,7 @@ public class SendSegn extends Activity {
         dropdown = findViewById(R.id.tipologia);
         floor = findViewById(R.id.piano);
         String[] floors = new String[]{"Seleziona il Piano","Piano Terra", "Primo Piano","Secondo Piano"};
-        String[] items = new String[]{"Seleziona un'opzione","Danno Intonaco",
+        /*String[] items = new String[]{"Seleziona un'opzione","Danno Intonaco",
                 "Danno Finestre",
                 "Cedimento Soffitto",
                 "Danno Idraulico",
@@ -99,17 +109,121 @@ public class SendSegn extends Activity {
                 "Danno Connettività",
                 "Danno Condizionatore(i)",
                 "Danno Arredi Aule"};
+*/
 
-        final String[] pianoT = new String[]{"Seleziona un'opzione","Laboratorio T","Laboratorio M","Aula M.Fisica", "Aula Studio", "Laboratorio GARR","Bagni P.Terra","Bagni seminterrato","Atrio"};
-        final String[] piano1 = new String[]{"Seleziona un'opzione","Aula M.Matematica","Aula A","Bagni 1° Piano","Andito docenti","Scale","Atrio","Ufficio dirigenza"};
-        final String[] piano2 = new String[]{"Seleziona un'opzione","Aula B", "Aula C","Bagni 2° Piano","Atrio","Ufficio Segreteria"};
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, floors);
-
-        dropdown.setAdapter(adapter);
         floor.setAdapter(adapter3);
+
+        if(!SegnFactory.getSelectedCategory().equals("Tutte le segnalazioni"))
+            dropdown.setText(SegnFactory.getSelectedCategory());
+        else
+            dropdown.setText("Seleziona un'opzione");
+        if(!dropdown.getText().toString().equals("Seleziona un'opzione")){
+            int i = 0;
+
+            Segnalazione s = SegnFactory.getSegnalazioneById(-1000);
+            for(String[] m : matrix){
+                for(i=0;i<m.length;i++){
+                    if(m[i].equals(s.getLuogo())){
+                        switch (m.length) {
+                            case (terra): {
+                                floor.setSelection(0);
+                                break;
+                            }
+                            case(first):{
+                                floor.setSelection(1);
+                                break;
+                            }
+                            case(second):{
+                                floor.setSelection(2);
+                                break;
+                            }
+                        }
+
+                        switch (floor.getSelectedItem().toString()){
+                            case("Piano Terra"):{
+                                adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, pianoT);
+                                luogo.setAdapter(adapter2);
+                                luogo.setEnabled(true);
+                                break;
+                            }
+                            case("Primo Piano"):{
+                                adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano1);
+                                luogo.setAdapter(adapter2);
+                                luogo.setEnabled(true);
+                                break;
+                            }
+                            case("Secondo Piano"):{
+                                adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano2);
+                                luogo.setAdapter(adapter2);
+                                luogo.setEnabled(true);
+                                break;
+                            }
+                            default:{
+                                luogo.setEnabled(false);
+                                break;
+                            }
+                        }
+                        luogo.setSelection(i+1);
+                    }
+                }
+                t.setText(s.getTesto());
+                if(s.getImage().size()>0){
+                    ArrayList<Bitmap> tmp = new ArrayList<>();
+                    for(Bitmap b: s.getImage()){
+                        tmp.add(b);
+                    }
+                    imageHolder.setImageBitmap(tmp.get(tmp.size()-1));
+                    if (tmp.size()>1) {
+                        Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
+                        Canvas canvas = new Canvas(b2);
+                        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                        // text color - #3D3D3D
+                        paint.setColor(Color.rgb(255, 255, 255));
+                        // text size in pixels
+                        paint.setTextSize((int) (14 * scale));
+                        Rect bounds = new Rect();
+                        RectF rectF = new RectF(bounds);
+                        String str = "+" + String.valueOf(tmp.size()-1);
+                        paint.getTextBounds(str, 0, str.length(), bounds);
+                        int x = (b2.getWidth() - bounds.width())/2;
+                        int y = (b2.getHeight() + bounds.height())/2;
+
+                        canvas.drawText(str, x, y, paint);
+                        canvas.drawRoundRect(rectF, 100, 100, paint);
+                        overlay.setBackgroundColor(Color.BLACK);
+                        overlay.setImageBitmap(b2);
+                        overlay.setAlpha(0.5f);
+                    }
+                }
+
+            }
+
+
+
+
+
+        }
         luogo.setEnabled(false);
+        //dropdown.setAdapter(adapter);
+        dropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Segnalazione s =new Segnalazione();
+                if(luogo.isEnabled())
+                s.setLuogo(luogo.getSelectedItem().toString());
+                s.setTesto(t.getText().toString());
+                for(Bitmap b :tmp)
+                    s.setImage(b);
+                SegnFactory.modifyTemp(s);
+                Intent choose = new Intent(SendSegn.this,ChooseTypeSend.class);
+                choose.putExtra(PERSONA_EXTRA,p);
+                startActivity(choose);
+            }
+        });
+
 
         floor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
@@ -176,16 +290,18 @@ public class SendSegn extends Activity {
                         SegnFactory.removeTemp();
                         Segnalazione s = new Segnalazione();
                         s.setAutore(p.getId());
-                        s.setTipo(dropdown.getSelectedItem().toString());
+                        s.setTipo(dropdown.getText().toString());
                         s.setTesto(t.getText().toString());
                         s.setLuogo(luogo.getSelectedItem().toString());
+                        SegnFactory.setSelectedCategory("Tutte le segnalazioni");
                         for (Bitmap b : tmp) {
                             s.setImage(b);
                         }
                         s.setData(d);
-                        s.setIdIntervento(InterventiFactory.getInterventoByType(dropdown.getSelectedItem().toString()));
+                        s.setIdIntervento(InterventiFactory.getInterventoByType(dropdown.getText().toString()));
                         SegnFactory.addSegnalazione(s);
                         factory = SegnFactory.getInstance();
+                        tmp = null;
                         isok = true;
                         showFeedbackWindows(c);
                         //while(!isok){
@@ -383,6 +499,7 @@ public class SendSegn extends Activity {
             public void onClick(View v) {
                 SegnFactory sf = SegnFactory.getInstance();
                 SegnFactory.removeTemp();
+                tmp = null;
                 Intent indietro = new Intent(SendSegn.this, Homepage.class);
                 indietro.putExtra(Homepage.PERSONA_EXTRA,p);
                 startActivity(indietro);
@@ -426,7 +543,7 @@ public class SendSegn extends Activity {
             messaggio = messaggio+"&#8226 Non hai inserito il commento;<br>";
             errori ++;
         }
-        if(dropdown.getSelectedItem().toString().equals("Seleziona un'opzione")) {
+        if(dropdown.getText().toString().equals("Seleziona un'opzione")) {
             dd = true;
             messaggio = messaggio+"&#8226 Non hai inserito la tipologia del danno;<br>";
             errori++;

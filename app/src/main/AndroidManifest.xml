@@ -37,7 +37,9 @@
         <activity android:name=".OptionActivityRaga" />
         <activity android:name=".Resoconti" />
         <activity android:name=".DrawPDF" />
-        <activity android:name=".ChooseType"></activity>
+        <activity android:name=".ChooseType" />
+        <activity android:name=".ChooseTypeSend" />
+        <activity android:name=".CategoryOptionSend"></activity>
     </application>
 
 </manifest>
