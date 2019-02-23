@@ -45,7 +45,7 @@ public class SendSegn extends Activity {
     ImageView overlay;
     private final int requestCode = 20;
     Button capturedImageButton;
-    static EditText t;
+    EditText t;
     Button save;
     Button galleria;
     Bitmap bitmap;
@@ -60,25 +60,25 @@ public class SendSegn extends Activity {
     //Segnalazione s = new Segnalazione();
     public static final String PERSONA_EXTRA="com.example.mirko.unibroken.Persona";
     Persona p;
-    ArrayList<Bitmap> tmp;
+    static ArrayList<Bitmap> tmp =  new ArrayList<>();
     float scale;
     TextView dropdown;
     Spinner luogo;
     Spinner floor;
     boolean isok = false;
     ArrayAdapter<String> adapter2;
-    static String[] pianoT = new String[]{"Seleziona un'opzione","Laboratorio T","Laboratorio M","Aula M.Fisica", "Aula Studio", "Laboratorio GARR","Bagni P.Terra","Bagni seminterrato","Atrio","Lab2"};
-     static String[] piano1 = new String[]{"Seleziona un'opzione","Aula M.Matematica","Aula A","Bagni 1° Piano","Andito docenti","Scale","Atrio","Ufficio dirigenza"};
-     static String[] piano2 = new String[]{"Seleziona un'opzione","Aula B", "Aula C","Bagni 2° Piano","Atrio","Ufficio Segreteria"};
-     static ArrayList<String[]> matrix = new ArrayList<>();
-    final static int terra = pianoT.length;
-    final static int first = piano1.length;
-    final static int second = piano2.length;
+    String[] pianoT = new String[]{"Seleziona un'opzione","Laboratorio T","Laboratorio M","Aula M.Fisica", "Aula Studio", "Laboratorio GARR","Bagni P.Terra","Bagni seminterrato","Atrio","Lab2"};
+    String[] piano1 = new String[]{"Seleziona un'opzione","Aula M.Matematica","Aula A","Bagni 1° Piano","Andito docenti","Scale","Atrio p.p","Ufficio dirigenza"};
+    String[] piano2 = new String[]{"Seleziona un'opzione","Aula B", "Aula C","Bagni 2° Piano","Atrio s.p","Ufficio Segreteria"};
+    ArrayList<String[]> matrix = new ArrayList<>();
+    int terra = pianoT.length;
+    int first = piano1.length;
+    int second = piano2.length;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_segn);
-        tmp = new ArrayList<>();
+
         matrix.add(pianoT) ;
         matrix.add(piano1);
         matrix.add(piano2);
@@ -99,6 +99,7 @@ public class SendSegn extends Activity {
         // Create an ArrayAdapter using the string array and a default spinner layout
         dropdown = findViewById(R.id.tipologia);
         floor = findViewById(R.id.piano);
+        luogo.setEnabled(false);
         String[] floors = new String[]{"Seleziona il Piano","Piano Terra", "Primo Piano","Secondo Piano"};
         /*String[] items = new String[]{"Seleziona un'opzione","Danno Intonaco",
                 "Danno Finestre",
@@ -121,44 +122,51 @@ public class SendSegn extends Activity {
         else
             dropdown.setText("Seleziona un'opzione");
         if(!dropdown.getText().toString().equals("Seleziona un'opzione")){
-            int i = 0;
-
-            Segnalazione s = SegnFactory.getSegnalazioneById(-1000);
-            for(String[] m : matrix){
-                for(i=0;i<m.length;i++){
-                    if(m[i].equals(s.getLuogo())){
-                        switch (m.length) {
-                            case (terra): {
-                                floor.setSelection(0);
-                                break;
-                            }
-                            case(first):{
+            int i;
+            int v = 0;
+            SegnFactory sf = SegnFactory.getInstance();
+            Segnalazione s = SegnFactory.getSegnalazioneById(SegnFactory.getLastSegn());
+            if(s.getLuogo()!=null && s.getLuogo()!="") {
+                for (String[] m : matrix) {
+                    for (i = 0; i < m.length; i++) {
+                        if (m[i].equals(s.getLuogo())){
+                            if (m.length == terra) {
                                 floor.setSelection(1);
-                                break;
+                                v=i;
                             }
-                            case(second):{
+                            if (m.length == first) {
                                 floor.setSelection(2);
-                                break;
+                                v=i;
+                            }
+                            if (m.length == second) {
+                                floor.setSelection(3);
+                                v=i;
                             }
                         }
 
-                        switch (floor.getSelectedItem().toString()){
-                            case("Piano Terra"):{
+                    }
+                }
+            }
+            /*switch (floor.getSelectedItem().toString()){
+                case("Piano Terra"):{
+                                luogo.setEnabled(true);
                                 adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, pianoT);
                                 luogo.setAdapter(adapter2);
-                                luogo.setEnabled(true);
+                                luogo.setSelection(v);
                                 break;
                             }
                             case("Primo Piano"):{
+                                luogo.setEnabled(true);
                                 adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano1);
                                 luogo.setAdapter(adapter2);
-                                luogo.setEnabled(true);
+                                luogo.setSelection(v);
                                 break;
                             }
                             case("Secondo Piano"):{
+                                luogo.setEnabled(true);
                                 adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano2);
                                 luogo.setAdapter(adapter2);
-                                luogo.setEnabled(true);
+                                luogo.setSelection(v);
                                 break;
                             }
                             default:{
@@ -166,9 +174,8 @@ public class SendSegn extends Activity {
                                 break;
                             }
                         }
-                        luogo.setSelection(i+1);
-                    }
-                }
+
+            */
                 t.setText(s.getTesto());
                 if(s.getImage().size()>0){
                     ArrayList<Bitmap> tmp = new ArrayList<>();
@@ -180,9 +187,7 @@ public class SendSegn extends Activity {
                         Bitmap b2 = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888);
                         Canvas canvas = new Canvas(b2);
                         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-                        // text color - #3D3D3D
                         paint.setColor(Color.rgb(255, 255, 255));
-                        // text size in pixels
                         paint.setTextSize((int) (14 * scale));
                         Rect bounds = new Rect();
                         RectF rectF = new RectF(bounds);
@@ -199,14 +204,8 @@ public class SendSegn extends Activity {
                     }
                 }
 
-            }
-
-
-
-
 
         }
-        luogo.setEnabled(false);
         //dropdown.setAdapter(adapter);
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,7 +216,8 @@ public class SendSegn extends Activity {
                 s.setTesto(t.getText().toString());
                 for(Bitmap b :tmp)
                     s.setImage(b);
-                SegnFactory.modifyTemp(s);
+                s.setTemp(true);
+                SegnFactory.addSegnalazione(s);
                 Intent choose = new Intent(SendSegn.this,ChooseTypeSend.class);
                 choose.putExtra(PERSONA_EXTRA,p);
                 startActivity(choose);
@@ -231,21 +231,24 @@ public class SendSegn extends Activity {
 
                 switch (floor.getSelectedItem().toString()){
                     case("Piano Terra"):{
+                        luogo.setEnabled(true);
                         adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, pianoT);
                         luogo.setAdapter(adapter2);
-                        luogo.setEnabled(true);
+
                         break;
                     }
                     case("Primo Piano"):{
+                        luogo.setEnabled(true);
                         adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano1);
                         luogo.setAdapter(adapter2);
-                        luogo.setEnabled(true);
+
                         break;
                     }
                     case("Secondo Piano"):{
+                        luogo.setEnabled(true);
                         adapter2 = new ArrayAdapter<String>(SendSegn.this, android.R.layout.simple_spinner_dropdown_item, piano2);
                         luogo.setAdapter(adapter2);
-                        luogo.setEnabled(true);
+
                         break;
                     }
                     default:{
@@ -253,6 +256,36 @@ public class SendSegn extends Activity {
                         break;
                     }
                 }
+                if(!dropdown.getText().toString().equals("Seleziona un'opzione")) {
+                    int i;
+                    int v = 0;
+                    SegnFactory sf = SegnFactory.getInstance();
+                    Segnalazione s = SegnFactory.getSegnalazioneById(SegnFactory.getLastSegn());
+                    if (s.getLuogo() != null && s.getLuogo() != "") {
+                        for (String[] m : matrix) {
+                            for (i = 0; i < m.length; i++) {
+                                if (m[i].equals(s.getLuogo())) {
+                                    if (m.length == terra) {
+                                        floor.setSelection(1);
+                                        v = i;
+                                    }
+                                    if (m.length == first) {
+                                        floor.setSelection(2);
+                                        v = i;
+                                    }
+                                    if (m.length == second) {
+                                        floor.setSelection(3);
+                                        v = i;
+                                    }
+                                }
+
+                            }
+                        }
+                        if(luogo.isEnabled())
+                            luogo.setSelection(v);
+                    }
+                }
+
             }
 
             @Override
@@ -302,12 +335,9 @@ public class SendSegn extends Activity {
                         SegnFactory.addSegnalazione(s);
                         factory = SegnFactory.getInstance();
                         tmp = null;
+                        tmp = new ArrayList<>();
                         isok = true;
                         showFeedbackWindows(c);
-                        //while(!isok){
-
-                        //}
-
                     }
 
                 });
@@ -320,13 +350,13 @@ public class SendSegn extends Activity {
         imageHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(tmp.size()>0) {
                     SegnFactory sf = SegnFactory.getInstance();
                     Segnalazione s = new Segnalazione();
                     for (Bitmap b : tmp){
                         s.setImage(b);
                     }
+                    s.setLuogo(t.getText().toString());
                     s.setData(new Date());
                     s.setTemp(true);
                     SegnFactory.addSegnalazione(s);
@@ -341,13 +371,7 @@ public class SendSegn extends Activity {
         });
 
     }
-    public void result() {
-        if(isok) {
 
-
-        }
-
-    }
     //Mostra la finiestra di feedback della lista per x secondi
     public void showFeedbackWindows(Context c){
         final AlertDialog.Builder dialog = new AlertDialog.Builder(c);
@@ -500,6 +524,7 @@ public class SendSegn extends Activity {
                 SegnFactory sf = SegnFactory.getInstance();
                 SegnFactory.removeTemp();
                 tmp = null;
+                tmp = new ArrayList<>();
                 Intent indietro = new Intent(SendSegn.this, Homepage.class);
                 indietro.putExtra(Homepage.PERSONA_EXTRA,p);
                 startActivity(indietro);

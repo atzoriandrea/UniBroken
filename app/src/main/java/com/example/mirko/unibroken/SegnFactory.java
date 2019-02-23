@@ -24,20 +24,21 @@ public class SegnFactory{
         private static SegnFactory instance;
         private static Bitmap [] v = new Bitmap[11];
         private static HashMap<String, Bitmap> mMemoryCache = new HashMap<>();;
-        public static  Segnalazione stemp;
         private static String selectedCategory = "Tutte le segnalazioni";
+        //public static Segnalazione stemp = stemp = new Segnalazione();
+
     private static ArrayList<Segnalazione> listaSegnalazioni = new ArrayList<>();
         private SegnFactory(){
             InterventiFactory ifact = InterventiFactory.getInstance();
-            stemp = new Segnalazione();
-            stemp.setId(-1000);
-            stemp.setLuogo("Aula D");
+
+            /*stemp.setId(-1000);
+            stemp.setLuogo("");
             stemp.setAutore(4);
             stemp.setSolved(true);
-            stemp.setTesto("Cedimento del soffitto dell'aula D");
-            stemp.setTipo("Cedimento Soffitto");
-            stemp.setData("12/12/2012");
-            stemp.setIdIntervento(InterventiFactory.getInterventoByType(stemp.getTipo()));
+            stemp.setTesto("o");
+            stemp.setTipo("");
+            stemp.setData("");
+            //stemp.setIdIntervento(InterventiFactory.getInterventoByType(stemp.getTipo()));*/
 
 
             Segnalazione s1 = new Segnalazione();
@@ -295,7 +296,6 @@ public class SegnFactory{
 
 
 
-            listaSegnalazioni.add(stemp);
             listaSegnalazioni.add(s1);
             listaSegnalazioni.add(s2);
             listaSegnalazioni.add(s3);
@@ -378,9 +378,9 @@ public class SegnFactory{
         return null;
     }
     public static int getLastSegn(){
-        //SegnFactory factory = SegnFactory.getInstance();
-        int m = 0;
-        for(Segnalazione s:getListaSegnalazioni()){
+        SegnFactory factory = SegnFactory.getInstance();
+        int m = 10;
+        for(Segnalazione s:listaSegnalazioni){
             if (m<s.getId())
                 m = s.getId();
         }
@@ -396,7 +396,7 @@ public class SegnFactory{
         listaSegnalazioni.add(s);
 
     }
-    public static void modifyTemp(Segnalazione segn){
+    /*public static void modifyTemp(Segnalazione segn){
             ArrayList<Bitmap>t = segn.getImage();
             for(Bitmap b : t) {
                 stemp.setImage(b);
@@ -408,7 +408,7 @@ public class SegnFactory{
         if(segn.getLuogo() != null && !segn.getLuogo().equals(""))
             stemp.setLuogo(segn.getLuogo());
 
-    }
+    }*/
     public static void setBitmaps (Bitmap [] a){
             v[0] = a[0];
             v[1] = a[1];
