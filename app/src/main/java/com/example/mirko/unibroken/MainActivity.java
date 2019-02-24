@@ -143,4 +143,6 @@ public class MainActivity extends AppCompatActivity {
             password.setError(null);
         return errors==0; // se non trova errori rende TRUE
     }
+    @Override
+    public void onBackPressed() {}
 }

@@ -104,8 +104,29 @@ public class ShowsegnRaga extends AppCompatActivity {
                 overlay.setAlpha(0.5f);
             }
 
-        }else
-            img.setImageResource(R.drawable.dummy_image_square);
+        }else {
+            TextView tw = (TextView)findViewById(R.id.suggerimento);
+            tw.setVisibility(View.INVISIBLE);
+            Bitmap b2 = Bitmap.createBitmap(400, 200, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(b2);
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            // text color - #3D3D3D
+            paint.setColor(Color.rgb(255, 255, 255));
+            // text size in pixels
+            paint.setTextSize((int) (11 * scale));
+            Rect bounds = new Rect();
+            RectF rectF = new RectF(bounds);
+            String str = ("Nessuna foto");
+            paint.getTextBounds(str, 0, str.length(), bounds);
+            int x = (b2.getWidth() - bounds.width())/2;
+            int y = (b2.getHeight() + bounds.height())/2;
+
+            canvas.drawText(str, x, y, paint);
+            canvas.drawRoundRect(rectF, 100, 100, paint);
+            overlay.setBackgroundColor(Color.BLACK);
+            overlay.setImageBitmap(b2);
+            overlay.setAlpha(0.3f);
+        }
         //array[0] = s.getImage();
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,9 +152,9 @@ public class ShowsegnRaga extends AppCompatActivity {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        InterventiFactory ifact;
+                        InterventiFactory ifact = InterventiFactory.getInstance();
                         double bud = InterventiFactory.getBudget();
-                        if (bud - InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto() >= 0){
+                        if (bud - ifact.getInterventoById(s.getIdIntervento()).getImporto() >= 0){
                             s.setConfirmed(true);
                             InterventiFactory.setBudget(bud - InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto());
                             showPositiveFeedbackWindows(ShowsegnRaga.this);
@@ -173,8 +194,13 @@ public class ShowsegnRaga extends AppCompatActivity {
                 positiveButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        s.setConfirmed(false);
+
+                        InterventiFactory ifact = InterventiFactory.getInstance();
+                        double bud = InterventiFactory.getBudget();
+                        InterventiFactory.setBudget(bud + InterventiFactory.getInterventoById(s.getIdIntervento()).getImporto());
                         showNegativeFeedbackWindows(ShowsegnRaga.this);
+                        s.setConfirmed(false);
+                        soldi.setText("€ "+String.valueOf(InterventiFactory.getBudget())+"0 disp.");
                         dialog.hide();
                         if(s.isConfirmed() == true){
                             conf.setVisibility(View.GONE);

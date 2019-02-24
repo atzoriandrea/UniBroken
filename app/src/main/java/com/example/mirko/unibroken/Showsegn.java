@@ -85,14 +85,37 @@ public class Showsegn extends AppCompatActivity {
                 overlay.setAlpha(0.5f);
             }
 
-        }else
-            img.setImageResource(R.drawable.dummy_image_square);
+        }else {
+            TextView tw = (TextView)findViewById(R.id.suggerimento);
+            tw.setVisibility(View.INVISIBLE);
+            Bitmap b2 = Bitmap.createBitmap(400, 200, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(b2);
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            // text color - #3D3D3D
+            paint.setColor(Color.rgb(255, 255, 255));
+            // text size in pixels
+            paint.setTextSize((int) (11 * scale));
+            Rect bounds = new Rect();
+            RectF rectF = new RectF(bounds);
+            String str = ("Nessuna foto");
+            paint.getTextBounds(str, 0, str.length(), bounds);
+            int x = (b2.getWidth() - bounds.width())/2;
+            int y = (b2.getHeight() + bounds.height())/2;
+
+            canvas.drawText(str, x, y, paint);
+            canvas.drawRoundRect(rectF, 100, 100, paint);
+            overlay.setBackgroundColor(Color.BLACK);
+            overlay.setImageBitmap(b2);
+            overlay.setAlpha(0.3f);
+        }
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent switcher = new Intent(Showsegn.this,ImgSwitcherShow.class);
-                switcher.putExtra(BITMAP_EXTRA, s.getId());
-                startActivity(switcher);
+                if(s.getImage().size()>0){
+                    Intent switcher = new Intent(Showsegn.this,ImgSwitcherShow.class);
+                    switcher.putExtra(BITMAP_EXTRA, s.getId());
+                    startActivity(switcher);
+                }
             }
         });
     }
